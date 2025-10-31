@@ -1,10 +1,10 @@
 import { Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function MyScreen() {
+export default function MessageScreen() {
   return (
-      <SafeAreaView>
-        <Text>Message</Text>
-      </SafeAreaView>
+    <SafeAreaView>
+      <Text>Message</Text>
+    </SafeAreaView>
   );
 }

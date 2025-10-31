@@ -5,7 +5,7 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-export default function FeedScreen() {
+export default function BuddyScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Pressable
@@ -14,8 +14,18 @@ export default function FeedScreen() {
         <Fontisto name="bell" size={24} color={colors.BLACK} />
       </Pressable>
       <View style={styles.buttonsContainer}>
-        <CustomButton label="Free" size="large" variant="pressedStandard" onPress={()=>router.replace("/(tabs)/feed")}/>
-        <CustomButton label="Buddy" size="large" variant="standard" onPress={()=>router.replace("/(tabs)/feed/buddy")}/>
+        <CustomButton
+          label="Free"
+          size="large"
+          variant="standard"
+          onPress={() => router.replace("/(tabs)/feed")}
+        />
+        <CustomButton
+          label="Buddy"
+          size="large"
+          variant="pressedStandard"
+          onPress={() => router.replace("/(tabs)/feed/buddy")}
+        />
       </View>
     </SafeAreaView>
   );

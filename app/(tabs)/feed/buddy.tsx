@@ -1,4 +1,4 @@
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/ui/CustomButton";
 import { colors } from "@/constants";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { router } from "expo-router";
@@ -16,14 +16,14 @@ export default function BuddyScreen() {
       <View style={styles.buttonsContainer}>
         <CustomButton
           label="Free"
-          size="large"
-          variant="standard"
+          shape="large"
+          labelStyle="largeText"
           onPress={() => router.replace("/(tabs)/feed")}
         />
         <CustomButton
           label="Buddy"
-          size="large"
-          variant="pressedStandard"
+          shape="large"
+          labelStyle="pressedStandardText"
           onPress={() => router.replace("/(tabs)/feed/buddy")}
         />
       </View>
@@ -44,14 +44,14 @@ const styles = StyleSheet.create({
     elevation: 2, //elevation효과를 넣어줌
   },
   buttonsContainer: {
+    marginTop: 60,
     width: 163,
     height: 36,
-    top: 40,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: 24,
-    marginBottom: 18,
+    paddingHorizontal: 24,
+    marginBottom: 8,
     gap: 12,
   },
 });

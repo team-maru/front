@@ -1,11 +1,15 @@
-import CustomButton from "@/components/CustomButton";
+import CategoryButtons from "@/components/CategoryButtons";
+import CustomButton from "@/components/ui/CustomButton";
+import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { router } from "expo-router";
+import { useState } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FeedScreen() {
+  const [searchText, setSearchText] = useState("");
   return (
     <SafeAreaView style={styles.container}>
       <Pressable
@@ -13,9 +17,31 @@ export default function FeedScreen() {
         style={styles.NotificationButton}>
         <Fontisto name="bell" size={24} color={colors.BLACK} />
       </Pressable>
-      <View style={styles.buttonsContainer}>
-        <CustomButton label="Free" size="large" variant="pressedStandard" onPress={()=>router.replace("/(tabs)/feed")}/>
-        <CustomButton label="Buddy" size="large" variant="standard" onPress={()=>router.replace("/(tabs)/feed/buddy")}/>
+      <View style={{ flex: 1 }}>
+        <View style={styles.buttonsContainer}>
+          <CustomButton
+            label="Free"
+            shape="large"
+            labelStyle="pressedStandardText"
+            onPress={() => router.replace("/(tabs)/feed")}
+          />
+          <CustomButton
+            label="Buddy"
+            shape="large"
+            labelStyle="largeText"
+            onPress={() => router.replace("/(tabs)/feed/buddy")}
+          />
+        </View>
+        <CategoryButtons />
+        <InputField
+          value={searchText}
+          // onSubmitEditing={}
+          onChangeText={(text) => setSearchText(text)}
+          placeholder="Search Keywords"
+          leftChild={
+            <Fontisto name="search" size={16} color={colors.GRAY_600} />
+          }
+        />
       </View>
     </SafeAreaView>
   );
@@ -34,14 +60,23 @@ const styles = StyleSheet.create({
     elevation: 2, //elevation효과를 넣어줌
   },
   buttonsContainer: {
+    marginTop: 60,
     width: 163,
     height: 36,
-    top: 40,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-start",
-    padding: 24,
-    marginBottom: 18,
+    paddingHorizontal: 24,
+    marginBottom: 8,
     gap: 12,
+  },
+  categoryContainer: {
+    height: 32,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 24,
+    marginBottom: 10,
+    gap: 5,
   },
 });

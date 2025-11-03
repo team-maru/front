@@ -16,15 +16,10 @@ function NotificationButton() {
 
 const styles = StyleSheet.create({
   NotificationButton: {
-    position: "absolute",
-    top: 32,
-    right: 16,
-    marginVertical: 16,
-    shadowColor: colors.BLACK,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 3,
-    shadowOpacity: 0.5, // Android에서는 shadow가 적용되지 않으므로
-    elevation: 2, //elevation효과를 넣어줌
+    margin: 18,
+    justifyContent: "center",
+    alignItems: "flex-end",
+    backgroundColor: colors.WHITE,
   },
 });
 

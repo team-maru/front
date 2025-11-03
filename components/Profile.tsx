@@ -9,17 +9,17 @@ dayjs.locale("ko");
 
 interface ProfileProps {
   onPress: () => void;
-  nickname: string;
+  name: string;
   imageUri?: string;
-  createdAt: string;
+  university: string;
   option?: ReactNode;
 }
 
 function Profile({
   onPress,
   imageUri,
-  nickname,
-  createdAt,
+  name = "Name",
+  university = "university name",
   option,
 }: ProfileProps) {
   return (
@@ -27,15 +27,13 @@ function Profile({
       <Pressable style={styles.profileContainer} onPress={onPress}>
         <Image
           source={
-            imageUri
-              ? { uri: imageUri }
-              : require("@/assets/images/default-avatar.png")
+            imageUri ? { uri: imageUri } : require("@/assets/images/Earth.png")
           }
           style={styles.avatar}
         />
         <View>
-          <Text style={styles.nickname}>{nickname}</Text>
-          <Text style={styles.createdAt}>{dayjs(createdAt).fromNow()}</Text>
+          <Text style={styles.name}>{name}</Text>
+          <Text style={styles.university}>{university}</Text>
         </View>
       </Pressable>
       {option}
@@ -45,7 +43,7 @@ function Profile({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    width: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -56,14 +54,15 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   avatar: {
-    width: 50,
-    height: 50,
-    borderRadius: 50,
+    width: 46,
+    height: 46,
+    borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.GRAY_300,
+    backgroundColor: colors.GRAY_300,
   },
-  nickname: { fontSize: 15, fontWeight: "bold", color: colors.BLACK },
-  createdAt: { fontSize: 14, color: colors.GRAY_500 },
+  name: { fontSize: 15, fontWeight: "600", color: colors.BLACK },
+  university: { fontSize: 12, fontWeight: "500", color: colors.BLACK },
 });
 
 export default Profile;

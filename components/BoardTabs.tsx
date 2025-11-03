@@ -26,7 +26,6 @@ function BoardTabs({}: BoardTabsProps) {
 
 const styles = StyleSheet.create({
   buttonsContainer: {
-    marginTop: 60,
     width: 163,
     height: 36,
     flexDirection: "row",
@@ -35,6 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 8,
     gap: 12,
+    backgroundColor: "white",
   },
 });
 

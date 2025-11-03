@@ -5,13 +5,12 @@ import CustomButton from "./ui/CustomButton";
 interface CategoryButtonsProps {}
 
 const CategoryButtons = ({}: CategoryButtonsProps) => {
+  const categoryLabels = ["All", "Campus", "Tips", "Eats", "Ask"];
   return (
     <View style={styles.categoryContainer}>
-      <CustomButton label="All" shape="outline" labelStyle="outlineText" />
-      <CustomButton label="Campus" shape="outline" labelStyle="outlineText" />
-      <CustomButton label="Tips" shape="outline" labelStyle="outlineText" />
-      <CustomButton label="Eats" shape="outline" labelStyle="outlineText" />
-      <CustomButton label="Ask" shape="outline" labelStyle="outlineText" />
+      {categoryLabels.map((label) => (
+        <CustomButton label={label} shape="outline" labelStyle="outlineText" />
+      ))}
     </View>
   );
 };

@@ -5,7 +5,6 @@ import PostActions from "@/components/PostActions";
 import Profile from "@/components/Profile";
 import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 import { Ionicons } from "@expo/vector-icons";
 import Fontisto from "@expo/vector-icons/Fontisto";
 import { useState } from "react";
@@ -22,7 +21,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FeedScreen() {
   const [searchText, setSearchText] = useState("");
-  const { showActionSheetWithOptions } = useActionSheet();
 
   const ListHeader = () => (
     //FlatList의 헤더 컴포넌트

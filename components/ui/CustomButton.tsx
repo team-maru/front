@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
 
   filledText: {
     color: colors.WHITE,
+    fontWeight: "600",
+    fontSize: 16,
   },
   outlineText: {
     color: colors.GRAY_600,

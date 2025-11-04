@@ -1,4 +1,5 @@
 import queryClient from "@/api/queryClient";
+import "@/utils/dayjsConfig";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";

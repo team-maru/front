@@ -5,7 +5,7 @@ import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
 interface CustomButtonProps extends PressableProps {
   label: string;
   shape?: "large" | "filled" | "outline" | undefined;
-  labelStyle?:
+  variant?:
     | "filledText"
     | "largeText"
     | "pressedStandardText"
@@ -16,7 +16,7 @@ interface CustomButtonProps extends PressableProps {
 function CustomButton({
   label,
   shape = "large",
-  labelStyle = "largeText",
+  variant = "largeText",
   ...props
 }: CustomButtonProps) {
   return (
@@ -27,7 +27,7 @@ function CustomButton({
         pressed && styles.pressed,
       ]}
       {...props}>
-      <Text style={styles[labelStyle]}>{label}</Text>
+      <Text style={styles[variant]}>{label}</Text>
     </Pressable>
   );
 }

@@ -11,22 +11,37 @@ interface CustomButtonProps extends PressableProps {
     | "pressedStandardText"
     | "outlineText"
     | undefined;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
 }
 
 function CustomButton({
   label,
   shape = "large",
   labelStyle = "largeText",
+  width,
+  height,
+  borderRadius,
+  style,
   ...props
 }: CustomButtonProps) {
+  const customStyle = {
+    ...(width && { width }),
+    ...(height && { height }),
+    ...(borderRadius && { borderRadius }),
+  };
   return (
     <Pressable
       style={({ pressed }) => [
         styles.container,
         styles[shape],
+        customStyle,
+        style,
         pressed && styles.pressed,
       ]}
-      {...props}>
+      {...props}
+    >
       <Text style={styles[labelStyle]}>{label}</Text>
     </Pressable>
   );

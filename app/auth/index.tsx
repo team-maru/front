@@ -1,3 +1,4 @@
+import CustomButton from "@/components/ui/CustomButton";
 import { colors } from "@/constants";
 import {
   Image,
@@ -53,6 +54,34 @@ export default function AuthScreen() {
           </Text>
         </Pressable>
       </View>
+      <View style={styles.buttonContainer}>
+        <CustomButton
+          label="Login"
+          shape="filled"
+          labelStyle="filledText"
+          style={styles.customButton}
+        />
+        <View style={styles.dividerContainer}>
+          <View style={styles.line} />
+          <Text style={styles.dividerText}>Or sign in with</Text>
+          <View style={styles.line} />
+        </View>
+        <CustomButton
+          label="Sign in with Google"
+          shape="outline"
+          labelStyle="outlineText"
+          style={styles.customButton}
+        />
+      </View>
+      <View style={styles.signupContainer}>
+        <Text style={styles.signupText}>Don't have an account?</Text>
+        <CustomButton
+          label="Sign Up"
+          shape="large"
+          labelStyle="pressedStandardText"
+          textStyle={styles.signupButtonText}
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -73,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   ImageContainer: {
-    marginTop: 71,
+    marginTop: 51,
     alignItems: "center",
   },
   introductionText: {
@@ -86,6 +115,10 @@ const styles = StyleSheet.create({
     marginTop: 9,
     marginBottom: 40,
     alignItems: "center",
+  },
+  buttonContainer: {
+    marginTop: 22,
+    gap: 16,
   },
   input: {
     borderColor: colors.GRAY_500,
@@ -100,5 +133,42 @@ const styles = StyleSheet.create({
   inputContainer: {
     gap: 15,
     marginBottom: 16,
+  },
+  customButton: {
+    width: 299,
+    height: 40,
+    borderRadius: 12,
+  },
+  dividerContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    width: 299,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.GRAY_500,
+  },
+  dividerText: {
+    marginHorizontal: 14,
+    fontSize: 10,
+    color: colors.GRAY_600,
+  },
+  signupText: {
+    fontSize: 10,
+    color: colors.GRAY_600,
+    fontWeight: "500",
+  },
+  signupButtonText: {
+    fontSize: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.ORANGE_600,
+    lineHeight: 16,
+  },
+  signupContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    marginTop: 29,
   },
 });

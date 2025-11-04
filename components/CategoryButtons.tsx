@@ -9,7 +9,12 @@ const CategoryButtons = ({}: CategoryButtonsProps) => {
   return (
     <View style={styles.categoryContainer}>
       {categoryLabels.map((label) => (
-        <CustomButton label={label} shape="outline" labelStyle="outlineText" />
+        <CustomButton
+          key={label}
+          label={label}
+          shape="outline"
+          labelStyle="outlineText"
+        />
       ))}
     </View>
   );

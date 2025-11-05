@@ -1,6 +1,12 @@
 import { colors } from "@/constants";
 import React from "react";
-import { Pressable, PressableProps, StyleSheet, Text } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleSheet,
+  Text,
+  TextStyle,
+} from "react-native";
 
 interface CustomButtonProps extends PressableProps {
   label: string;
@@ -11,23 +17,40 @@ interface CustomButtonProps extends PressableProps {
     | "pressedStandardText"
     | "outlineText"
     | undefined;
+  width?: number;
+  height?: number;
+  borderRadius?: number;
+  textStyle?: TextStyle;
 }
 
 function CustomButton({
   label,
   shape = "large",
   labelStyle = "largeText",
+  width,
+  height,
+  borderRadius,
+  style,
+  textStyle,
   ...props
 }: CustomButtonProps) {
+  const customStyle = {
+    ...(width && { width }),
+    ...(height && { height }),
+    ...(borderRadius && { borderRadius }),
+  };
   return (
     <Pressable
       style={({ pressed }) => [
         styles.container,
         styles[shape],
+        customStyle,
+        style,
         pressed && styles.pressed,
       ]}
-      {...props}>
-      <Text style={styles[labelStyle]}>{label}</Text>
+      {...props}
+    >
+      <Text style={[styles[labelStyle], textStyle]}>{label}</Text>
     </Pressable>
   );
 }
@@ -57,6 +80,8 @@ const styles = StyleSheet.create({
 
   filledText: {
     color: colors.WHITE,
+    fontWeight: "600",
+    fontSize: 16,
   },
   outlineText: {
     color: colors.GRAY_600,

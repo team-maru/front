@@ -11,7 +11,7 @@ import {
 interface InputFieldProps extends TextInputProps {
   label?: string;
   error?: string;
-  variant?: "filled";
+  variant?: "filled" | "outlined";
   leftChild?: ReactNode;
   rightChild?: ReactNode;
 }
@@ -31,14 +31,16 @@ function InputField(
     <View
       style={{
         paddingHorizontal: 24,
-      }}>
+      }}
+    >
       {label && <Text style={styles.label}>{label}</Text>}
       <View
         style={[
           styles.container,
           styles[variant],
           props.multiline && styles.multiLine,
-        ]}>
+        ]}
+      >
         {leftChild}
         <TextInput
           ref={ref}
@@ -73,6 +75,15 @@ const styles = StyleSheet.create({
     borderRadius: 24,
     paddingHorizontal: 20,
     gap: 8,
+  },
+  outlined: {
+    borderWidth: 1,
+    borderColor: colors.GRAY_500,
+    paddingHorizontal: 14,
+    gap: 4,
+    width: 299,
+    height: 35,
+    borderRadius: 12,
   },
   input: { flex: 1, fontSize: 14, padding: 0, fontWeight: "500" },
   multiLine: {

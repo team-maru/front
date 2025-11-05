@@ -11,10 +11,10 @@ export default function AuthScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAwareScrollView>
-        <View style={styles.ImageContainer}>
+        <View style={styles.imageContainer}>
           <Image
             source={require("@/assets/images/login1.png")}
-            style={styles.image}
+            style={styles.imageStyles}
           />
         </View>
         <View style={styles.introductionText}>
@@ -57,13 +57,9 @@ export default function AuthScreen() {
           <CustomText style={styles.betweenLoginButtonText}>
             Or sign in with
           </CustomText>
-          <Pressable
-            style={styles.googleSignInButton}
-            onPress={() => router.push("/(tabs)")}
-          >
+          <Pressable onPress={() => router.push("/(tabs)")}>
             <Image
               source={require("@/assets/images/Google.png")}
-              style={styles.googleButtonImage}
               resizeMode="contain"
             />
           </Pressable>
@@ -86,7 +82,7 @@ export default function AuthScreen() {
 }
 
 const styles = StyleSheet.create({
-  image: {
+  imageStyles: {
     width: 262,
     height: 262,
   },
@@ -100,7 +96,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.GRAY_100,
     alignItems: "center",
   },
-  ImageContainer: {
+  imageContainer: {
     marginTop: 44,
     alignItems: "center",
   },

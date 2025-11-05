@@ -1,87 +1,86 @@
 import CustomButton from "@/components/ui/CustomButton";
+import CustomText from "@/components/ui/CustomText";
+import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from "react-native";
+import { router } from "expo-router";
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function AuthScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.ImageContainer}>
-        <Image
-          source={require("@/assets/images/login1.png")}
-          style={styles.image}
-        />
-      </View>
-      <View style={styles.introductionText}>
-        <Text style={styles.introductionText}>
-          Your Korea story starts here.
-        </Text>
-      </View>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require("@/assets/images/logo-3.png")}
-          style={styles.logo}
-        />
-      </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Email"
-          style={styles.input}
-          placeholderTextColor={colors.GRAY_600}
-        />
-        <TextInput
-          placeholder="Password"
-          style={styles.input}
-          secureTextEntry
-          placeholderTextColor={colors.GRAY_600}
-        />
-        <Pressable style={{ alignSelf: "flex-end" }}>
-          <Text
-            style={{
-              color: colors.ORANGE_600,
-              fontSize: 10,
-              fontWeight: "500",
-            }}
-          >
-            Forgot Password?
-          </Text>
-        </Pressable>
-      </View>
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          label="Login"
-          shape="filled"
-          labelStyle="filledText"
-          style={styles.customButton}
-        />
-        <View style={styles.dividerContainer}>
-          <View style={styles.line} />
-          <Text style={styles.dividerText}>Or sign in with</Text>
-          <View style={styles.line} />
+      <KeyboardAwareScrollView>
+        <View style={styles.ImageContainer}>
+          <Image
+            source={require("@/assets/images/login1.png")}
+            style={styles.image}
+          />
         </View>
-        <CustomButton
-          label="Sign in with Google"
-          shape="outline"
-          labelStyle="outlineText"
-          style={styles.customButton}
-        />
-      </View>
-      <View style={styles.signupContainer}>
-        <Text style={styles.signupText}>Don't have an account?</Text>
-        <CustomButton
-          label="Sign Up"
-          shape="large"
-          labelStyle="pressedStandardText"
-          textStyle={styles.signupButtonText}
-        />
-      </View>
+        <View style={styles.introductionText}>
+          <CustomText style={styles.introductionText}>
+            Your Korea story starts here.
+          </CustomText>
+        </View>
+        <View style={styles.logoContainer}>
+          <Image
+            source={require("@/assets/images/logo-3.png")}
+            style={styles.logo}
+          />
+        </View>
+        <View style={styles.inputContainer}>
+          <InputField variant="outlined" placeholder="Email" />
+          <InputField
+            variant="outlined"
+            placeholder="Password"
+            secureTextEntry
+          />
+        </View>
+        <View style={styles.forgotPasswordButton}>
+          <CustomButton
+            label="Forgot Password?"
+            shape="large"
+            labelStyle="pressedStandardText"
+            textStyle={{ fontSize: 10 }}
+            onPress={() => router.push("/auth/forgotPassword")}
+          />
+        </View>
+
+        <View style={styles.loginButtonContainer}>
+          <CustomButton
+            label="Login"
+            shape="filled"
+            labelStyle="filledText"
+            style={styles.loginButton}
+            onPress={() => router.push("/(tabs)")}
+          />
+          <CustomText style={styles.betweenLoginButtonText}>
+            Or sign in with
+          </CustomText>
+          <Pressable
+            style={styles.googleSignInButton}
+            onPress={() => router.push("/(tabs)")}
+          >
+            <Image
+              source={require("@/assets/images/Google.png")}
+              style={styles.googleButtonImage}
+              resizeMode="contain"
+            />
+          </Pressable>
+        </View>
+        <View style={styles.signupContainer}>
+          <CustomText style={styles.signupText}>
+            Don't have an account?
+          </CustomText>
+          <CustomButton
+            label="Sign Up"
+            shape="large"
+            labelStyle="pressedStandardText"
+            textStyle={styles.signupButtonText}
+            onPress={() => router.push("/auth/signup")}
+          />
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
@@ -102,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   ImageContainer: {
-    marginTop: 51,
+    marginTop: 44,
     alignItems: "center",
   },
   introductionText: {
@@ -116,41 +115,27 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     alignItems: "center",
   },
-  buttonContainer: {
-    marginTop: 22,
-    gap: 16,
-  },
-  input: {
-    borderColor: colors.GRAY_500,
-    borderWidth: 1,
-    borderRadius: 12,
-    paddingHorizontal: 14,
-    width: 299,
-    height: 35,
-    fontSize: 14,
-    fontWeight: "400",
-  },
+
   inputContainer: {
     gap: 15,
     marginBottom: 16,
   },
-  customButton: {
+  forgotPasswordButton: {
+    alignSelf: "flex-end",
+    marginRight: 38,
+  },
+  loginButtonContainer: {
+    marginTop: 22,
+    gap: 14,
+    alignItems: "center",
+  },
+  loginButton: {
     width: 299,
     height: 40,
     borderRadius: 12,
   },
-  dividerContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    width: 299,
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: colors.GRAY_500,
-  },
-  dividerText: {
-    marginHorizontal: 14,
+
+  betweenLoginButtonText: {
     fontSize: 10,
     color: colors.GRAY_600,
   },
@@ -167,6 +152,7 @@ const styles = StyleSheet.create({
   },
   signupContainer: {
     flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
     gap: 6,
     marginTop: 29,

@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     width: 299,
-    height: 40,
+    height: 48,
     borderRadius: 12,
   },
 

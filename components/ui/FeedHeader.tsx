@@ -24,6 +24,7 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
         onChangeText={setSearchText}
         placeholder="Search Keywords"
         leftChild={<Fontisto name="search" size={16} color={colors.GRAY_600} />}
+        containerStyle={styles.inputFieldContainer}
       />
     </View>
   );
@@ -33,6 +34,9 @@ const styles = StyleSheet.create({
   headerContentContainer: {
     backgroundColor: colors.WHITE,
     paddingBottom: 16,
+  },
+  inputFieldContainer: {
+    width: 327,
   },
 });
 

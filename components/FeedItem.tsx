@@ -1,14 +1,6 @@
 import { colors } from "@/constants";
-import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
-import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import PostActions from "./PostActions";
 import Profile from "./Profile";
 import CustomText from "./ui/CustomText";
@@ -33,14 +25,7 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
           onPress={() => {}}
           name={`Name`}
           university="university name"
-          option={
-            <Ionicons
-              name="ellipsis-vertical"
-              size={24}
-              color={colors.GRAY_500}
-              onPress={() => {}}
-            />
-          }
+          option={true}
         />
         <CustomText fontWeight="semibold" style={styles.titleStyle}>
           Title
@@ -57,8 +42,14 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
             />
           ))}
         </ScrollView>
+        <CustomText fontWeight="medium" style={styles.contentContainer}>
+          Content Text...
+        </CustomText>
         <PostActions />
-        <CustomText fontWeight="medium" style={styles.feedTag}>Ask</CustomText>
+
+        <CustomText fontWeight="medium" style={styles.feedTag}>
+          Ask
+        </CustomText>
       </View>
     </ContainerComponent>
   );
@@ -94,7 +85,7 @@ const styles = StyleSheet.create({
   titleStyle: {
     alignItems: "center",
     justifyContent: "flex-start",
-    fontSize: 16,
+    fontSize: 20,
     color: colors.GRAY_900,
   },
   imagesContainer: {
@@ -109,6 +100,7 @@ const styles = StyleSheet.create({
   headerContentContainer: {
     paddingBottom: 16,
   },
+  contentContainer: { fontSize: 16, color: colors.GRAY_900 },
   feedTag: {
     paddingHorizontal: 14,
     paddingVertical: 3,

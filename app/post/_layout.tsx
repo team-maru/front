@@ -7,17 +7,17 @@ export default function Postlayout() {
   return (
     <Stack
       screenOptions={{
-        headerShown: false,
-        headerTintColor: colors.BLACK,
+        headerTitle: "",
         contentStyle: { backgroundColor: colors.WHITE },
+        headerShadowVisible: false,
       }}>
       <Stack.Screen
         name="write"
         options={{
-          headerShown: false,
+          headerTitle: "",
           headerLeft: () => (
             <Link href={"/"} replace style={{ paddingRight: 10 }}>
-              <Feather name="arrow-left" size={28} color={"black"} />
+              <Feather name="arrow-left" size={28} color={colors.BLACK} />
             </Link>
           ),
         }}
@@ -25,13 +25,13 @@ export default function Postlayout() {
       <Stack.Screen
         name="[id]"
         options={{
-          headerShown: false,
+          headerTitle: "",
           headerLeft: () => (
             <Pressable
               onPress={() =>
                 router.canGoBack() ? router.back() : router.replace("/")
               }>
-              <Feather name="arrow-left" size={28} color={"black"} />
+              <Feather name="arrow-left" size={28} color={colors.BLACK} />
             </Pressable>
           ),
         }}
@@ -39,12 +39,12 @@ export default function Postlayout() {
       <Stack.Screen
         name="update/[id]"
         options={{
-          headerShown: false,
+          headerTitle: "",
           headerLeft: () => (
             <Feather
               name="arrow-left"
               size={28}
-              color={"black"}
+              color={colors.BLACK}
               onPress={() => router.back()}
             />
           ),

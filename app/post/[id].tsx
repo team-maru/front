@@ -1,5 +1,5 @@
+import CommentList from "@/components/CommentList";
 import FeedItem from "@/components/FeedItem";
-import CustomText from "@/components/ui/CustomText";
 import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
 import useKeyboard from "@/hooks/useKeyboard";
@@ -31,8 +31,25 @@ export default function PostDetailScreen() {
   const [content, setContent] = useState("");
   const scrollRef = useRef<ScrollView | null>(null); // 새로운 댓글을 작성했을때 화면이 해당 댓글에 맞춰서 위치하도록 (1)
 
+  const commentList = [
+    {
+      id: 1,
+      imageUri: undefined,
+      author: "Name",
+      university: "university name",
+      text: "A lot of people are struggling with exams right now, so you're not alone! If you're looking for a good spot to study near Sinchon, here are some great cafés to consider:",
+    },
+    {
+      id: 2,
+      imageUri: undefined,
+      author: "Name",
+      university: "university name",
+      text: "A lot of people are struggling with exams right now, so you're not alone! If you're looking for a good spot to study near Sinchon, here are some great cafés to consider:",
+    },
+  ];
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={["bottom"]}>
       <KeyboardAppendView
         contentContainerStyle={styles.awareScrollViewContainer}
         behavior="height"
@@ -41,10 +58,9 @@ export default function PostDetailScreen() {
         }>
         <ScrollView
           ref={scrollRef} // 새로운 댓글을 작성했을때 화면이 해당 댓글에 맞춰서 위치하도록 (2)
-          style={{ marginBottom: 75 }}
           contentContainerStyle={styles.scrollViewContainer}>
           <FeedItem post={1} isDetail />
-          <CustomText>Comments</CustomText>
+          <CommentList comments={commentList} />
         </ScrollView>
         <View style={styles.inputFieldContainer}>
           <InputField
@@ -52,6 +68,7 @@ export default function PostDetailScreen() {
             onSubmitEditing={() => {}}
             onChangeText={(text) => setContent(text)}
             placeholder="Add your comment"
+            containerStyle={styles.commentWriteContainer}
             rightChild={
               <Pressable
                 disabled={!content}
@@ -75,34 +92,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.WHITE,
+    paddingBottom: 60,
   },
   awareScrollViewContainer: {
     flex: 1,
-    backgroundColor: colors.GRAY_200,
+    backgroundColor: colors.WHITE,
   },
   scrollViewContainer: {
-    backgroundColor: colors.GRAY_200,
-  },
-  commentCount: {
-    marginTop: 12,
-    backgroundColor: colors.WHITE,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    fontSize: 16,
-    fontWeight: "semibold",
-  },
-  commentInputContainer: {
-    bottom: 0,
-    position: "absolute",
-    padding: 16,
-    backgroundColor: colors.WHITE,
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: colors.GRAY_200,
-    width: "100%",
+    paddingBottom: 0,
   },
   inputFieldContainer: {
-    height: "30%",
-    paddingVertical: 10,
+    paddingTop: 8,
+    paddingBottom: 0,
+  },
+  commentWriteContainer: {
+    width: 290,
+    borderRadius: 20,
   },
   inputButtonContainer: {
     backgroundColor: colors.ORANGE_600,

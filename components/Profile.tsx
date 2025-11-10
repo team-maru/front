@@ -1,8 +1,8 @@
 import { colors } from "@/constants";
+import { Ionicons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
-import  { ReactNode } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -12,7 +12,7 @@ interface ProfileProps {
   name: string;
   imageUri?: string;
   university: string;
-  option?: ReactNode;
+  option?: boolean;
 }
 
 function Profile({
@@ -20,7 +20,7 @@ function Profile({
   imageUri,
   name = "Name",
   university = "university name",
-  option,
+  option = false,
 }: ProfileProps) {
   return (
     <View style={styles.container}>
@@ -36,7 +36,14 @@ function Profile({
           <Text style={styles.university}>{university}</Text>
         </View>
       </Pressable>
-      {option}
+      {option && (
+        <Ionicons
+          name="ellipsis-vertical"
+          size={24}
+          color={colors.GRAY_500}
+          onPress={() => {}}
+        />
+      )}
     </View>
   );
 }
@@ -54,14 +61,14 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   avatar: {
-    width: 46,
-    height: 46,
+    width: 52,
+    height: 52,
     borderRadius: 12,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: colors.GRAY_300,
     backgroundColor: colors.GRAY_300,
   },
-  name: { fontSize: 15, fontWeight: "600", color: colors.BLACK },
+  name: { fontSize: 18, fontWeight: "600", color: colors.BLACK },
   university: { fontSize: 12, fontWeight: "500", color: colors.BLACK },
 });
 

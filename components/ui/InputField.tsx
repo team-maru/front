@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "Poppins-Regular" },
+  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "regular" },
   multiLine: {
     alignItems: "flex-start",
     paddingVertical: 10,

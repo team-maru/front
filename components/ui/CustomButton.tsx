@@ -7,6 +7,7 @@ import {
   TextStyle,
   StyleProp, ViewStyle
 } from "react-native";
+import CustomText from "./CustomText";
 
 interface CustomButtonProps extends PressableProps {
   label: string;
@@ -51,7 +52,9 @@ function CustomButton({
       ]}
       {...props}
     >
-      <Text style={[styles[labelStyle], textStyle]}>{label}</Text>
+      <CustomText fontWeight="semibold" style={[styles[labelStyle], textStyle]}>
+        {label}
+      </CustomText>
     </Pressable>
   );
 }
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
   filledText: {
     color: colors.WHITE,
     fontWeight: "600",
-    fontSize: 16,
+    fontSize: 20,
   },
   outlineText: {
     color: colors.GRAY_600,

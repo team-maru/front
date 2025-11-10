@@ -15,7 +15,7 @@ function FeedList() {
     <FlatList
       ref={ref}
       data={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]}
-      renderItem={({ item }) => <FeedItem post={item} />}
+      renderItem={({ item }) => <FeedItem post={item} isDetail={false} />}
       keyExtractor={(item) => String(item.id)} // 키로써 식별자 역할
       onEndReachedThreshold={0.5} //0.5일때 목록 절반에서 다음 페이지 미리 불러오기
       refreshing={isRefreshing}

@@ -20,7 +20,7 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
   const ContainerComponent = isDetail ? View : Pressable;
   return (
     <ContainerComponent style={styles.container} onPress={handlePressFeed}>
-      <View style={styles.freeItemContainer}>
+      <View style={[styles.freeItemContainer, isDetail && styles.detailItem]}>
         <Profile
           onPress={() => {}}
           name={`Name`}
@@ -42,9 +42,11 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
             />
           ))}
         </ScrollView>
-        <CustomText fontWeight="medium" style={styles.contentContainer}>
-          Content Text...
-        </CustomText>
+        {isDetail && (
+          <CustomText fontWeight="medium" style={styles.contentContainer}>
+            Content Text...
+          </CustomText>
+        )}
         <PostActions />
 
         <CustomText fontWeight="medium" style={styles.feedTag}>
@@ -64,8 +66,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
-    paddingVertical: 16,
-    paddingHorizontal: 21,
+    paddingVertical: 24,
+    paddingHorizontal: 12,
     backgroundColor: colors.WHITE,
     marginTop: 12,
     margin: 16,
@@ -81,6 +83,9 @@ const styles = StyleSheet.create({
 
     // Android 스타일
     elevation: 10,
+  },
+  detailItem: {
+    marginTop: 6,
   },
   titleStyle: {
     alignItems: "center",

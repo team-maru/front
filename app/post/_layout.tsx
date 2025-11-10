@@ -31,7 +31,12 @@ export default function Postlayout() {
               onPress={() =>
                 router.canGoBack() ? router.back() : router.replace("/")
               }>
-              <Feather name="arrow-left" size={28} color={colors.BLACK} />
+              <Feather
+                name="arrow-left"
+                size={24}
+                color={colors.BLACK}
+                style={{ marginTop: 8 }}
+              />
             </Pressable>
           ),
         }}

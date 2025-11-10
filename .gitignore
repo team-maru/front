@@ -41,3 +41,8 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Claude Code 개인 설정 파일
+CLAUDE.local.md
+nul
+settings.local.json

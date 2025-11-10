@@ -4,22 +4,36 @@ import dayjs from "dayjs";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-interface PostActionsProps {}
+interface PostActionsProps {
+  createdAt?: string | Date;
+  commentCount?: number;
+  likeCount?: number;
+  onCommentPress?: () => void;
+  onLikePress?: () => void;
+}
 
-function PostActions({}: PostActionsProps) {
+function PostActions({
+  createdAt = "2025-11-03 14:03",
+  commentCount = 0,
+  likeCount = 0,
+  onCommentPress,
+  onLikePress,
+}: PostActionsProps) {
   return (
     <View style={styles.postActionsContainer}>
-      <Pressable style={styles.commentsButton}>
+      <Pressable style={styles.commentsButton} onPress={onCommentPress}>
         <Feather name="message-circle" size={18} color={colors.GRAY_600} />
-        <Text style={styles.commentsText}>comments</Text>
+        <Text style={styles.commentsText}>
+          {commentCount} {commentCount === 1 ? "comment" : "comments"}
+        </Text>
       </Pressable>
-      <Pressable style={styles.commentsButton}>
+      <Pressable style={styles.commentsButton} onPress={onLikePress}>
         <Feather name="heart" size={18} color={colors.GRAY_600} />
-        <Text style={styles.commentsText}>likes</Text>
+        <Text style={styles.commentsText}>
+          {likeCount} {likeCount === 1 ? "like" : "likes"}
+        </Text>
       </Pressable>
-      <Text style={styles.createdAt}>
-        {dayjs("2025-11-03 14:03").fromNow()}
-      </Text>
+      <Text style={styles.createdAt}>{dayjs(createdAt).fromNow()}</Text>
     </View>
   );
 }

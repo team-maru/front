@@ -1,12 +1,13 @@
 import { colors } from "@/constants";
-import React, { ForwardedRef, forwardRef, ReactNode } from "react";
+import { ForwardedRef, forwardRef, ReactNode } from "react";
 import {
   StyleSheet,
-  Text,
   TextInput,
   TextInputProps,
   View,
+  ViewStyle,
 } from "react-native";
+import CustomText from "./CustomText";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
@@ -14,6 +15,7 @@ interface InputFieldProps extends TextInputProps {
   variant?: "filled" | "outlined";
   leftChild?: ReactNode;
   rightChild?: ReactNode;
+  containerStyle?: ViewStyle;
 }
 
 function InputField(
@@ -23,6 +25,7 @@ function InputField(
     error = "",
     leftChild = null,
     rightChild = null,
+    containerStyle,
     ...props
   }: InputFieldProps,
   ref?: ForwardedRef<TextInput>
@@ -33,12 +36,17 @@ function InputField(
         paddingHorizontal: 24,
       }}
     >
-      {label && <Text style={styles.label}>{label}</Text>}
+      {label && (
+        <CustomText fontWeight="regular" style={styles.label}>
+          {label}
+        </CustomText>
+      )}
       <View
         style={[
           styles.container,
           styles[variant],
           props.multiline && styles.multiLine,
+          containerStyle,
         ]}
       >
         {leftChild}
@@ -85,7 +93,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 14, padding: 0, fontWeight: "500" },
+  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "Poppins-Regular" },
   multiLine: {
     alignItems: "flex-start",
     paddingVertical: 10,

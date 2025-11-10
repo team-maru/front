@@ -6,15 +6,14 @@ import Profile from "./Profile";
 import CustomText from "./ui/CustomText";
 
 interface FeedItemProps {
-  post: number;
+  postId: number;
   isDetail?: boolean; // 피드를 눌러 상세페이지로 이동한후 또 상세페이지로 이동하는 것을 방지하기위함
 }
 
-function FeedItem({ post, isDetail = false }: FeedItemProps) {
-  const id = post;
+function FeedItem({ postId, isDetail = false }: FeedItemProps) {
   const handlePressFeed = () => {
     if (!isDetail) {
-      router.push({ pathname: "/post/[id]", params: { id } });
+      router.push({ pathname: "/post/[id]", params: { id: postId } });
     }
   };
   const ContainerComponent = isDetail ? View : Pressable;

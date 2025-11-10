@@ -59,14 +59,14 @@ export default function PostDetailScreen() {
         <ScrollView
           ref={scrollRef} // 새로운 댓글을 작성했을때 화면이 해당 댓글에 맞춰서 위치하도록 (2)
           contentContainerStyle={styles.scrollViewContainer}>
-          <FeedItem post={1} isDetail />
+          <FeedItem postId={1} isDetail />
           <CommentList comments={commentList} />
         </ScrollView>
         <View style={styles.inputFieldContainer}>
           <InputField
             value={content}
             onSubmitEditing={() => {}}
-            onChangeText={(text) => setContent(text)}
+            onChangeText={setContent}
             placeholder="Add your comment"
             containerStyle={styles.commentWriteContainer}
             rightChild={

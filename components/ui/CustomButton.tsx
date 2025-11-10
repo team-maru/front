@@ -1,11 +1,11 @@
 import { colors } from "@/constants";
-import React from "react";
 import {
   Pressable,
   PressableProps,
   StyleSheet,
   Text,
   TextStyle,
+  StyleProp, ViewStyle
 } from "react-native";
 
 interface CustomButtonProps extends PressableProps {
@@ -20,6 +20,7 @@ interface CustomButtonProps extends PressableProps {
   width?: number;
   height?: number;
   borderRadius?: number;
+  style?:StyleProp<ViewStyle>;
   textStyle?: TextStyle;
 }
 

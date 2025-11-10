@@ -1,0 +1,131 @@
+import { colors } from "@/constants";
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import PostActions from "./PostActions";
+import Profile from "./Profile";
+
+interface FeedItemProps {
+  post: number;
+  isDetail?: boolean; // 피드를 눌러 상세페이지로 이동한후 또 상세페이지로 이동하는 것을 방지하기위함
+}
+
+function FeedItem({ post, isDetail = false }: FeedItemProps) {
+  const id = post;
+  const handlePressFeed = () => {
+    if (!isDetail) {
+      router.push({ pathname: "/post/[id]", params: { id } });
+    }
+  };
+  const ContainerComponent = isDetail ? View : Pressable;
+  return (
+    <ContainerComponent style={styles.container} onPress={handlePressFeed}>
+      <View style={styles.freeItemContainer}>
+        <Profile
+          onPress={() => {}}
+          name={`Name`}
+          university="university name"
+          option={
+            <Ionicons
+              name="ellipsis-vertical"
+              size={24}
+              color={colors.GRAY_500}
+              onPress={() => {}}
+            />
+          }
+        />
+        <Text style={styles.titleStyle}>Title</Text>
+        <ScrollView
+          contentContainerStyle={styles.imagesContainer}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}>
+          {[1, 2, 3, 4].map((_, idx) => (
+            <Image
+              key={idx}
+              source={require("@/assets/images/Earth.png")}
+              style={styles.imageStyle}
+            />
+          ))}
+        </ScrollView>
+        <PostActions />
+        <Text style={styles.feedTag}>Ask</Text>
+      </View>
+    </ContainerComponent>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: colors.WHITE,
+  },
+  freeItemContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-start",
+    paddingVertical: 16,
+    paddingHorizontal: 21,
+    backgroundColor: colors.WHITE,
+    marginTop: 12,
+    margin: 16,
+    borderColor: colors.GRAY_100,
+    borderRadius: 20,
+    gap: 16,
+
+    // iOS 스타일
+    shadowColor: "#8e8e8eff",
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 20,
+    shadowOpacity: 0.1,
+
+    // Android 스타일
+    elevation: 10,
+  },
+  titleStyle: {
+    alignItems: "center",
+    justifyContent: "flex-start",
+    fontSize: 16,
+    fontWeight: "600",
+    color: colors.GRAY_900,
+  },
+  imagesContainer: {
+    gap: 16,
+  },
+  imageStyle: {
+    width: 90,
+    height: 90,
+    borderRadius: 10,
+  },
+
+  headerContentContainer: {
+    paddingBottom: 16,
+  },
+  feedTag: {
+    paddingHorizontal: 14,
+    paddingVertical: 3,
+    backgroundColor: colors.WHITE,
+    borderRadius: 16,
+    // iOS 스타일
+    shadowColor: "#00000063",
+    shadowOffset: { width: 2, height: 3 },
+    shadowRadius: 6,
+    shadowOpacity: 1,
+
+    // Android 스타일
+    elevation: 8,
+
+    color: colors.GRAY_600,
+    fontWeight: "500",
+    fontSize: 12,
+    opacity: 0.9,
+  },
+});
+
+export default FeedItem;

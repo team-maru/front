@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     paddingHorizontal: 16,
     fontSize: 16,
-    fontWeight: "bold",
+    fontWeight: "semibold",
   },
   commentInputContainer: {
     bottom: 0,

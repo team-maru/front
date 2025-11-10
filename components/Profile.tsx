@@ -2,7 +2,7 @@ import { colors } from "@/constants";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
-import React, { ReactNode } from "react";
+import  { ReactNode } from "react";
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");

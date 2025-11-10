@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import PostActions from "./PostActions";
 import Profile from "./Profile";
+import CustomText from "./ui/CustomText";
 
 interface FeedItemProps {
   post: number;
@@ -41,7 +42,9 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
             />
           }
         />
-        <Text style={styles.titleStyle}>Title</Text>
+        <CustomText fontWeight="semibold" style={styles.titleStyle}>
+          Title
+        </CustomText>
         <ScrollView
           contentContainerStyle={styles.imagesContainer}
           horizontal={true}
@@ -55,7 +58,7 @@ function FeedItem({ post, isDetail = false }: FeedItemProps) {
           ))}
         </ScrollView>
         <PostActions />
-        <Text style={styles.feedTag}>Ask</Text>
+        <CustomText fontWeight="medium" style={styles.feedTag}>Ask</CustomText>
       </View>
     </ContainerComponent>
   );
@@ -92,7 +95,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "flex-start",
     fontSize: 16,
-    fontWeight: "600",
     color: colors.GRAY_900,
   },
   imagesContainer: {
@@ -122,7 +124,6 @@ const styles = StyleSheet.create({
     elevation: 8,
 
     color: colors.GRAY_600,
-    fontWeight: "500",
     fontSize: 12,
     opacity: 0.9,
   },

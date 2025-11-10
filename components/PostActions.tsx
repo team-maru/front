@@ -1,8 +1,8 @@
 import { colors } from "@/constants";
 import { Feather } from "@expo/vector-icons";
 import dayjs from "dayjs";
-import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
+import CustomText from "./ui/CustomText";
 
 interface PostActionsProps {
   createdAt?: string | Date;
@@ -19,21 +19,33 @@ function PostActions({
   onCommentPress,
   onLikePress,
 }: PostActionsProps) {
+  const actionsList = [
+    {
+      style: styles.commentsButton,
+      onPress: onCommentPress,
+      icon: "message-circle",
+      count: commentCount,
+      label: "comment",
+    },
+    {
+      style: styles.commentsButton,
+      onPress: onLikePress,
+      icon: "heart",
+      count: likeCount,
+      label: "like",
+    },
+  ];
   return (
     <View style={styles.postActionsContainer}>
-      <Pressable style={styles.commentsButton} onPress={onCommentPress}>
-        <Feather name="message-circle" size={18} color={colors.GRAY_600} />
-        <Text style={styles.commentsText}>
-          {commentCount} {commentCount === 1 ? "comment" : "comments"}
-        </Text>
-      </Pressable>
-      <Pressable style={styles.commentsButton} onPress={onLikePress}>
-        <Feather name="heart" size={18} color={colors.GRAY_600} />
-        <Text style={styles.commentsText}>
-          {likeCount} {likeCount === 1 ? "like" : "likes"}
-        </Text>
-      </Pressable>
-      <Text style={styles.createdAt}>{dayjs(createdAt).fromNow()}</Text>
+      {actionsList.map(({ style, onPress, icon, count, label }, index) => (
+        <Pressable key={index} style={style} onPress={onPress}>
+          <Feather name={icon as any} size={18} color={colors.GRAY_600} />
+          <CustomText fontWeight="medium" style={styles.commentsText}>
+            {count} {count === 1 ? label : label + "s"}
+          </CustomText>
+        </Pressable>
+      ))}
+      <CustomText fontWeight="medium" style={styles.createdAt}>{dayjs(createdAt).fromNow()}</CustomText>
     </View>
   );
 }
@@ -54,13 +66,11 @@ const styles = StyleSheet.create({
   },
   commentsText: {
     fontSize: 12,
-    fontWeight: "500",
     color: colors.GRAY_600,
   },
   createdAt: {
     fontSize: 12,
     lineHeight: 12, //글꼴 크기에 맞춰 라인 높이를 지정 ( 아이콘 크기가 비슷하게 )
-    fontWeight: "500",
     color: colors.GRAY_600,
     borderLeftColor: colors.GRAY_500,
     borderLeftWidth: 1.5,

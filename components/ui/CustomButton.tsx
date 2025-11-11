@@ -1,12 +1,5 @@
 import { colors } from "@/constants";
-import React from "react";
-import {
-  Pressable,
-  PressableProps,
-  StyleSheet,
-  Text,
-  TextStyle,
-} from "react-native";
+import { Pressable, PressableProps, StyleSheet, TextStyle } from "react-native";
 import CustomText from "./CustomText";
 
 interface CustomButtonProps extends PressableProps {
@@ -18,6 +11,7 @@ interface CustomButtonProps extends PressableProps {
     | "pressedStandardText"
     | "outlineText"
     | undefined;
+  fontWeight?: "regular" | "medium" | "semibold" | "bold";
   width?: number;
   height?: number;
   borderRadius?: number;
@@ -28,6 +22,7 @@ function CustomButton({
   label,
   shape = "large",
   labelStyle = "largeText",
+  fontWeight = "semibold",
   width,
   height,
   borderRadius,
@@ -51,7 +46,10 @@ function CustomButton({
       ]}
       {...props}
     >
-      <CustomText fontWeight="semibold" style={[styles[labelStyle], textStyle]}>
+      <CustomText
+        fontWeight={fontWeight}
+        style={[styles[labelStyle], textStyle]}
+      >
         {label}
       </CustomText>
     </Pressable>
@@ -83,25 +81,21 @@ const styles = StyleSheet.create({
 
   filledText: {
     color: colors.WHITE,
-    fontWeight: "600",
     fontSize: 20,
   },
   outlineText: {
     color: colors.GRAY_600,
-    fontWeight: "500",
     fontSize: 14,
     lineHeight: 14,
     opacity: 0.9,
   },
   largeText: {
     color: colors.GRAY_500,
-    fontWeight: "600",
     fontSize: 24,
     lineHeight: 28,
   },
   pressedStandardText: {
     color: colors.ORANGE_600,
-    fontWeight: "600",
     fontSize: 24,
     lineHeight: 28,
   },

@@ -1,23 +1,24 @@
 import { router } from "expo-router";
-import React from "react";
 import { StyleSheet, View } from "react-native";
 import CustomButton from "./ui/CustomButton";
 
-interface BoardTabsProps {}
+interface BoardTabsProps {
+  feedtype: "free" | "buddy";
+}
 
-function BoardTabs({}: BoardTabsProps) {
+function BoardTabs({ feedtype }: BoardTabsProps) {
   return (
     <View style={styles.buttonsContainer}>
       <CustomButton
         label="Free"
         shape="large"
-        labelStyle="pressedStandardText"
+        labelStyle={feedtype === "free" ? "pressedStandardText" : "largeText"}
         onPress={() => router.replace("/(tabs)/feed")}
       />
       <CustomButton
         label="Buddy"
         shape="large"
-        labelStyle="largeText"
+        labelStyle={feedtype === "free" ? "largeText" : "pressedStandardText"}
         onPress={() => router.replace("/(tabs)/feed/buddy")}
       />
     </View>

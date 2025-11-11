@@ -1,5 +1,12 @@
 import { colors } from "@/constants";
-import { Pressable, PressableProps, StyleSheet, TextStyle } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import CustomText from "./CustomText";
 
 interface CustomButtonProps extends PressableProps {
@@ -15,6 +22,7 @@ interface CustomButtonProps extends PressableProps {
   width?: number;
   height?: number;
   borderRadius?: number;
+  style?: StyleProp<ViewStyle>;
   textStyle?: TextStyle;
 }
 
@@ -44,12 +52,10 @@ function CustomButton({
         style,
         pressed && styles.pressed,
       ]}
-      {...props}
-    >
+      {...props}>
       <CustomText
         fontWeight={fontWeight}
-        style={[styles[labelStyle], textStyle]}
-      >
+        style={[styles[labelStyle], textStyle]}>
         {label}
       </CustomText>
     </Pressable>

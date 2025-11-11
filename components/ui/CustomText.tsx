@@ -1,4 +1,4 @@
-import React from "react";
+import { fonts } from "@/constants/fonts";
 import { Text, TextProps } from "react-native";
 
 interface CustomTextProps extends TextProps {
@@ -13,13 +13,13 @@ export default function CustomText({
   const getFontFamily = () => {
     switch (fontWeight) {
       case "medium":
-        return "Poppins-Medium";
+        return fonts.medium;
       case "semibold":
-        return "Poppins-SemiBold";
+        return fonts.semibold;
       case "bold":
-        return "Poppins-Bold";
+        return fonts.bold;
       default:
-        return "Poppins-Regular";
+        return fonts.regular;
     }
   };
 

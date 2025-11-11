@@ -4,7 +4,6 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Octicons from "@expo/vector-icons/Octicons";
 import { Tabs } from "expo-router";
-import React from "react";
 
 export default function TabLayout() {
   return (

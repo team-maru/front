@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   label: {
-    fontSize: 12,
-    color: colors.GRAY_200,
+    fontSize: 10,
+    color: colors.GRAY_600,
     marginBottom: 5,
   },
   filled: {

@@ -46,7 +46,7 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
             Content Text...
           </CustomText>
         )}
-        <PostActions />
+        <PostActions isDetail={isDetail} />
 
         <CustomText fontWeight="medium" style={styles.feedTag}>
           Ask

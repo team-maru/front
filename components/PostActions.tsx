@@ -1,7 +1,7 @@
 import { colors } from "@/constants";
+import { formatAbsoluteDate, formatRelativeDate } from "@/utils/dayjsConfig";
 import { Feather } from "@expo/vector-icons";
-import dayjs from "dayjs";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
 
 interface PostActionsProps {
@@ -10,6 +10,7 @@ interface PostActionsProps {
   likeCount?: number;
   onCommentPress?: () => void;
   onLikePress?: () => void;
+  isDetail?: boolean;
 }
 
 function PostActions({
@@ -18,6 +19,7 @@ function PostActions({
   likeCount = 0,
   onCommentPress,
   onLikePress,
+  isDetail = false,
 }: PostActionsProps) {
   const actionsList = [
     {
@@ -35,6 +37,8 @@ function PostActions({
       label: "like",
     },
   ];
+  const date = isDetail ? formatAbsoluteDate(createdAt) : formatRelativeDate(createdAt);
+
   return (
     <View style={styles.postActionsContainer}>
       {actionsList.map(({ style, onPress, icon, count, label }, index) => (
@@ -45,7 +49,9 @@ function PostActions({
           </CustomText>
         </Pressable>
       ))}
-      <CustomText fontWeight="medium" style={styles.createdAt}>{dayjs(createdAt).fromNow()}</CustomText>
+      <CustomText fontWeight="medium" style={styles.createdAt}>
+        {date}
+      </CustomText>
     </View>
   );
 }

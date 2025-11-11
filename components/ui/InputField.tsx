@@ -33,9 +33,11 @@ function InputField(
   return (
     <View
       style={{
+        flexDirection: "row",
+        alignItems: "center",
         paddingHorizontal: 24,
-      }}
-    >
+        gap: 9,
+      }}>
       {label && (
         <CustomText fontWeight="regular" style={styles.label}>
           {label}
@@ -47,8 +49,7 @@ function InputField(
           styles[variant],
           props.multiline && styles.multiLine,
           containerStyle,
-        ]}
-      >
+        ]}>
         {leftChild}
         <TextInput
           ref={ref}
@@ -59,8 +60,8 @@ function InputField(
           autoCorrect={false} // 자동 수정 비활성화
           {...props}
         />
-        {rightChild}
       </View>
+      {rightChild}
     </View>
   );
 }
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "Poppins-Regular" },
+  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "regular" },
   multiLine: {
     alignItems: "flex-start",
     paddingVertical: 10,

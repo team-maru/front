@@ -40,13 +40,13 @@ export default function DetailScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.title}>
-        <CustomText fontWeight="semibold" style={styles.titleText}>
-          Almost there! {"\n"}Just a few details
-        </CustomText>
-      </View>
-
       <DropdownProvider>
+        <View style={styles.title}>
+          <CustomText fontWeight="semibold" style={styles.titleText}>
+            Almost there! {"\n"}Just a few details
+          </CustomText>
+        </View>
+
         <View style={styles.inputContainer}>
           <StatusDropdown
             selectedValue={selectedStatus}
@@ -57,18 +57,18 @@ export default function DetailScreen() {
             onSelect={handleUniversityChange}
           />
         </View>
-      </DropdownProvider>
 
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          label="Next"
-          shape={isAllValid ? "filled" : "disabled"}
-          labelStyle="filledText"
-          style={styles.nextButton}
-          onPress={handleNext}
-          disabled={!isAllValid}
-        />
-      </View>
+        <View style={styles.buttonContainer}>
+          <CustomButton
+            label="Next"
+            shape={isAllValid ? "filled" : "disabled"}
+            labelStyle="filledText"
+            style={styles.nextButton}
+            onPress={handleNext}
+            disabled={!isAllValid}
+          />
+        </View>
+      </DropdownProvider>
     </SafeAreaView>
   );
 }
@@ -82,17 +82,17 @@ const styles = StyleSheet.create({
   title: {
     alignItems: "center",
     gap: 5,
-    marginTop: 80,
+    marginTop: 169,
   },
   titleText: {
     fontSize: 34,
   },
   inputContainer: {
-    marginTop: 32,
-    marginBottom: 57,
+    marginTop: 39,
+    marginBottom: 130,
     width: "100%",
     alignItems: "center",
-    gap: 22,
+    gap: 24,
   },
   buttonContainer: {
     width: "100%",

@@ -63,14 +63,24 @@ function Dropdown({
   const dropdownStyle = useMemo(() => {
     const itemHeight = 30; // dropdownItem height (18) + marginVertical (6*2)
     const searchHeight = searchable ? 56 : 0; // searchContainer height + gap
+    const paddingHeight = 12;
+    const emptyMessageHeight = 60;
 
-    const shouldScroll = filteredItems.length > maxVisibleItems;
-    const visibleItemCount = shouldScroll
-      ? maxVisibleItems
-      : filteredItems.length;
-    const itemsHeight = visibleItemCount * itemHeight;
+    let contentHeight;
 
-    const totalHeight = searchHeight + itemsHeight + 12; // paddingVertical (6*2)
+    if (filteredItems.length === 0) {
+      // 검색 결과 없음 → emptyMessage 표시를 위한 높이
+      contentHeight = emptyMessageHeight;
+    } else {
+      // 정상적인 항목들 → 기존 로직
+      const shouldScroll = filteredItems.length > maxVisibleItems;
+      const visibleItemCount = shouldScroll
+        ? maxVisibleItems
+        : filteredItems.length;
+      contentHeight = visibleItemCount * itemHeight;
+    }
+
+    const totalHeight = searchHeight + contentHeight + paddingHeight;
 
     return {
       ...styles.dropdown,

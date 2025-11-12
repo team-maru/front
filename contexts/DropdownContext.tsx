@@ -58,7 +58,7 @@ export function DropdownProvider({ children }: { children: ReactNode }) {
       value={{ openDropdownId, setOpenDropdownId, isSearching, setIsSearching }}
     >
       <TouchableWithoutFeedback onPress={handleOutsidePress}>
-        <View style={{ flex: 1 }}>{children}</View>
+        <View style={{ flex: 1, alignItems: "center" }}>{children}</View>
       </TouchableWithoutFeedback>
     </DropdownContext.Provider>
   );

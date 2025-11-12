@@ -9,6 +9,7 @@ import { DropdownProvider } from "@/contexts/DropdownContext";
 import { router } from "expo-router";
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function CreateProfileScreen() {
@@ -53,38 +54,42 @@ export default function CreateProfileScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.title}>
-        <CustomText fontWeight="semibold" style={styles.titleText}>
-          Create your profile
-        </CustomText>
-      </View>
-
       <DropdownProvider>
-        <View style={styles.inputContainer}>
-          <NicknameInputField onValidationChange={handleNicknameValidation} />
-          <NationalityDropdown
-            selectedValue={selectedNationality}
-            onSelect={handleNationalityChange}
-          />
-          <GenderDropdown
-            selectedValue={selectedGender}
-            onSelect={handleGenderChange}
-          />
+        <KeyboardAwareScrollView>
+          <View style={styles.title}>
+            <CustomText fontWeight="semibold" style={styles.titleText}>
+              Create your profile
+            </CustomText>
+          </View>
 
-          <BirthdateInputField onValidationChange={handleBirthdateValidation} />
-        </View>
+          <View style={styles.inputContainer}>
+            <NicknameInputField onValidationChange={handleNicknameValidation} />
+            <NationalityDropdown
+              selectedValue={selectedNationality}
+              onSelect={handleNationalityChange}
+            />
+            <GenderDropdown
+              selectedValue={selectedGender}
+              onSelect={handleGenderChange}
+            />
+
+            <BirthdateInputField
+              onValidationChange={handleBirthdateValidation}
+            />
+          </View>
+
+          <View style={styles.buttonContainer}>
+            <CustomButton
+              label="Next"
+              shape={isAllValid ? "filled" : "disabled"}
+              labelStyle="filledText"
+              style={styles.nextButton}
+              onPress={handleNext}
+              disabled={!isAllValid}
+            />
+          </View>
+        </KeyboardAwareScrollView>
       </DropdownProvider>
-
-      <View style={styles.buttonContainer}>
-        <CustomButton
-          label="Next"
-          shape={isAllValid ? "filled" : "disabled"}
-          labelStyle="filledText"
-          style={styles.nextButton}
-          onPress={handleNext}
-          disabled={!isAllValid}
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -98,17 +103,17 @@ const styles = StyleSheet.create({
   title: {
     alignItems: "center",
     gap: 5,
-    marginTop: 80,
+    marginTop: 116,
   },
   titleText: {
     fontSize: 34,
   },
   inputContainer: {
-    marginTop: 32,
-    marginBottom: 57,
+    marginTop: 40,
+    marginBottom: 72,
     width: "100%",
     alignItems: "center",
-    gap: 22,
+    gap: 24,
   },
   buttonContainer: {
     width: "100%",

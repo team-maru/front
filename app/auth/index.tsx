@@ -113,6 +113,7 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
+    paddingHorizontal:24,
     gap: 15,
     marginBottom: 16,
   },

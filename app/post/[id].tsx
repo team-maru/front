@@ -1,15 +1,13 @@
+import CommentInputButton from "@/components/CommentInputButton";
 import CommentList from "@/components/CommentList";
 import FeedItem from "@/components/FeedItem";
-import InputField from "@/components/ui/InputField";
 import { colors } from "@/constants";
 import useKeyboard from "@/hooks/useKeyboard";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useLocalSearchParams } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
-  Pressable,
   ScrollView,
   StyleSheet,
   View,
@@ -63,25 +61,7 @@ export default function PostDetailScreen() {
           <CommentList comments={commentList} />
         </ScrollView>
         <View style={styles.inputFieldContainer}>
-          <InputField
-            value={content}
-            onSubmitEditing={() => {}}
-            onChangeText={setContent}
-            placeholder="Add your comment"
-            containerStyle={styles.commentWriteContainer}
-            rightChild={
-              <Pressable
-                disabled={!content}
-                style={styles.inputButtonContainer}
-                onPress={() => {}}>
-                <MaterialCommunityIcons
-                  name="navigation-variant-outline"
-                  size={24}
-                  color={colors.WHITE}
-                />
-              </Pressable>
-            }
-          />
+          <CommentInputButton content={content} setContent={() => setContent} />
         </View>
       </KeyboardAppendView>
     </SafeAreaView>

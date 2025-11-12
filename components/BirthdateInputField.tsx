@@ -8,7 +8,7 @@ function formatBaseYYYYMMDD(digits: string) {
   return `${digits.slice(0, 4)}/${digits.slice(4, 6)}/${digits.slice(6)}`;
 }
 
-export default function BirthdateInputField() {
+function BirthdateInputField() {
   const [birthdate, setBirthdate] = useState("");
   const [selection, setSelection] = useState({ start: 0, end: 0 });
   const prevDigitsLenRef = useRef(0);
@@ -67,3 +67,5 @@ const styles = StyleSheet.create({
     height: 40,
   },
 });
+
+export default BirthdateInputField;

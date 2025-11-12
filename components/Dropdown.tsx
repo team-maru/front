@@ -3,8 +3,8 @@ import { fonts } from "@/constants/fonts";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useMemo, useState } from "react";
 import {
-  FlatList,
   Pressable,
+  ScrollView,
   StyleSheet,
   TextInput,
   View,
@@ -27,6 +27,7 @@ interface DropdownProps {
   searchable?: boolean;
   searchPlaceholder?: string;
   emptyMessage?: string;
+  maxVisibleItems?: number;
 }
 
 function Dropdown({
@@ -39,6 +40,7 @@ function Dropdown({
   searchable = false,
   searchPlaceholder = "검색",
   emptyMessage = "항목이 없습니다",
+  maxVisibleItems = 6, // 기본값 6개
 }: DropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchText, setSearchText] = useState("");
@@ -53,6 +55,25 @@ function Dropdown({
     );
   }, [items, searchText, searchable]);
 
+  // 동적 높이 계산
+  const dropdownStyle = useMemo(() => {
+    const itemHeight = 30; // dropdownItem height (18) + marginVertical (6*2)
+    const searchHeight = searchable ? 56 : 0; // searchContainer height + gap
+
+    const shouldScroll = filteredItems.length > maxVisibleItems;
+    const visibleItemCount = shouldScroll
+      ? maxVisibleItems
+      : filteredItems.length;
+    const itemsHeight = visibleItemCount * itemHeight;
+
+    const totalHeight = searchHeight + itemsHeight;
+
+    return {
+      ...styles.dropdown,
+      height: totalHeight,
+    };
+  }, [filteredItems.length, searchable, maxVisibleItems]);
+
   const handleSelect = (item: DropdownItem) => {
     onSelect(item);
     setIsOpen(false);
@@ -60,7 +81,7 @@ function Dropdown({
   };
 
   return (
-    <View style={styles.wrapper}>
+    <View>
       {label && (
         <CustomText fontWeight="regular" style={styles.label}>
           {label}
@@ -90,51 +111,52 @@ function Dropdown({
         </Pressable>
 
         {isOpen && (
-          <View style={styles.dropdown}>
+          <View style={dropdownStyle}>
             {/* 검색 입력 필드 */}
             {searchable && (
               <View style={styles.searchContainer}>
-                <Ionicons name="search" size={18} color={colors.GRAY_900} />
+                <Ionicons name="search" size={18} color={colors.GRAY_600} />
                 <TextInput
                   style={styles.searchInput}
                   placeholder={searchPlaceholder}
-                  placeholderTextColor={colors.GRAY_900}
+                  placeholderTextColor={colors.GRAY_600}
                   value={searchText}
                   onChangeText={setSearchText}
                 />
               </View>
             )}
 
-            <FlatList
-              data={filteredItems}
-              keyExtractor={(item) => item.value}
-              renderItem={({ item }) => (
-                <Pressable
-                  style={styles.dropdownItem}
-                  onPress={() => handleSelect(item)}
-                >
-                  <CustomText
-                    style={[
-                      styles.dropdownItemText,
-                      item.value === selectedValue && styles.selectedItemText,
-                    ]}
-                  >
-                    {item.label}
-                  </CustomText>
-                </Pressable>
-              )}
+            <ScrollView
+              style={styles.scrollContainer}
               showsVerticalScrollIndicator={false}
               nestedScrollEnabled={true}
-              ListEmptyComponent={
-                searchText.trim() ? (
-                  <View style={styles.emptyContainer}>
-                    <CustomText style={styles.emptyText}>
-                      {emptyMessage}
-                    </CustomText>
-                  </View>
-                ) : null
-              }
-            />
+            >
+              {filteredItems.length > 0
+                ? filteredItems.map((item) => (
+                    <Pressable
+                      key={item.value}
+                      style={styles.dropdownItem}
+                      onPress={() => handleSelect(item)}
+                    >
+                      <CustomText
+                        style={[
+                          styles.dropdownItemText,
+                          item.value === selectedValue &&
+                            styles.selectedItemText,
+                        ]}
+                      >
+                        {item.label}
+                      </CustomText>
+                    </Pressable>
+                  ))
+                : searchText.trim() && (
+                    <View style={styles.emptyContainer}>
+                      <CustomText style={styles.emptyText}>
+                        {emptyMessage}
+                      </CustomText>
+                    </View>
+                  )}
+            </ScrollView>
           </View>
         )}
       </View>
@@ -143,10 +165,6 @@ function Dropdown({
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    paddingHorizontal: 24,
-  },
-
   container: {
     height: 40,
     width: 355,
@@ -163,10 +181,11 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: colors.GRAY_600,
     marginBottom: 5,
+    fontFamily: fonts.regular,
   },
   selectedText: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: fonts.regular,
     color: colors.BLACK,
   },
@@ -183,8 +202,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.GRAY_100,
     borderRadius: 12,
     marginTop: 1,
-    padding: 12,
-    maxHeight: 280,
+    paddingHorizontal: 12,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -198,7 +216,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
-    height: 36,
+    height: 44,
     borderBottomWidth: 1,
     borderBottomColor: colors.GRAY_500,
     gap: 7,
@@ -209,8 +227,12 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     color: colors.BLACK,
   },
+  scrollContainer: {
+    flex: 1,
+  },
   dropdownItem: {
-    paddingVertical: 6,
+    marginVertical: 6,
+    height: 18,
   },
   dropdownItemText: {
     fontSize: 12,
@@ -219,6 +241,7 @@ const styles = StyleSheet.create({
   },
   selectedItemText: {
     color: colors.ORANGE_600,
+    fontFamily: fonts.medium,
   },
   emptyContainer: {
     padding: 20,

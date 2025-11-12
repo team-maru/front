@@ -57,6 +57,7 @@ function NationalityDropdown({
       searchable={true}
       searchPlaceholder="Search countries"
       emptyMessage="No countries found"
+      maxVisibleItems={7}
     />
   );
 }

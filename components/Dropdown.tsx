@@ -1,7 +1,8 @@
 import { colors } from "@/constants";
 import { fonts } from "@/constants/fonts";
+import { useDropdownContext } from "@/contexts/DropdownContext";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
-import { useMemo, useState } from "react";
+import { useId, useMemo, useState } from "react";
 import {
   Pressable,
   ScrollView,
@@ -40,9 +41,11 @@ function Dropdown({
   searchable = false,
   searchPlaceholder = "검색",
   emptyMessage = "항목이 없습니다",
-  maxVisibleItems = 6, // 기본값 6개
+  maxVisibleItems = 6,
 }: DropdownProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { openDropdownId, setOpenDropdownId } = useDropdownContext();
+  const dropdownId = useId();
+  const isOpen = openDropdownId === dropdownId;
   const [searchText, setSearchText] = useState("");
 
   const selectedItem = items.find((item) => item.value === selectedValue);
@@ -74,9 +77,16 @@ function Dropdown({
     };
   }, [filteredItems.length, searchable, maxVisibleItems]);
 
+  const handleToggle = () => {
+    if (isOpen) {
+      setOpenDropdownId(null);
+    } else {
+      setOpenDropdownId(dropdownId);
+    }
+  };
   const handleSelect = (item: DropdownItem) => {
     onSelect(item);
-    setIsOpen(false);
+    setOpenDropdownId(null);
     setSearchText("");
   };
 
@@ -91,7 +101,7 @@ function Dropdown({
       <View>
         <Pressable
           style={[styles.container, containerStyle]}
-          onPress={() => setIsOpen(!isOpen)}
+          onPress={handleToggle}
         >
           <CustomText
             style={[

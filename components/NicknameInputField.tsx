@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet } from "react-native";
 import InputField from "./ui/InputField";
 
 // 임시 중복 닉네임 목록 (실제로는 서버 API 호출로 대체)
 const TAKEN_NICKNAMES = ["maru", "roy"];
+
+interface NicknameInputFieldProps {
+  onValidationChange?: (isValid: boolean) => void;
+}
 
 function validateNickname(nickname: string): string {
   if (!nickname.trim()) {
@@ -46,10 +50,15 @@ function checkNicknameAvailability(
   return "available";
 }
 
-function NicknameInputField() {
+function NicknameInputField({ onValidationChange }: NicknameInputFieldProps) {
   const [nickname, setNickname] = useState("");
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState<"error" | "success" | "">("");
+
+  useEffect(() => {
+    const isValid = messageType === "success" && nickname.trim() !== "";
+    onValidationChange?.(isValid);
+  }, [messageType, nickname, onValidationChange]);
 
   const handleValidation = () => {
     if (!nickname.trim()) {

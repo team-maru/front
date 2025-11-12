@@ -1,6 +1,10 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Keyboard, StyleSheet } from "react-native";
 import InputField from "./ui/InputField";
+
+interface BirthdateInputFieldProps {
+  onValidationChange?: (isValid: boolean) => void;
+}
 
 function formatBaseYYYYMMDD(digits: string) {
   if (digits.length <= 4) return digits;
@@ -50,11 +54,17 @@ function validateBirthdate(digits: string): string {
   return ""; // 유효성 검사 통과
 }
 
-function BirthdateInputField() {
+function BirthdateInputField({ onValidationChange }: BirthdateInputFieldProps) {
   const [birthdate, setBirthdate] = useState("");
   const [selection, setSelection] = useState({ start: 0, end: 0 });
   const [error, setError] = useState("");
   const prevDigitsLenRef = useRef(0);
+
+  useEffect(() => {
+    const digits = birthdate.replace(/\D/g, "");
+    const isValid = digits.length === 8 && !error;
+    onValidationChange?.(isValid);
+  }, [birthdate, error, onValidationChange]);
 
   const handleChangeText = (text: string) => {
     const digits = text.replace(/\D/g, "").slice(0, 8);

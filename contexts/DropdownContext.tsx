@@ -44,6 +44,8 @@ export function DropdownProvider({ children }: { children: ReactNode }) {
   const handleOutsidePress = () => {
     if (openDropdownId) {
       setOpenDropdownId(null);
+    } else {
+      Keyboard.dismiss();
     }
   };
 

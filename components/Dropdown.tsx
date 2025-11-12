@@ -43,7 +43,8 @@ function Dropdown({
   emptyMessage = "항목이 없습니다",
   maxVisibleItems = 6,
 }: DropdownProps) {
-  const { openDropdownId, setOpenDropdownId } = useDropdownContext();
+  const { openDropdownId, setOpenDropdownId, isSearching, setIsSearching } =
+    useDropdownContext();
   const dropdownId = useId();
   const isOpen = openDropdownId === dropdownId;
   const [searchText, setSearchText] = useState("");
@@ -69,7 +70,7 @@ function Dropdown({
       : filteredItems.length;
     const itemsHeight = visibleItemCount * itemHeight;
 
-    const totalHeight = searchHeight + itemsHeight;
+    const totalHeight = searchHeight + itemsHeight + 12; // paddingVertical (6*2)
 
     return {
       ...styles.dropdown,
@@ -88,6 +89,15 @@ function Dropdown({
     onSelect(item);
     setOpenDropdownId(null);
     setSearchText("");
+    setIsSearching(false);
+  };
+
+  const handleSearchFocus = () => {
+    setIsSearching(true);
+  };
+
+  const handleSearchBlur = () => {
+    setIsSearching(false);
   };
 
   return (
@@ -132,6 +142,11 @@ function Dropdown({
                   placeholderTextColor={colors.GRAY_600}
                   value={searchText}
                   onChangeText={setSearchText}
+                  onFocus={handleSearchFocus}
+                  onBlur={handleSearchBlur}
+                  autoCapitalize="none" // 자동 대문자 변환 비활성화
+                  spellCheck={false} // 맞춤법 검사 비활성화
+                  autoCorrect={false} // 자동 수정 비활성화
                 />
               </View>
             )}
@@ -154,6 +169,8 @@ function Dropdown({
                           item.value === selectedValue &&
                             styles.selectedItemText,
                         ]}
+                        numberOfLines={1}
+                        ellipsizeMode="tail"
                       >
                         {item.label}
                       </CustomText>
@@ -239,6 +256,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     flex: 1,
+    paddingVertical: 6,
   },
   dropdownItem: {
     marginVertical: 6,
@@ -248,6 +266,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fonts.regular,
     color: colors.BLACK,
+    width: 355 - 24, // container width - paddingHorizontal * 2
   },
   selectedItemText: {
     color: colors.ORANGE_600,

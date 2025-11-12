@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 34,
+    textAlign: "center",
   },
   inputContainer: {
     marginTop: 39,

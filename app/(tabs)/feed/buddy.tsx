@@ -1,6 +1,4 @@
-import BoardTabs from "@/components/BoardTabs";
-import NotificationButton from "@/components/NotificationButton";
-import FeedHeader from "@/components/ui/FeedHeader";
+import FeedHeader from "@/components/FeedHeader";
 import { colors } from "@/constants";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

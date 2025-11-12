@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   inputContainer: {
+    paddingHorizontal: 24,
     marginTop: 32,
     marginBottom: 57,
     width: "100%",

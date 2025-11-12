@@ -19,13 +19,16 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
       <NotificationButton />
       <BoardTabs feedtype={feedtype} />
       {feedtype === "free" && <CategoryButtons />}
-      <InputField
-        value={searchText}
-        onChangeText={setSearchText}
-        placeholder="Search Keywords"
-        leftChild={<Fontisto name="search" size={16} color={colors.GRAY_600} />}
-        containerStyle={styles.inputFieldContainer}
-      />
+      <View style={styles.inputFieldContainer}>
+        <InputField
+          value={searchText}
+          onChangeText={setSearchText}
+          placeholder="Search Keywords"
+          leftChild={
+            <Fontisto name="search" size={16} color={colors.GRAY_600} />
+          }
+        />
+      </View>
     </View>
   );
 }
@@ -36,7 +39,7 @@ const styles = StyleSheet.create({
     paddingBottom: 16,
   },
   inputFieldContainer: {
-    width: 327,
+    paddingHorizontal: 16,
   },
 });
 

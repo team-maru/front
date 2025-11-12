@@ -8,6 +8,7 @@ import {
   ViewStyle,
 } from "react-native";
 import CustomText from "./CustomText";
+import { fonts } from "@/constants/fonts";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
@@ -31,13 +32,7 @@ function InputField(
   ref?: ForwardedRef<TextInput>
 ) {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 24,
-        gap: 9,
-      }}>
+    <View>
       {label && (
         <CustomText fontWeight="regular" style={styles.label}>
           {label}
@@ -94,7 +89,7 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 14, padding: 0, fontFamily: "regular" },
+  input: { flex: 1, fontSize: 12, padding: 0, fontFamily: fonts.regular },
   multiLine: {
     alignItems: "flex-start",
     paddingVertical: 10,

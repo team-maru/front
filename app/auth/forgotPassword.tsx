@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     alignItems: "center",
+    paddingHorizontal:24
   },
   inputField: {
     width: 355,

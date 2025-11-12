@@ -31,13 +31,7 @@ function InputField(
   ref?: ForwardedRef<TextInput>
 ) {
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 24,
-        gap: 9,
-      }}>
+    <View>
       {label && (
         <CustomText fontWeight="regular" style={styles.label}>
           {label}

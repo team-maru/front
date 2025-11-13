@@ -1,3 +1,4 @@
+import Toast from "@/components/Toast";
 import CustomButton from "@/components/ui/CustomButton";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
@@ -12,6 +13,10 @@ export default function CheckEmailScreen() {
   const handleResetLink = () => {
     // TODO: 실제 비밀번호 재설정 링크 전송 API 호출
     setIsLinkSent(true);
+
+    setTimeout(() => {
+      setIsLinkSent(false);
+    }, 5000);
   };
 
   return (
@@ -54,6 +59,13 @@ export default function CheckEmailScreen() {
           onPress={() => router.push("/auth/password-reset/resetPassword")}
         />
       </View>
+      <Toast
+        visible={isLinkSent}
+        message="Please Check your email for the new link"
+        variant="success"
+        position="bottom"
+        size="small"
+      />
     </SafeAreaView>
   );
 }

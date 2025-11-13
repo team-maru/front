@@ -110,18 +110,20 @@ function BirthdateInputField({ onValidationChange }: BirthdateInputFieldProps) {
     }
   };
 
-  const handleBlur = () => {
-    // 키보드가 내려갈 때 유효성 검사 (8자리 미만도 체크)
+  const runValidation = () => {
     const digits = birthdate.replace(/\D/g, "");
     const validationError = validateBirthdate(digits);
     setError(validationError);
   };
 
+  const handleBlur = () => {
+    // 키보드가 내려갈 때 유효성 검사 (8자리 미만도 체크)
+    runValidation();
+  };
+
   const handleSubmitEditing = () => {
     // Done 버튼 눌렀을 때 유효성 검사 (8자리 미만도 체크)
-    const digits = birthdate.replace(/\D/g, "");
-    const validationError = validateBirthdate(digits);
-    setError(validationError);
+    runValidation();
   };
 
   return (

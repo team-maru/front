@@ -44,7 +44,14 @@ export default function CheckEmailScreen() {
           shape="large"
           labelStyle="pressedStandardText"
           textStyle={styles.resendButtonText}
-          onPress={() => router.push("/auth/password-reset/resetPassword")} //원래는 handleResetLink로 연결해야하는데 임시로 이 페이지로 연결
+          onPress={handleResetLink}
+        />
+        <CustomButton
+          label="비번찾기 페이지 버튼 ㅎㅎ 나중에 지울 겁니두"
+          shape="large"
+          labelStyle="pressedStandardText"
+          textStyle={styles.resendButtonText}
+          onPress={() => router.push("/auth/password-reset/resetPassword")}
         />
       </View>
     </SafeAreaView>

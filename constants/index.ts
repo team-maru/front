@@ -9,6 +9,14 @@ const colors = {
   GRAY_200: "#F5F5F5FF",
   GRAY_100: "#FAFAFAFF",
   BLACK: "#000",
+  YELLOW: "#FFCC00",
+  GREEN: "#34C759",
+  TEAL: "#00C3D0",
+  PURPLE: "#CB30E0",
+  ORANGE: "#FF8D28",
+  BROWN: "#AC7F5E",
+  RED: "#FF383C",
+  BLUE: "#0088FF",
 };
 
 export { colors };

@@ -1,4 +1,5 @@
 import { colors } from "@/constants";
+import { fonts } from "@/constants/fonts";
 import { ForwardedRef, forwardRef, ReactNode } from "react";
 import {
   StyleSheet,
@@ -8,11 +9,11 @@ import {
   ViewStyle,
 } from "react-native";
 import CustomText from "./CustomText";
-import { fonts } from "@/constants/fonts";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
   error?: string;
+  success?: string;
   variant?: "filled" | "outlined";
   leftChild?: ReactNode;
   rightChild?: ReactNode;
@@ -24,6 +25,7 @@ function InputField(
     label,
     variant = "filled",
     error = "",
+    success = "",
     leftChild = null,
     rightChild = null,
     containerStyle,
@@ -44,7 +46,8 @@ function InputField(
           styles[variant],
           props.multiline && styles.multiLine,
           containerStyle,
-        ]}>
+        ]}
+      >
         {leftChild}
         <TextInput
           ref={ref}
@@ -56,6 +59,10 @@ function InputField(
           {...props}
         />
       </View>
+      {error ? <CustomText style={styles.errorText}>{error}</CustomText> : null}
+      {success ? (
+        <CustomText style={styles.successText}>{success}</CustomText>
+      ) : null}
       {rightChild}
     </View>
   );
@@ -94,6 +101,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingVertical: 10,
     height: 200,
+  },
+  errorText: {
+    fontSize: 10,
+    color: colors.RED,
+    marginTop: 4,
+  },
+  successText: {
+    fontSize: 10,
+    color: colors.GREEN,
+    marginTop: 4,
   },
 });
 

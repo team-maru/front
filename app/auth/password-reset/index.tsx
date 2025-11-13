@@ -38,11 +38,11 @@ export default function ForgotPasswordScreen() {
 
       <View style={styles.buttonContainer}>
         <CustomButton
-          label={isLinkSent ? "resend link" : "request reset link"}
+          label="request reset link"
           shape="filled"
           labelStyle="filledText"
           style={styles.requestButton}
-          onPress={handleResetLink}
+          onPress={() => router.push("/auth/password-reset/checkEmail")}
         />
       </View>
       <View style={styles.signinContainer}>
@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     alignItems: "center",
-    paddingHorizontal:24
+    paddingHorizontal: 24,
   },
   inputField: {
     width: 355,

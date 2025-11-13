@@ -42,7 +42,7 @@ export default function AuthScreen() {
             shape="large"
             labelStyle="pressedStandardText"
             textStyle={{ fontSize: 10 }}
-            onPress={() => router.push("/auth/forgotPassword")}
+            onPress={() => router.push("/auth/password-reset")}
           />
         </View>
 
@@ -113,7 +113,7 @@ const styles = StyleSheet.create({
   },
 
   inputContainer: {
-    paddingHorizontal:24,
+    paddingHorizontal: 24,
     gap: 15,
     marginBottom: 16,
   },

@@ -1,23 +1,14 @@
 import CustomButton from "@/components/ui/CustomButton";
 import CustomText from "@/components/ui/CustomText";
 import InputField from "@/components/ui/InputField";
-import { colors } from "@/constants";
 import { router } from "expo-router";
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ForgotPasswordScreen() {
-  const [isLinkSent, setIsLinkSent] = useState(false);
-
-  const handleResetLink = () => {
-    // TODO: 실제 비밀번호 재설정 링크 전송 API 호출
-    setIsLinkSent(true);
-  };
-
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.title}>
+      <View style={styles.titleContainer}>
         <CustomText fontWeight="semibold" style={styles.titleText}>
           Forgot Password?
         </CustomText>
@@ -38,21 +29,11 @@ export default function ForgotPasswordScreen() {
 
       <View style={styles.buttonContainer}>
         <CustomButton
-          label={isLinkSent ? "resend link" : "request reset link"}
+          label="Request reset link"
           shape="filled"
           labelStyle="filledText"
           style={styles.requestButton}
-          onPress={handleResetLink}
-        />
-      </View>
-      <View style={styles.signinContainer}>
-        <CustomButton
-          label="Back To Login"
-          fontWeight="medium"
-          shape="large"
-          labelStyle="pressedStandardText"
-          textStyle={styles.signinButtonText}
-          onPress={() => router.push("/auth")}
+          onPress={() => router.push("/auth/password-reset/checkEmail")}
         />
       </View>
     </SafeAreaView>
@@ -64,11 +45,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
   },
-  title: {
+  titleContainer: {
     alignItems: "center",
-    gap: 23,
+    gap: 16,
     marginTop: 145,
-    marginBottom: 30,
   },
   titleText: {
     fontSize: 28,
@@ -80,7 +60,9 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "100%",
     alignItems: "center",
-    paddingHorizontal:24
+    paddingHorizontal: 24,
+    marginTop: 51,
+    marginBottom: 102,
   },
   inputField: {
     width: 355,
@@ -97,18 +79,5 @@ const styles = StyleSheet.create({
     width: 299,
     height: 48,
     borderRadius: 12,
-  },
-  signinContainer: {
-    flexDirection: "row",
-    marginTop: 6,
-    gap: 6,
-    alignItems: "center",
-  },
-  signinDescriptionText: {
-    fontSize: 10,
-    color: colors.GRAY_600,
-  },
-  signinButtonText: {
-    fontSize: 13,
   },
 });

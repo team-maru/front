@@ -15,6 +15,7 @@ interface InputFieldProps extends TextInputProps {
   isPlaceholderLarge?: boolean;
   isMediumFont?: boolean;
   error?: string;
+  success?: string;
   variant?: "standard" | "filled" | "outlined" | "filledOrange";
   leftChild?: ReactNode;
   rightChild?: ReactNode;
@@ -28,6 +29,7 @@ function InputField(
     isPlaceholderLarge = false,
     isMediumFont = false,
     error = "",
+    success = "",
     leftChild = null,
     rightChild = null,
     containerStyle,
@@ -48,7 +50,8 @@ function InputField(
           styles[variant],
           props.multiline && styles.multiLine,
           containerStyle,
-        ]}>
+        ]}
+      >
         {leftChild}
         <TextInput
           ref={ref}
@@ -66,6 +69,10 @@ function InputField(
           {...props}
         />
       </View>
+      {error ? <CustomText style={styles.errorText}>{error}</CustomText> : null}
+      {success ? (
+        <CustomText style={styles.successText}>{success}</CustomText>
+      ) : null}
       {rightChild}
     </View>
   );
@@ -130,6 +137,16 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingVertical: 10,
     height: 200,
+  },
+  errorText: {
+    fontSize: 10,
+    color: colors.RED,
+    marginTop: 4,
+  },
+  successText: {
+    fontSize: 10,
+    color: colors.GREEN,
+    marginTop: 4,
   },
 });
 

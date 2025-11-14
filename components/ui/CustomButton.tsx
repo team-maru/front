@@ -28,7 +28,7 @@ import CustomText from "./CustomText";
  */
 interface CustomButtonProps extends PressableProps {
   label: string;
-  shape?: "large" | "filled" | "outline" | undefined;
+  shape?: "large" | "filled" | "outline" | "disabled" | undefined;
   labelStyle?:
     | "filledText"
     | "largeText"
@@ -69,10 +69,12 @@ function CustomButton({
         style,
         pressed && styles.pressed,
       ]}
-      {...props}>
+      {...props}
+    >
       <CustomText
         fontWeight={fontWeight}
-        style={[styles[labelStyle], textStyle]}>
+        style={[styles[labelStyle], textStyle]}
+      >
         {label}
       </CustomText>
     </Pressable>
@@ -108,6 +110,9 @@ const styles = StyleSheet.create({
     backgroundColor: colors.WHITE,
     borderColor: colors.GRAY_200,
     borderWidth: 1.5,
+  },
+  disabled: {
+    backgroundColor: colors.GRAY_500,
   },
 
   // Button states

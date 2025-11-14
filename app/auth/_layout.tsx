@@ -67,6 +67,13 @@ export default function AuthLayout() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="signup/interestSelection"
+        options={{
+          title: "관심사 선택",
+          headerShown: false,
+        }}
+      />
     </Stack>
   );
 }

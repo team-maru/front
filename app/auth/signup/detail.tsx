@@ -34,7 +34,7 @@ export default function DetailScreen() {
   };
   const handleNext = () => {
     if (isAllValid) {
-      router.push("/auth/signup/interests");
+      router.push("/auth/signup/interestSelection");
     }
   };
 

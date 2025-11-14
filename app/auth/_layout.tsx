@@ -1,5 +1,5 @@
-import { Stack } from "expo-router";
 import { colors } from "@/constants";
+import { Stack } from "expo-router";
 
 export default function AuthLayout() {
   return (
@@ -19,7 +19,21 @@ export default function AuthLayout() {
         }}
       />
       <Stack.Screen
-        name="forgotPassword"
+        name="password-reset/index"
+        options={{
+          title: "비밀번호 재설정 요청",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="password-reset/checkEmail"
+        options={{
+          title: "이메일 확인 안내",
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="password-reset/resetPassword"
         options={{
           title: "비밀번호 재설정",
           headerShown: false,

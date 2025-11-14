@@ -8,6 +8,7 @@ import { Tabs } from "expo-router";
 export default function TabLayout() {
   return (
     <Tabs
+      initialRouteName="index" // 앱 접속시 홈 페이지로 
       screenOptions={{
         tabBarActiveTintColor: colors.ORANGE_600,
         headerShown: false,

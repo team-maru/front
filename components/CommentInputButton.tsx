@@ -16,6 +16,7 @@ function CommentInputButton({ content, setContent }: CommentInputButtonProps) {
         onSubmitEditing={() => {}}
         onChangeText={setContent}
         placeholder="Add your comment"
+        isMediumFont={true}
         containerStyle={styles.commentWriteContainer}
       />
       <Pressable

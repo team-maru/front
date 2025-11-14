@@ -26,8 +26,6 @@ const styles = StyleSheet.create({
     borderRadius: 32,
     alignItems: "center",
     justifyContent: "center",
-    zIndex: 999,
-    elevation: 5, // Android shadow
   },
 });
 

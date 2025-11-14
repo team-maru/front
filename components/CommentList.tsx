@@ -19,7 +19,7 @@ function CommentList({ comments }: CommentListProps) {
   return (
     <>
       <CustomText fontWeight="semibold" style={styles.commentTextContainer}>
-        Comments
+        Comment
       </CustomText>
       {comments.map((comment) => (
         <View key={comment.id} style={styles.commentContainer}>
@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: colors.BLACK,
     marginHorizontal: 16,
-    marginTop: -12,
+    marginTop: 44,
   },
   commentContentContainer: {
     marginHorizontal: 16,

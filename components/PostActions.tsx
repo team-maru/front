@@ -16,7 +16,7 @@ interface PostActionsProps {
 function PostActions({
   createdAt = "2025-11-03 14:03",
   commentCount = 0,
-  likeCount = 0,
+  likeCount = 5,
   onCommentPress,
   onLikePress,
   isDetail = false,
@@ -37,7 +37,9 @@ function PostActions({
       label: "like",
     },
   ];
-  const date = isDetail ? formatAbsoluteDate(createdAt) : formatRelativeDate(createdAt);
+  const date = isDetail
+    ? formatAbsoluteDate(createdAt)
+    : formatRelativeDate(createdAt);
 
   return (
     <View style={styles.postActionsContainer}>
@@ -45,7 +47,7 @@ function PostActions({
         <Pressable key={index} style={style} onPress={onPress}>
           <Feather name={icon as any} size={18} color={colors.GRAY_600} />
           <CustomText fontWeight="medium" style={styles.commentsText}>
-            {count} {count === 1 ? label : label + "s"}
+            {count === 0 ? label : count}
           </CustomText>
         </Pressable>
       ))}

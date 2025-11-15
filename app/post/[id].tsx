@@ -58,7 +58,9 @@ export default function PostDetailScreen() {
           ref={scrollRef} // 새로운 댓글을 작성했을때 화면이 해당 댓글에 맞춰서 위치하도록 (2)
           contentContainerStyle={styles.scrollViewContainer}>
           <FeedItem postId={1} isDetail />
-          <CommentList comments={commentList} />
+          <View style={styles.commentsWrapper}>
+            <CommentList comments={commentList} />
+          </View>
         </ScrollView>
         <View style={styles.inputFieldContainer}>
           <CommentInputButton content={content} setContent={() => setContent} />
@@ -71,15 +73,18 @@ export default function PostDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     paddingBottom: 60,
   },
   awareScrollViewContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
   },
   scrollViewContainer: {
     paddingBottom: 0,
+  },
+  commentsWrapper: {
+    marginRight: 12,
   },
   inputFieldContainer: {
     paddingTop: 8,

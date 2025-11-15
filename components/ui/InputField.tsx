@@ -12,9 +12,12 @@ import CustomText from "./CustomText";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
+  size?: "small" | "medium" | "large";
+  fontSize?: "small" | "medium" | "large";
+  fontWeight?: "regular" | "medium" | "semibold" | "bold";
   error?: string;
   success?: string;
-  variant?: "filled" | "outlined";
+  variant?: "standard" | "filled" | "outlined" | "filledOrange";
   leftChild?: ReactNode;
   rightChild?: ReactNode;
   containerStyle?: ViewStyle;
@@ -24,6 +27,9 @@ function InputField(
   {
     label,
     variant = "filled",
+    size = "small",
+    fontSize = "small",
+    fontWeight = "regular",
     error = "",
     success = "",
     leftChild = null,
@@ -33,6 +39,19 @@ function InputField(
   }: InputFieldProps,
   ref?: ForwardedRef<TextInput>
 ) {
+  const getFontFamily = () => {
+    switch (fontWeight) {
+      case "medium":
+        return fonts.medium;
+      case "semibold":
+        return fonts.semibold;
+      case "bold":
+        return fonts.bold;
+      default:
+        return fonts.regular;
+    }
+  };
+
   return (
     <View>
       {label && (
@@ -46,13 +65,16 @@ function InputField(
           styles[variant],
           props.multiline && styles.multiLine,
           containerStyle,
-        ]}
-      >
+        ]}>
         {leftChild}
         <TextInput
           ref={ref}
           placeholderTextColor={colors.GRAY_600}
-          style={styles.input}
+          style={[
+            styles.baseInput,
+            styles[`fontSize_${fontSize}`],
+            { fontFamily: getFontFamily() },
+          ]}
           autoCapitalize="none" // 자동 대문자 변환 비활성화
           spellCheck={false} // 맞춤법 검사 비활성화
           autoCorrect={false} // 자동 수정 비활성화
@@ -81,11 +103,22 @@ const styles = StyleSheet.create({
     color: colors.GRAY_600,
     marginBottom: 5,
   },
+  standard: {
+    flex: 1,
+    height: 46,
+    paddingHorizontal: 4,
+  },
   filled: {
     backgroundColor: colors.GRAY_300,
     borderRadius: 24,
     paddingHorizontal: 20,
     gap: 8,
+  },
+  filledOrange: {
+    backgroundColor: colors.ORANGE_700,
+    borderRadius: 28,
+    paddingHorizontal: 18,
+    paddingVertical: 24,
   },
   outlined: {
     borderWidth: 1,
@@ -96,7 +129,23 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 12, padding: 0, fontFamily: fonts.regular },
+  baseInput: {
+    flex: 1,
+    padding: 0,
+    textAlignVertical: "center",
+    includeFontPadding: false,
+  },
+  fontSize_small: {
+    fontSize: 12,
+  },
+  fontSize_medium: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  fontSize_large: {
+    fontSize: 20,
+    lineHeight: 28,
+  },
   multiLine: {
     alignItems: "flex-start",
     paddingVertical: 10,

@@ -20,12 +20,14 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
   return (
     <ContainerComponent style={styles.container} onPress={handlePressFeed}>
       <View style={[styles.freeItemContainer, isDetail && styles.detailItem]}>
-        <Profile
-          onPress={() => {}}
-          name={`Name`}
-          university="university name"
-          option={true}
-        />
+        <View style={styles.profileContainer}>
+          <Profile
+            onPress={() => {}}
+            name={`Name`}
+            university="university name"
+            option={true}
+          />
+        </View>
         <CustomText fontWeight="semibold" style={styles.titleStyle}>
           Title
         </CustomText>
@@ -34,11 +36,12 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
           horizontal={true}
           showsHorizontalScrollIndicator={false}>
           {[1, 2, 3, 4].map((_, idx) => (
-            <Image
-              key={idx}
-              source={require("@/assets/images/Earth.png")}
-              style={styles.imageStyle}
-            />
+            <Pressable key={idx} onPress={(e) => e.stopPropagation()}>
+              <Image
+                source={require("@/assets/images/Earth.png")}
+                style={styles.imageStyle}
+              />
+            </Pressable>
           ))}
         </ScrollView>
         {isDetail && (
@@ -59,15 +62,15 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
   },
   freeItemContainer: {
     flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
     paddingVertical: 24,
-    paddingHorizontal: 12,
-    backgroundColor: colors.WHITE,
+    paddingHorizontal: 24,
+    backgroundColor: colors.GRAY_100,
     marginTop: 12,
     margin: 16,
     borderColor: colors.GRAY_100,
@@ -85,6 +88,10 @@ const styles = StyleSheet.create({
   },
   detailItem: {
     marginTop: 6,
+  },
+  profileContainer: {
+    marginHorizontal: -28,
+    paddingHorizontal: 20,
   },
   titleStyle: {
     alignItems: "center",
@@ -104,12 +111,14 @@ const styles = StyleSheet.create({
   headerContentContainer: {
     paddingBottom: 16,
   },
-  contentContainer: { fontSize: 16, color: colors.GRAY_900 },
+  contentContainer: { fontSize: 12, color: colors.GRAY_900 },
   feedTag: {
-    paddingHorizontal: 14,
-    paddingVertical: 3,
-    backgroundColor: colors.WHITE,
-    borderRadius: 16,
+    height: 28,
+    paddingHorizontal: 16,
+    paddingVertical: 2.5,
+    backgroundColor: colors.GRAY_100,
+    borderRadius: 14,
+    textAlignVertical: "center",
     // iOS 스타일
     shadowColor: "#00000063",
     shadowOffset: { width: 2, height: 3 },
@@ -120,7 +129,7 @@ const styles = StyleSheet.create({
     elevation: 8,
 
     color: colors.GRAY_600,
-    fontSize: 12,
+    fontSize: 14,
     opacity: 0.9,
   },
 });

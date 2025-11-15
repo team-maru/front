@@ -35,10 +35,10 @@ const CategoryButtons = ({
           <CustomButton
             key={label}
             label={label}
-            shape={selected ? "filled" : "outline"}
+            shape="outline"
             labelStyle="outlineText"
             // 선택된 버튼은 텍스트를 흰색으로 표시 (opacity도 1로 override)
-            textStyle={selected ? { color: colors.WHITE, opacity: 1 } : undefined}
+            style={selected ? { borderColor: colors.ORANGE_600 } : undefined}
             fontWeight="medium"
             onPress={() => onPress(label)}
           />
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     gap: 5,
   },
-  
 });
 
 export default CategoryButtons;

@@ -10,6 +10,7 @@ export default function Postlayout() {
         headerTitle: "",
         contentStyle: { backgroundColor: colors.GRAY_100 },
         headerShadowVisible: false,
+        headerStyle: { backgroundColor: colors.GRAY_100 },
       }}>
       <Stack.Screen
         name="write"

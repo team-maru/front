@@ -105,14 +105,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 2,
     backgroundColor: colors.GRAY_100,
-    borderColor: colors.GRAY_200,
+    borderColor: colors.GRAY_500,
     borderWidth: 1.5,
     borderRadius: 16,
     justifyContent: "center",
   },
   categoryWrapper: {
     marginTop: 4,
-    marginRight: -24,
   },
   pictureButton: {
     justifyContent: "center",

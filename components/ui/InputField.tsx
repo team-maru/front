@@ -12,8 +12,9 @@ import CustomText from "./CustomText";
 
 interface InputFieldProps extends TextInputProps {
   label?: string;
-  isPlaceholderLarge?: boolean;
-  isMediumFont?: boolean;
+  size?: "small" | "medium" | "large";
+  fontSize?: "small" | "medium" | "large";
+  fontWeight?: "regular" | "medium" | "semibold" | "bold";
   error?: string;
   success?: string;
   variant?: "standard" | "filled" | "outlined" | "filledOrange";
@@ -26,8 +27,9 @@ function InputField(
   {
     label,
     variant = "filled",
-    isPlaceholderLarge = false,
-    isMediumFont = false,
+    size = "small",
+    fontSize = "small",
+    fontWeight = "regular",
     error = "",
     success = "",
     leftChild = null,
@@ -37,6 +39,19 @@ function InputField(
   }: InputFieldProps,
   ref?: ForwardedRef<TextInput>
 ) {
+  const getFontFamily = () => {
+    switch (fontWeight) {
+      case "medium":
+        return fonts.medium;
+      case "semibold":
+        return fonts.semibold;
+      case "bold":
+        return fonts.bold;
+      default:
+        return fonts.regular;
+    }
+  };
+
   return (
     <View>
       {label && (
@@ -50,19 +65,16 @@ function InputField(
           styles[variant],
           props.multiline && styles.multiLine,
           containerStyle,
-        ]}
-      >
+        ]}>
         {leftChild}
         <TextInput
           ref={ref}
           placeholderTextColor={colors.GRAY_600}
-          style={
-            isPlaceholderLarge
-              ? styles.placeholderLargerStyle
-              : isMediumFont
-              ? styles.mediumFontStyle
-              : styles.input
-          }
+          style={[
+            styles.baseInput,
+            styles[`fontSize_${fontSize}`],
+            { fontFamily: getFontFamily() },
+          ]}
           autoCapitalize="none" // 자동 대문자 변환 비활성화
           spellCheck={false} // 맞춤법 검사 비활성화
           autoCorrect={false} // 자동 수정 비활성화
@@ -117,21 +129,22 @@ const styles = StyleSheet.create({
     height: 35,
     borderRadius: 12,
   },
-  input: { flex: 1, fontSize: 12, padding: 0, fontFamily: fonts.regular },
-  mediumFontStyle: {
+  baseInput: {
     flex: 1,
-    fontSize: 14,
     padding: 0,
-    fontFamily: fonts.medium,
-  },
-  placeholderLargerStyle: {
-    flex: 1,
-    fontSize: 20,
-    padding: 0,
-    fontFamily: fonts.semibold,
-    lineHeight: 26,
     textAlignVertical: "center",
     includeFontPadding: false,
+  },
+  fontSize_small: {
+    fontSize: 12,
+  },
+  fontSize_medium: {
+    fontSize: 16,
+    lineHeight: 22,
+  },
+  fontSize_large: {
+    fontSize: 20,
+    lineHeight: 28,
   },
   multiLine: {
     alignItems: "flex-start",

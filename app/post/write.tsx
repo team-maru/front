@@ -69,6 +69,9 @@ function PostWriteScreen() {
   // 헤더 오른쪽에 "Post" 버튼 추가
   useEffect(() => {
     navigation.setOptions({
+      headerStyle: {
+        backgroundColor: colors.GRAY_100,
+      },
       headerRight: () => (
         <CustomButton
           label="Post"

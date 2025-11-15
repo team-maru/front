@@ -68,10 +68,13 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
       <View style={styles.searchBarContainer}>
         <InputField
           value={searchText}
+          fontWeight="medium"
+          fontSize="medium"
           onChangeText={setSearchText}
           placeholder="Search Keywords"
+          containerStyle={{ backgroundColor: colors.GRAY_200 }}
           leftChild={
-            <Fontisto name="search" size={16} color={colors.GRAY_600} />
+            <Fontisto name="search" size={18} color={colors.GRAY_600} />
           }
         />
       </View>

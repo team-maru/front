@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import { StyleSheet, View } from "react-native";
 import CustomButton from "./ui/CustomButton";
+import { colors } from "@/constants";
 
 interface BoardTabsProps {
   feedtype: "free" | "buddy";
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     marginBottom: 8,
     gap: 12,
-    backgroundColor: "white",
+    backgroundColor: colors.GRAY_100
   },
 });
 

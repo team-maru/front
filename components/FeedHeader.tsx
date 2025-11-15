@@ -1,6 +1,6 @@
 import { colors } from "@/constants";
+import { categoryLabels } from "@/constants/categoryLabels";
 import { Category } from "@/types";
-import { categoryLabels } from "@/utils/categoryLabels";
 import { Fontisto } from "@expo/vector-icons";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -81,7 +81,7 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
 
 const styles = StyleSheet.create({
   headerContentContainer: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     paddingBottom: 4,
   },
   scrollViewWrapper: {

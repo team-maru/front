@@ -8,7 +8,7 @@ export default function Postlayout() {
     <Stack
       screenOptions={{
         headerTitle: "",
-        contentStyle: { backgroundColor: colors.WHITE },
+        contentStyle: { backgroundColor: colors.GRAY_100 },
         headerShadowVisible: false,
       }}>
       <Stack.Screen

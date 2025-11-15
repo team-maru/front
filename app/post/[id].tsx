@@ -73,18 +73,18 @@ export default function PostDetailScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     paddingBottom: 60,
   },
   awareScrollViewContainer: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
   },
   scrollViewContainer: {
     paddingBottom: 0,
   },
-  commentsWrapper:{
-    marginRight:12
+  commentsWrapper: {
+    marginRight: 12,
   },
   inputFieldContainer: {
     paddingTop: 8,

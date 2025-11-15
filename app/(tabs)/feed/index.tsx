@@ -20,9 +20,10 @@ export default function FeedScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
   },
   contentContainer: {
     flex: 1,
+    backgroundColor: colors.GRAY_100,
   },
 });

@@ -62,7 +62,7 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
   },
   freeItemContainer: {
     flex: 1,
@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     paddingVertical: 24,
     paddingHorizontal: 24,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     marginTop: 12,
     margin: 16,
     borderColor: colors.GRAY_100,
@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     height: 28,
     paddingHorizontal: 16,
     paddingVertical: 2.5,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     borderRadius: 14,
     textAlignVertical: "center",
     // iOS 스타일

@@ -1,7 +1,7 @@
 import PictureIcon from "@/assets/images/picture.svg";
 import { colors } from "@/constants";
+import { categoryLabels } from "@/constants/categoryLabels";
 import { Category, ImageUri } from "@/types";
-import { categoryLabels } from "@/utils/categoryLabels";
 import * as ImagePicker from "expo-image-picker";
 import { Controller, useFormContext } from "react-hook-form";
 import { Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     height: 26,
     paddingHorizontal: 16,
     paddingVertical: 2,
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     borderColor: colors.GRAY_200,
     borderWidth: 1.5,
     borderRadius: 16,

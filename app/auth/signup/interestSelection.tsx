@@ -2,7 +2,7 @@ import Tag from "@/components/Tag";
 import CustomButton from "@/components/ui/CustomButton";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
-import { INTEREST_CATEGORIES, Interest } from "@/constants/interests";
+import { INTEREST_CATEGORIES, InterestProps } from "@/constants/interests";
 import { router } from "expo-router";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -25,7 +25,7 @@ export default function InterestSelectionScreen() {
     });
   };
 
-  const renderInterest = (interest: Interest) => {
+  const renderInterest = (interest: InterestProps) => {
     const IconComponent = interest.icon.library;
     const isSelected = selectedInterests.includes(interest.id);
 

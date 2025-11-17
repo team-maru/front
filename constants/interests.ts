@@ -10,29 +10,82 @@ import {
   MaterialCommunityIcons,
   MaterialIcons,
 } from "@expo/vector-icons";
+import { ComponentType } from "react";
 import { colors } from "./index";
 
-export interface Interest {
+export type InterestIconName =
+  // Travel & Exploration
+  | "compass"
+  | "account-group-outline"
+  | "school"
+  | "festival"
+  // Sports
+  | "hiking"
+  | "tent"
+  | "shoe-sneaker"
+  | "football"
+  | "baseball-bat-ball"
+  | "basketball-hoop-outline"
+  | "sports-tennis"
+  | "badminton"
+  | "golf-course"
+  | "pedal-bike"
+  | "arm-flex-outline"
+  | "meditation"
+  | "pool"
+  | "surfing"
+  | "rollerblade"
+  | "mountains"
+  // Lifestyle
+  | "movie"
+  | "headphones"
+  | "game-controller-outline"
+  | "book-open"
+  | "camera"
+  | "color-palette-outline"
+  | "chef-hat"
+  | "baguette"
+  | "local-cafe"
+  | "bookshelf"
+  | "face-woman-shimmer"
+  | "hanger"
+  // Food
+  | "bowl-rice"
+  | "cake"
+  | "beer-outline"
+  // Korean Culture & Community
+  | "tv"
+  | "silverware-fork-knife"
+  | "plane"
+  | "place"
+  | "language";
+
+export interface InterestProps {
   id: string;
   icon: {
-    library:
-      | typeof AntDesign
-      | typeof MaterialIcons
-      | typeof Feather
-      | typeof Ionicons
-      | typeof MaterialCommunityIcons
-      | typeof FontAwesome
-      | typeof FontAwesome5
-      | typeof FontAwesome6
-      | typeof Fontisto
-      | typeof Foundation;
-    name: string;
+    library: ComponentType<any>;
+    name: InterestIconName;
     color: string;
   };
   label: string;
 }
 
-export const INTEREST_CATEGORIES = {
+export interface InterestCategory {
+  title: string;
+  interests: InterestProps[];
+}
+
+type InterestCategoryKey =
+  | "travel"
+  | "sports"
+  | "lifestyle"
+  | "food"
+  | "korean_culture";
+
+export const INTEREST_CATEGORIES: Record<
+  InterestCategoryKey,
+  InterestCategory
+> = {
   travel: {
     title: "Travel & Exploration",
     interests: [
@@ -342,7 +395,11 @@ export const INTEREST_CATEGORIES = {
       },
       {
         id: "drink_chill",
-        icon: { library: Ionicons, name: "beer-outline", color: colors.BLUE },
+        icon: {
+          library: Ionicons,
+          name: "beer-outline",
+          color: colors.BLUE,
+        },
         label: "Drink & Chill",
       },
     ],
@@ -407,20 +464,18 @@ export const INTEREST_CATEGORIES = {
 };
 
 // 유틸리티 함수들
-export const getAllInterests = (): Interest[] => {
+export const getAllInterests = (): InterestProps[] => {
   return Object.values(INTEREST_CATEGORIES).flatMap(
     (category) => category.interests
   );
 };
 
 export const getInterestsByCategory = (
-  categoryKey: keyof typeof INTEREST_CATEGORIES
-): Interest[] => {
+  categoryKey: InterestCategoryKey
+): InterestProps[] => {
   return INTEREST_CATEGORIES[categoryKey].interests;
 };
 
-export const getCategoryNames = () => {
-  return Object.keys(
-    INTEREST_CATEGORIES
-  ) as (keyof typeof INTEREST_CATEGORIES)[];
+export const getCategoryNames = (): InterestCategoryKey[] => {
+  return Object.keys(INTEREST_CATEGORIES) as InterestCategoryKey[];
 };

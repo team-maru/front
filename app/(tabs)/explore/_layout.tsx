@@ -7,7 +7,7 @@ export default function ExploreLayout() {
       screenOptions={{
         headerShown: false,
         contentStyle: {
-          backgroundColor: colors.WHITE,
+          backgroundColor: colors.GRAY_100,
         },
       }}>
       <Stack.Screen

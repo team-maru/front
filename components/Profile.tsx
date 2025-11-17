@@ -3,7 +3,8 @@ import { Ionicons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import CustomText from "./ui/CustomText";
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
 
@@ -32,17 +33,23 @@ function Profile({
           style={styles.avatar}
         />
         <View>
-          <Text style={styles.name}>{name}</Text>
-          <Text style={styles.university}>{university}</Text>
+          <CustomText style={styles.name} fontWeight="semibold">
+            {name}
+          </CustomText>
+          <CustomText style={styles.university} fontWeight="medium">
+            {university}
+          </CustomText>
         </View>
       </Pressable>
       {option && (
-        <Ionicons
-          name="ellipsis-vertical"
-          size={24}
-          color={colors.GRAY_500}
-          onPress={() => {}}
-        />
+        <View style={styles.optionContainer}>
+          <Ionicons
+            name="ellipsis-vertical"
+            size={24}
+            color={colors.GRAY_500}
+            onPress={() => {}}
+          />
+        </View>
       )}
     </View>
   );
@@ -64,12 +71,23 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 12,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.GRAY_300,
-    backgroundColor: colors.GRAY_300,
   },
-  name: { fontSize: 18, fontWeight: "600", color: colors.BLACK },
-  university: { fontSize: 12, fontWeight: "500", color: colors.BLACK },
+  name: {
+    fontSize: 16,
+    color: colors.BLACK,
+    includeFontPadding: false, // Android 기본 폰트 패딩 제거
+    lineHeight: 16, // 위아래 여백 최소화
+  },
+  university: {
+    fontSize: 14,
+    color: colors.BLACK,
+    includeFontPadding: false, // Android 기본 폰트 패딩 제거
+    lineHeight: 14, // 위아래 여백 최소화
+    marginTop: 4,
+  },
+  optionContainer: {
+    marginTop: -16,
+  },
 });
 
 export default Profile;

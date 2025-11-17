@@ -1,6 +1,6 @@
 const colors = {
   WHITE: "#FFF",
-  ORANGE_700: "#FF960FF",
+  ORANGE_700: "#FF9B60",
   ORANGE_600: "#F6782EFF",
   GRAY_900: "#212121FF",
   GRAY_600: "#787878FF",

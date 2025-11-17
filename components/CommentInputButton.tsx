@@ -16,6 +16,7 @@ function CommentInputButton({ content, setContent }: CommentInputButtonProps) {
         onSubmitEditing={() => {}}
         onChangeText={setContent}
         placeholder="Add your comment"
+        isMediumFont={true}
         containerStyle={styles.commentWriteContainer}
       />
       <Pressable
@@ -25,7 +26,7 @@ function CommentInputButton({ content, setContent }: CommentInputButtonProps) {
         <MaterialCommunityIcons
           name="navigation-variant-outline"
           size={24}
-          color={colors.WHITE}
+          color={colors.GRAY_100}
         />
       </Pressable>
     </View>

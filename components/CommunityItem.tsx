@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.GRAY_100,
     borderRadius: 15,
     marginHorizontal: 8,
-    marginTop: 24,
+    marginVertical: 16,
 
     // iOS 스타일
     shadowColor: "#000",

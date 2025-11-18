@@ -26,7 +26,8 @@ function TitleInput({}: TitleInputProps) {
             ref={ref}
             autoFocus // 화면 로드 시 자동 포커스
             variant="standard"
-            isPlaceholderLarge={true}
+            fontSize="large"
+            fontWeight="semibold"
             placeholder="Write a Title"
             placeholderTextColor={colors.BLACK}
             returnKeyType="next" // 엔터키 모양: "다음"

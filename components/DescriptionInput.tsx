@@ -30,7 +30,7 @@ function DescriptionInput({}: DescriptionInputProps) {
           variant="filledOrange"
           placeholder="Share your thoughts"
           placeholderTextColor={colors.GRAY_500}
-          returnKeyType="next"
+          returnKeyType="default"
           value={value}
           onChangeText={(text) => {
             // 1000자 이하일 때만 입력 허용
@@ -42,6 +42,7 @@ function DescriptionInput({}: DescriptionInputProps) {
           multiline // 여러 줄 입력 가능
           scrollEnabled={true} // 텍스트가 영역을 넘어갈 때 스크롤 활성화
           textAlignVertical="top" // 텍스트를 상단 정렬
+          blurOnSubmit={false} // 엔터 키로 줄바꿈 가능하도록 설정
           containerStyle={{
             height: inputHeight,
             paddingVertical: 24,

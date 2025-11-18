@@ -1,6 +1,6 @@
 import { colors } from "@/constants";
+import { categoryLabels } from "@/constants/categoryLabels";
 import { Category } from "@/types";
-import { categoryLabels } from "@/utils/categoryLabels";
 import { Fontisto } from "@expo/vector-icons";
 import { useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -68,10 +68,13 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
       <View style={styles.searchBarContainer}>
         <InputField
           value={searchText}
+          fontWeight="medium"
+          fontSize="medium"
           onChangeText={setSearchText}
           placeholder="Search Keywords"
+          containerStyle={{ backgroundColor: colors.GRAY_200 }}
           leftChild={
-            <Fontisto name="search" size={16} color={colors.GRAY_600} />
+            <Fontisto name="search" size={18} color={colors.GRAY_600} />
           }
         />
       </View>
@@ -81,7 +84,7 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
 
 const styles = StyleSheet.create({
   headerContentContainer: {
-    backgroundColor: colors.WHITE,
+    backgroundColor: colors.GRAY_100,
     paddingBottom: 4,
   },
   scrollViewWrapper: {

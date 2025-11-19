@@ -3,11 +3,15 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 
-function RightArrowButton() {
+interface RightArrowButtonProps {
+  destination: "/(tabs)/explore" | "/(tabs)/feed" | "/(tabs)/feed/buddy";
+}
+
+function RightArrowButton({ destination }: RightArrowButtonProps) {
   return (
     <Pressable
-      onPress={() => router.push("/")}
-      style={styles.notificationButton}
+      onPress={() => router.push(destination)}
+      style={styles.rightArrowButton}
     >
       <MaterialIcons
         name="keyboard-arrow-right"
@@ -19,7 +23,7 @@ function RightArrowButton() {
 }
 
 const styles = StyleSheet.create({
-  notificationButton: {
+  rightArrowButton: {
     margin: 0,
     justifyContent: "center",
     alignItems: "center",

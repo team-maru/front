@@ -115,6 +115,7 @@ export interface Event {
   start_date: string;
   capacity: number;
   price: number;
+  location?: string; // 위치 필드 추가 (선택적)
   created_at: string;
   updated_at: string;
   // 추가 필드들 (예약, 북마크 등)

@@ -1,14 +1,32 @@
 import { colors } from "@/constants";
+import { dummyEvents } from "@/data/dummyData";
 import { Feather, FontAwesome6 } from "@expo/vector-icons";
+import dayjs from "dayjs";
+import "dayjs/locale/en";
+import timezone from "dayjs/plugin/timezone";
+import utc from "dayjs/plugin/utc";
 import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
 import WishButton from "./WishButton";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.locale("en");
 
 interface EventItemProps {
   eventPostId: number;
 }
 
 function EventItem({ eventPostId }: EventItemProps) {
+  const event = dummyEvents.find((e) => e.id === eventPostId) || dummyEvents[0];
+
+  const formatEventDate = (dateString: string) => {
+    return dayjs(dateString)
+      .tz("Asia/Seoul")
+      .format("dddd, MMM DD")
+      .toUpperCase();
+  };
+
   const handlePressFeed = () => {
     // router.push({ pathname: "/eventPost/[id]", params: { id: eventPostId } }); 아직 이벤트 아이템 그런 거 없음..ㅋㅋ
   };
@@ -16,22 +34,32 @@ function EventItem({ eventPostId }: EventItemProps) {
     <Pressable style={styles.container} onPress={handlePressFeed}>
       <View style={styles.dateContainer}>
         <CustomText fontWeight="semibold" style={styles.dateText}>
-          Nov 10 - Nov 12
+          {formatEventDate(event.start_date)}
         </CustomText>
       </View>
       <View style={styles.itemContainer}>
         <View style={styles.cardContainer}>
           <View style={styles.textContainer}>
             <View style={styles.titleContainer}>
-              <CustomText fontWeight="semibold" style={styles.titleText}>
-                Transfer Love Party
+              <CustomText
+                fontWeight="semibold"
+                style={styles.titleText}
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
+                {event.title}
               </CustomText>
             </View>
             <View style={styles.infoContainer}>
               <View style={styles.infoOneLineContainer}>
                 <Feather name="map-pin" color={colors.GRAY_600} size={14} />
-                <CustomText fontWeight="medium" style={styles.infoText}>
-                  Songhui's house
+                <CustomText
+                  fontWeight="medium"
+                  style={styles.infoText}
+                  numberOfLines={1}
+                  ellipsizeMode="tail"
+                >
+                  {event.location}
                 </CustomText>
               </View>
               <View style={styles.infoOneLineContainer}>
@@ -41,7 +69,7 @@ function EventItem({ eventPostId }: EventItemProps) {
                   size={14}
                 />
                 <CustomText fontWeight="medium" style={styles.infoText}>
-                  100,000
+                  {event.price}
                 </CustomText>
               </View>
             </View>
@@ -100,14 +128,17 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     flexDirection: "row",
     paddingHorizontal: 16,
+    gap: 30,
   },
   textContainer: {
     paddingVertical: 13,
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: "center",
+    gap: 12,
   },
   infoContainer: {
     gap: 5,
+    width: "100%",
   },
   infoOneLineContainer: {
     flexDirection: "row",
@@ -138,6 +169,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     alignItems: "flex-start",
     justifyContent: "center",
+    width: "100%",
   },
 
   titleText: {

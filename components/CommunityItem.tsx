@@ -1,5 +1,5 @@
 import { colors } from "@/constants";
-import { router } from "expo-router";
+import { dummyCategories, dummyPosts } from "@/data/dummyData";
 import { Pressable, StyleSheet, View } from "react-native";
 import CreatedAt from "./CreatedAt";
 import CustomText from "./ui/CustomText";
@@ -9,25 +9,33 @@ interface CommunityItemProps {
 }
 
 function CommunityItem({ postId }: CommunityItemProps) {
+  const post = dummyPosts.find((p) => p.id === postId) || dummyPosts[0];
+  const category = dummyCategories.find((c) => c.id === post.category_id);
   const handlePressFeed = () => {
-    router.push({ pathname: "/post/[id]", params: { id: postId } });
+    // router.push({ pathname: "/post/[id]", params: { id: postId } });
+    // 더미데이터로 만들어진 포스트 상세보기 페이지는 없어서 주석처리 해놨어요 시간 되면 나중에 추가할게요
   };
   return (
     <Pressable style={styles.container} onPress={handlePressFeed}>
       <View style={styles.itemContainer}>
         <View style={styles.categoryContainer}>
           <CustomText fontWeight="medium" style={styles.feedTag}>
-            Campus
+            {category?.category_name}
           </CustomText>
         </View>
         <View style={styles.titleContainer}>
-          <CustomText fontWeight="semibold" style={styles.titleText}>
-            Midterm season already… 😵‍💫
+          <CustomText
+            fontWeight="semibold"
+            style={styles.titleText}
+            numberOfLines={3}
+            ellipsizeMode="tail"
+          >
+            {post.title}
           </CustomText>
         </View>
 
         <View style={styles.createdAtContainer}>
-          <CreatedAt createdAt="2025-11-03 14:03" />
+          <CreatedAt createdAt={post.created_at} />
         </View>
       </View>
     </Pressable>
@@ -41,7 +49,7 @@ const styles = StyleSheet.create({
   },
   itemContainer: {
     width: 148,
-    flex: 1,
+    height: 143,
 
     alignItems: "flex-start",
     backgroundColor: colors.GRAY_100,
@@ -62,7 +70,7 @@ const styles = StyleSheet.create({
   categoryContainer: {
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    paddingTop: 16,
+    paddingTop: 14,
     paddingHorizontal: 8.5,
   },
   feedTag: {
@@ -86,9 +94,9 @@ const styles = StyleSheet.create({
   },
 
   titleContainer: {
-    marginTop: 12,
-    paddingLeft: 16,
-    height: 53,
+    marginTop: 6,
+    paddingHorizontal: 16,
+    height: 60,
     alignItems: "flex-start",
     justifyContent: "center",
   },
@@ -102,7 +110,8 @@ const styles = StyleSheet.create({
 
   createdAtContainer: {
     width: "100%",
-    marginTop: 17,
+    height: 12,
+    marginVertical: 16,
     alignItems: "flex-end",
     justifyContent: "flex-start",
   },

@@ -64,6 +64,10 @@ export default function Postlayout() {
           ),
         }}
       />
+      <Stack.Screen name="connecting/index" options={{ headerShown: false }} />
+      <Stack.Screen name="gathering/index" options={{ headerShown: false }} />
+      <Stack.Screen name="gathering/[id]" options={{ headerShown: false }} />
+      <Stack.Screen name="gathering/write" options={{ headerShown: false }} />
     </Stack>
   );
 }

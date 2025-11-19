@@ -12,7 +12,11 @@ export default function FeedLayout() {
       }}>
       <Stack.Screen
         name="index"
-        options={{ headerShown: false, title: "Feed" }}
+        options={{ headerShown: false, title: "free" }}
+      />
+      <Stack.Screen
+        name="buddy"
+        options={{ headerShown: false, title: "buddy" }}
       />
     </Stack>
   );

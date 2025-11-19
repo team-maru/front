@@ -1,3 +1,4 @@
+import EventTitle from "@/components/EventTitle";
 import FeedHeader from "@/components/FeedHeader";
 import { colors } from "@/constants";
 import { StyleSheet } from "react-native";
@@ -7,6 +8,7 @@ export default function BuddyScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <FeedHeader feedtype="buddy" />
+      <EventTitle route="/post/gathering">Join a Gathering</EventTitle>
     </SafeAreaView>
   );
 }

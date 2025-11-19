@@ -176,7 +176,7 @@ export interface Notification {
 
 // Gathering (Buddy) 관련 타입들 - ERD에는 없지만 앱에서 사용하므로 추가
 export interface Gathering {
-  id: string;
+  id: number;
   title: string;
   description: string;
   meetDate: string;

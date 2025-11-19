@@ -699,12 +699,12 @@ export const dummyEvents: Event[] = [
 // 게더링 더미 데이터 (10개로 확장)
 export const dummyGatherings: Gathering[] = [
   {
-    id: "1",
+    id: 1,
     title: "Korean-English Language Exchange Cafe ☕",
     description:
       "Weekly language exchange meeting at a cozy cafe in Hongdae! Native Korean and English speakers welcome. We rotate between Korean and English every 30 minutes. Great for making friends!",
     meetDate: "2025-11-22T18:00:00Z",
-    location: "Hongdae Station Exit 9, Cafe Comma",
+    location: "Gongdeok-dong, Mapo-gu, Seoul",
     maxMembers: 8,
     currentMembers: 5,
     host: {
@@ -715,12 +715,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-15T10:30:00Z",
   },
   {
-    id: "2",
+    id: 2,
     title: "Weekend Hiking Group - Bukhansan 🥾",
     description:
       "Join us for a morning hike at Bukhansan National Park! Perfect for beginners and experienced hikers. We'll take the easy trail to Baegundae Peak. Bring water and comfortable shoes!",
     meetDate: "2025-11-24T08:00:00Z",
-    location: "Bukhansan National Park, Doseonsa Entrance",
+    location: "Ui-dong, Gangbuk-gu, Seoul",
     maxMembers: 10,
     currentMembers: 7,
     host: {
@@ -731,12 +731,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-16T14:20:00Z",
   },
   {
-    id: "3",
+    id: 3,
     title: "Study Group - Korean Grammar Focus 📚",
     description:
       "Regular study group for intermediate Korean learners. We focus on grammar patterns and practice conversation. Bring your Korean textbook! Very supportive environment.",
     meetDate: "2025-11-23T15:00:00Z",
-    location: "SNU Central Library, Study Room B-12",
+    location: "Gwanak-dong, Gwanak-gu, Seoul",
     maxMembers: 6,
     currentMembers: 4,
     host: {
@@ -747,12 +747,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-17T09:15:00Z",
   },
   {
-    id: "4",
+    id: 4,
     title: "Board Game Night - International Edition 🎲",
     description:
       "Fun board game night with games from around the world! Bring your favorite game from your home country. Snacks and drinks provided. Great way to relax after midterms!",
     meetDate: "2025-11-26T19:00:00Z",
-    location: "Sogang University Student Center, Room 302",
+    location: "Sinsu-dong, Mapo-gu, Seoul",
     maxMembers: 12,
     currentMembers: 8,
     host: {
@@ -763,12 +763,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-18T11:45:00Z",
   },
   {
-    id: "5",
+    id: 5,
     title: "Cooking Club - Making Kimchi! 🥬",
     description:
       "Learn to make authentic kimchi with Korean students! We'll teach you the traditional family recipe. All ingredients provided. You can take your kimchi home to ferment!",
     meetDate: "2025-11-25T16:00:00Z",
-    location: "Korea University Cooking Lab, Building 5",
+    location: "Anam-dong, Seongbuk-gu, Seoul",
     maxMembers: 8,
     currentMembers: 6,
     host: {
@@ -779,12 +779,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-14T13:30:00Z",
   },
   {
-    id: "6",
+    id: 6,
     title: "Photography Walk - Autumn in Seoul 📸",
     description:
       "Capture the beautiful autumn colors around Seoul! We'll visit Namsan Park, Deoksugung Palace, and hidden spots in Jung-gu. All photography levels welcome. Bring your camera or phone!",
     meetDate: "2025-11-28T14:00:00Z",
-    location: "Namsan Park, Cable Car Station",
+    location: "Hoehyeon-dong, Jung-gu, Seoul",
     maxMembers: 15,
     currentMembers: 11,
     host: {
@@ -795,12 +795,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-19T08:45:00Z",
   },
   {
-    id: "7",
+    id: 7,
     title: "Movie Night - Korean Films with Subtitles 🎬",
     description:
       "Join us for Korean movie night! We'll watch classic and modern Korean films with English subtitles. Popcorn and snacks provided. Great way to learn about Korean culture!",
     meetDate: "2025-11-29T19:30:00Z",
-    location: "Yonsei University AV Room 201",
+    location: "Sinchon-dong, Seodaemun-gu, Seoul",
     maxMembers: 20,
     currentMembers: 14,
     host: {
@@ -811,12 +811,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-20T12:15:00Z",
   },
   {
-    id: "8",
+    id: 8,
     title: "Tennis Club - All Levels Welcome! 🎾",
     description:
       "Weekly tennis meetup at Hanyang University courts. We have rackets available for borrowing. Beginners welcome - we'll help you learn! Come for exercise and friendship!",
     meetDate: "2025-11-30T10:00:00Z",
-    location: "Hanyang University Tennis Courts",
+    location: "Haengdang-dong, Seongdong-gu, Seoul",
     maxMembers: 12,
     currentMembers: 9,
     host: {
@@ -827,12 +827,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-21T16:30:00Z",
   },
   {
-    id: "9",
+    id: 9,
     title: "Korean Calligraphy Practice Group ✍️",
     description:
       "Practice Korean calligraphy in a peaceful setting. We provide all materials including brushes and ink. Learn about Korean characters while creating beautiful art. Very meditative!",
     meetDate: "2025-12-01T13:00:00Z",
-    location: "Korea University Traditional Arts Center",
+    location: "Anam-dong, Seongbuk-gu, Seoul",
     maxMembers: 10,
     currentMembers: 6,
     host: {
@@ -843,12 +843,12 @@ export const dummyGatherings: Gathering[] = [
     createdAt: "2025-11-22T09:20:00Z",
   },
   {
-    id: "10",
+    id: 10,
     title: "Cultural Exchange Potluck Dinner 🍽️",
     description:
       "Bring a dish from your home country and try foods from around the world! Share stories about your culture and learn about others. Vegetarian and halal options welcome!",
     meetDate: "2025-12-03T18:00:00Z",
-    location: "Hongik University International Lounge",
+    location: "Sangsu-dong, Mapo-gu, Seoul",
     maxMembers: 25,
     currentMembers: 18,
     host: {

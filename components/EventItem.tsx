@@ -30,7 +30,7 @@ function EventItem({ eventPostId }: EventItemProps) {
             <View style={styles.infoContainer}>
               <View style={styles.infoOneLineContainer}>
                 <Feather name="map-pin" color={colors.GRAY_600} size={14} />
-                <CustomText fontWeight="regular" style={styles.infoText}>
+                <CustomText fontWeight="medium" style={styles.infoText}>
                   Songhui's house
                 </CustomText>
               </View>
@@ -40,7 +40,7 @@ function EventItem({ eventPostId }: EventItemProps) {
                   color={colors.GRAY_600}
                   size={14}
                 />
-                <CustomText fontWeight="regular" style={styles.infoText}>
+                <CustomText fontWeight="medium" style={styles.infoText}>
                   100,000
                 </CustomText>
               </View>

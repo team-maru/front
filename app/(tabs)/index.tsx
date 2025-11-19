@@ -6,7 +6,13 @@ import RightArrowButton from "@/components/RightArrowButton";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
 
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Image,
+  ImageBackground,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -21,6 +27,11 @@ export default function HomeScreen() {
       </View>
       <ScrollView>
         <View style={styles.bannerContainer}>
+          <ImageBackground
+            source={require("@/assets/images/banner1.png")}
+            style={styles.bannerImage}
+            imageStyle={{ borderRadius: 10 }}
+          />
           <CustomText fontWeight="semibold" style={styles.bannerText}>
             Our journey starts here,{"\n"}together with KOPLE
           </CustomText>
@@ -85,6 +96,9 @@ const styles = StyleSheet.create({
     paddingVertical: 19,
     borderRadius: 10,
     backgroundColor: colors.BLACK,
+  },
+  bannerImage: {
+    ...StyleSheet.absoluteFillObject,
   },
   bannerText: {
     color: colors.GRAY_300,

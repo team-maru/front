@@ -1,7 +1,8 @@
 import { colors } from "@/constants";
 import { Feather, FontAwesome6 } from "@expo/vector-icons";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { ImageBackground, Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
+import WishButton from "./WishButton";
 
 interface EventItemProps {
   eventPostId: number;
@@ -46,10 +47,15 @@ function EventItem({ eventPostId }: EventItemProps) {
             </View>
           </View>
           <View style={styles.imageContainer}>
-            <Image
+            <ImageBackground
               source={require("@/assets/images/sample.jpg")}
-              style={{ width: 94, height: 94, borderRadius: 5 }}
-            />
+              style={styles.backgroundImage}
+              imageStyle={{ borderRadius: 5 }}
+            >
+              <View style={styles.wishButtonContainer}>
+                <WishButton />
+              </View>
+            </ImageBackground>
           </View>
         </View>
       </View>
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: colors.GRAY_100,
     borderRadius: 15,
-    marginHorizontal: 16,
+    height: 130,
 
     // iOS 스타일
     shadowColor: "#000",
@@ -82,7 +88,6 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingVertical: 14.5,
-    paddingHorizontal: 16,
   },
   dateText: {
     color: colors.ORANGE_600,
@@ -117,6 +122,17 @@ const styles = StyleSheet.create({
     width: 94,
     height: "100%",
     justifyContent: "center",
+  },
+  backgroundImage: {
+    width: 94,
+    height: 94,
+    justifyContent: "flex-start",
+    alignItems: "flex-end",
+  },
+  wishButtonContainer: {
+    padding: 8,
+    width: 38,
+    height: 38,
   },
 
   titleContainer: {

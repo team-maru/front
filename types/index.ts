@@ -11,7 +11,13 @@ export type LikeSource = "POST" | "COMMENT";
 export type NotificationType = "EVENT" | "COMMENT" | "PROMOTION";
 export type Gender = "MALE" | "FEMALE" | "OTHER";
 export type UserStatus = "교환학생" | "어학당" | "여행객" | "유학생";
-export type Category = "All" | "Campus" | "Daily" | "Eats" | "Activity" | "Q&A";
+export type Category =
+  | "All"
+  | "Campus"
+  | "Daily Tips"
+  | "Eat"
+  | "Activity"
+  | "Q&A";
 
 // User 관련 타입들
 export interface School {

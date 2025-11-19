@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   titleText: {
     alignItems: "flex-start",
     justifyContent: "flex-start",
-    fontSize: 14,
+    fontSize: 16,
     color: colors.GRAY_900,
   },
 });

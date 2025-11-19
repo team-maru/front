@@ -8,10 +8,7 @@ interface CreatedAtProps {
   isDetail?: boolean;
 }
 
-function CreatedAt({
-  createdAt = "2025-11-03 14:03",
-  isDetail = false,
-}: CreatedAtProps) {
+function CreatedAt({ createdAt = "", isDetail = false }: CreatedAtProps) {
   const date = isDetail
     ? formatAbsoluteDate(createdAt)
     : formatRelativeDate(createdAt);

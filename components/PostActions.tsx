@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
   },
   createdAt: {
     fontSize: 12,
-    lineHeight: 12, //글꼴 크기에 맞춰 라인 높이를 지정 ( 아이콘 크기가 비슷하게 )
+    lineHeight: 16, //글꼴 크기에 맞춰 라인 높이를 지정 ( 아이콘 크기가 비슷하게 )
     color: colors.GRAY_600,
     borderLeftColor: colors.GRAY_500,
     borderLeftWidth: 1.5,

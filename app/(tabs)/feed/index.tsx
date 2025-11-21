@@ -10,7 +10,7 @@ export default function FeedScreen() {
       <View style={styles.contentContainer}>
         <FeedList />
       </View>
-      <FloatingButton />
+      <FloatingButton destination="/post/write" />
     </View>
   );
 }

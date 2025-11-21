@@ -1,4 +1,5 @@
 import FeedHeader from "@/components/FeedHeader";
+import FloatingButton from "@/components/FloatingButton";
 import { colors } from "@/constants";
 import { Stack, usePathname } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -6,11 +7,30 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function FeedLayout() {
   const pathname = usePathname();
 
-  // 헤더부분은 buddy, gathering, connecting 공통으로 사용
-  const feedtype = pathname.includes("/buddy") || pathname.includes("/gathering") || pathname.includes("/connecting") ? "buddy" : "free";
+  // 현재 경로 확인
+  const isFeedIndex = pathname === "/feed";
+  const isBuddy = pathname === "/feed/buddy";
+  const isGathering = pathname === "/feed/gathering";
+  const isConnecting = pathname === "/feed/connecting";
+
+  // 피드 타입 결정 (free 또는 buddy)
+  const feedtype = isBuddy || isGathering || isConnecting ? "buddy" : "free";
+
+  // FloatingButton 이동 경로 결정
+  const writeType = isGathering
+    ? "gathering"
+    : isConnecting
+    ? "connecting"
+    : "free";
+
+  // FloatingButton은 메인 피드 페이지에서만 표시 (buddy 제외)
+  const showFloatingButton = isFeedIndex || isGathering || isConnecting;
+
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: colors.GRAY_100 }} edges={['top']}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: colors.GRAY_100 }}
+      edges={["top"]}>
       <FeedHeader feedtype={feedtype} />
       <Stack
         screenOptions={{
@@ -44,6 +64,7 @@ export default function FeedLayout() {
           options={{ headerShown: false, title: "connecting" }}
         />
       </Stack>
+      {showFloatingButton && <FloatingButton writeType={writeType} />}
     </SafeAreaView>
   );
 }

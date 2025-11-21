@@ -1,5 +1,4 @@
 import FeedList from "@/components/FeedList";
-import FloatingButton from "@/components/FloatingButton";
 import { colors } from "@/constants";
 
 import { StyleSheet, View } from "react-native";
@@ -10,7 +9,6 @@ export default function FeedScreen() {
       <View style={styles.contentContainer}>
         <FeedList />
       </View>
-      <FloatingButton destination="/post/write" />
     </View>
   );
 }

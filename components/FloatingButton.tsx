@@ -4,10 +4,12 @@ import { router } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 
 interface FloatingButtonProps {
-  destination: "/post/write" | "/(tabs)/feed/gathering/write";
+  writeType: "free"|"connecting"|"gathering";
 }
 
-function FloatingButton({ destination }: FloatingButtonProps) {
+function FloatingButton({ writeType }: FloatingButtonProps) {
+const destination = writeType === "free" ? "/post/write" : writeType === "gathering" ? "/(tabs)/feed/gathering/write" : "/(tabs)/feed/connecting/write";
+
   return (
     <Pressable
       style={styles.container}

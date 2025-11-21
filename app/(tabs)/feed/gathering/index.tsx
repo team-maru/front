@@ -1,4 +1,3 @@
-import FloatingButton from "@/components/FloatingButton";
 import GatheringList from "@/components/GatheringList";
 import TheLatestGatheringList from "@/components/TheLatestGatheringList";
 import CustomText from "@/components/ui/CustomText";
@@ -22,7 +21,6 @@ export default function GatheringListScreen({}: GatheringListScreenProps) {
         </CustomText>
         <TheLatestGatheringList />
       </View>
-      <FloatingButton destination="/(tabs)/feed/gathering/write" />
     </ScrollView>
   );
 }

@@ -46,7 +46,6 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
                 name="calendar-month-outline"
                 color={colors.GRAY_600}
                 size={14}
-                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
               />
               <CustomText fontWeight="medium" style={styles.infoText}>
                 {meetDate}
@@ -57,7 +56,6 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
                 name="map-pin"
                 color={colors.GRAY_600}
                 size={14}
-                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
               />
               <CustomText
                 fontWeight="medium"
@@ -75,7 +73,6 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
                 name="person-outline"
                 color={colors.GRAY_600}
                 size={14}
-                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
               />
               <CustomText fontWeight="medium" style={styles.infoText}>
                 {gathering.currentMembers}/{gathering.maxMembers}

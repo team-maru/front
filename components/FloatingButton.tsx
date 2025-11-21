@@ -1,19 +1,14 @@
 import PencilIcon from "@/assets/images/pencil.svg";
 import { colors } from "@/constants";
-import { router } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 
 interface FloatingButtonProps {
-  writeType: "free"|"connecting"|"gathering";
+  onPress?: () => void;
 }
 
-function FloatingButton({ writeType }: FloatingButtonProps) {
-const destination = writeType === "free" ? "/post/write" : writeType === "gathering" ? "/(tabs)/feed/gathering/write" : "/(tabs)/feed/connecting/write";
-
+function FloatingButton({ onPress }: FloatingButtonProps) {
   return (
-    <Pressable
-      style={styles.container}
-      onPress={() => router.push(destination)}>
+    <Pressable style={styles.container} onPress={onPress}>
       <PencilIcon width={22} height={24} />
     </Pressable>
   );

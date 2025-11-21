@@ -12,7 +12,7 @@ function CommunityItem({ postId }: CommunityItemProps) {
   const post = dummyPosts.find((p) => p.id === postId) || dummyPosts[0];
   const category = dummyCategories.find((c) => c.id === post.category_id);
   const handlePressFeed = () => {
-    // router.push({ pathname: "/post/[id]", params: { id: postId } });
+    // router.push({ pathname: "/(tabs)/feed/free/[id]", params: { id: postId } });
     // 더미데이터로 만들어진 포스트 상세보기 페이지는 없어서 주석처리 해놨어요 시간 되면 나중에 추가할게요
   };
   return (

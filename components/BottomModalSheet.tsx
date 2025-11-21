@@ -8,7 +8,8 @@ import {
 import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types";
 import { router } from "expo-router";
 import { forwardRef, useCallback } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
+import CustomText from "./ui/CustomText";
 
 interface BottomModalSheetProps {
   writeType: "free" | "connecting" | "gathering";
@@ -53,8 +54,17 @@ const BottomModalSheet = forwardRef<BottomSheetModal, BottomModalSheetProps>(
         enablePanDownToClose={false}
         backgroundStyle={styles.bottomSheetBackground}
         backdropComponent={renderBackdrop}>
-        <BottomSheetView style={styles.contentContainer}>
-          <WarningIcon width={48} height={48} style={{ marginBottom: 16 }} />
+        <BottomSheetView style={styles.contentWrapper}>
+          <View style={styles.contentContainer}>
+            <WarningIcon width={48} height={48} />
+            <CustomText fontWeight="semibold" style={styles.warningTitleStyle}>
+              Posting is limited
+            </CustomText>
+            <CustomText fontWeight="regular" style={styles.warningContentStyle}>
+              Only members who've joined at least{"\n"}
+              one KOPLE event can write a post.
+            </CustomText>
+          </View>
         </BottomSheetView>
       </BottomSheetModal>
     );
@@ -64,58 +74,31 @@ const BottomModalSheet = forwardRef<BottomSheetModal, BottomModalSheetProps>(
 const styles = StyleSheet.create({
   bottomSheetBackground: {
     backgroundColor: colors.WHITE,
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    borderTopLeftRadius: 40,
+    borderTopRightRadius: 40,
   },
   handleIndicator: {
     backgroundColor: colors.GRAY_300,
     width: 40,
     height: 4,
   },
-  contentContainer: {
+  contentWrapper: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 20,
-    zIndex: 10000,
+    paddingHorizontal: "15%",
+    paddingTop: "12%",
+    paddingBottom: "20%",
+    justifyContent: "center",
   },
-  title: {
-    fontSize: 24,
+  contentContainer: {
+    alignItems: "center",
+  },
+  warningTitleStyle: {
+    fontSize: 20,
     color: colors.GRAY_900,
-    marginBottom: 12,
   },
-  description: {
-    fontSize: 16,
-    color: colors.GRAY_600,
-    marginBottom: 32,
-  },
-  buttonContainer: {
-    gap: 12,
-  },
-  actionButton: {
-    backgroundColor: colors.ORANGE_600,
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  actionButtonPressed: {
-    opacity: 0.8,
-  },
-  buttonText: {
-    color: colors.WHITE,
-    fontSize: 16,
-  },
-  cancelButton: {
-    backgroundColor: colors.GRAY_200,
-    paddingVertical: 16,
-    borderRadius: 12,
-    alignItems: "center",
-  },
-  cancelButtonPressed: {
-    opacity: 0.8,
-  },
-  cancelText: {
-    color: colors.GRAY_600,
-    fontSize: 16,
+  warningContentStyle: {
+    fontSize: 12,
+    color: colors.GRAY_900,
   },
 });
 

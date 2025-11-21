@@ -4,12 +4,15 @@ import { Href, router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
 
-interface EventTitleProps {
+interface TitleWithNavigationProps {
   children: React.ReactNode;
-  route: "/(tabs)/explore" | "/(tabs)/feed" | "/(tabs)/feed/buddy";
+  route:
+    | "/(tabs)/explore"
+    | "/(tabs)/feed"
+    | "/(tabs)/feed/gathering";
 }
 
-function EventTitle({ children, route }: EventTitleProps) {
+function TitleWithNavigation({ children, route }: TitleWithNavigationProps) {
   const handlePress = () => {
     if (route) {
       router.push(route as Href);
@@ -44,4 +47,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default EventTitle;
+export default TitleWithNavigation;

@@ -1,11 +1,15 @@
+import BottomModalSheet from "@/components/BottomModalSheet";
 import FeedHeader from "@/components/FeedHeader";
 import FloatingButton from "@/components/FloatingButton";
 import { colors } from "@/constants";
-import { Stack, usePathname } from "expo-router";
+import { BottomSheetModal } from "@gorhom/bottom-sheet";
+import { router, Stack, usePathname } from "expo-router";
+import { Fragment, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FeedLayout() {
   const pathname = usePathname();
+  const bottomSheetRef = useRef<BottomSheetModal>(null);
 
   // 현재 경로 확인
   const isFeedIndex = pathname === "/feed";
@@ -24,14 +28,37 @@ export default function FeedLayout() {
     : "free";
 
   // FloatingButton은 메인 피드 페이지에서만 표시 (buddy 제외)
-  const showFloatingButton = isFeedIndex || isGathering || isConnecting;
+  const isMainPage = isFeedIndex || isBuddy || isGathering || isConnecting;
 
+  const showWriteButton = isFeedIndex || isGathering || isConnecting;
+
+  // FloatingButton 클릭 핸들러 (조건 체크 후 Bottom Sheet 표시)
+  const handleFloatingButtonPress = () => {
+    if (isGathering) {
+      // gathering일 때만 bottomSheet 표시
+      bottomSheetRef.current?.present();
+    } else {
+      // 그 외에는 바로 write 페이지로 이동
+      const destination =
+        writeType === "free"
+          ? "/(tabs)/feed/free/write"
+          : "/(tabs)/feed/connecting/write";
+      router.push(destination);
+    }
+  };
+
+  // 조건부 컨테이너 설정
+  const Container = isMainPage ? SafeAreaView : Fragment;
 
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: colors.GRAY_100 }}
-      edges={["top"]}>
-      <FeedHeader feedtype={feedtype} />
+    <Container
+      {...(isMainPage
+        ? {
+            style: { flex: 1, backgroundColor: colors.GRAY_100 },
+            edges: ["top"],
+          }
+        : {})}>
+      {isMainPage && <FeedHeader feedtype={feedtype} />}
       <Stack
         screenOptions={{
           headerShown: false,
@@ -64,7 +91,10 @@ export default function FeedLayout() {
           options={{ headerShown: false, title: "connecting" }}
         />
       </Stack>
-      {showFloatingButton && <FloatingButton writeType={writeType} />}
-    </SafeAreaView>
+      {showWriteButton && (
+        <FloatingButton onPress={handleFloatingButtonPress} />
+      )}
+      <BottomModalSheet ref={bottomSheetRef} writeType={writeType} />
+    </Container>
   );
 }

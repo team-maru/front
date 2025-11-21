@@ -94,7 +94,11 @@ export default function FeedLayout() {
       {showWriteButton && (
         <FloatingButton onPress={handleFloatingButtonPress} />
       )}
-      <BottomModalSheet ref={bottomSheetRef} writeType={writeType} />
+      <BottomModalSheet
+        ref={bottomSheetRef}
+        writeType={writeType}
+        warningType={1}
+      />
     </Container>
   );
 }

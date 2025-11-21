@@ -3,7 +3,7 @@ import { Feather } from "@expo/vector-icons";
 import { router, Stack } from "expo-router";
 import { Pressable } from "react-native";
 
-export default function Postlayout() {
+export default function FreeLayout() {
   return (
     <Stack
       screenOptions={{

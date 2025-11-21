@@ -52,7 +52,9 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
 
   return (
     <View style={styles.headerContentContainer}>
-      <NotificationButton />
+      <View style={styles.notificationButtonContainer}>
+        <NotificationButton />
+      </View>
       <BoardTabs feedtype={feedtype} />
       {feedtype === "free" && (
         <View style={styles.scrollViewWrapper}>
@@ -86,6 +88,9 @@ const styles = StyleSheet.create({
   headerContentContainer: {
     backgroundColor: colors.GRAY_100,
     paddingBottom: 4,
+  },
+  notificationButtonContainer: {
+    margin: 18,
   },
   scrollViewWrapper: {
     paddingHorizontal: 12,

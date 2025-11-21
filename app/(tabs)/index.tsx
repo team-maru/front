@@ -1,8 +1,8 @@
 import CommunityList from "@/components/CommunityList";
 import EventList from "@/components/EventList";
-import EventTitle from "@/components/EventTitle";
 import GatheringList from "@/components/GatheringList";
 import NotificationButton from "@/components/NotificationButton";
+import TitleWithNavigation from "@/components/TitleWithNavigation";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
 
@@ -37,20 +37,23 @@ export default function HomeScreen() {
           </CustomText>
         </View>
         <View style={styles.communityContainer}>
-          <EventTitle route="/(tabs)/feed">New in community</EventTitle>
-
+          <TitleWithNavigation route="/(tabs)/feed">
+            New in community
+          </TitleWithNavigation>
           <View style={styles.communityList}>
             <CommunityList />
           </View>
         </View>
         <View style={styles.eventContainer}>
-          <EventTitle route="/(tabs)/explore">
+          <TitleWithNavigation route="/(tabs)/explore">
             Find Your KOPLE Moment
-          </EventTitle>
+          </TitleWithNavigation>
           <EventList />
         </View>
         <View style={styles.gatheringContainer}>
-          <EventTitle route="/(tabs)/feed/buddy">Join a Gathering</EventTitle>
+          <TitleWithNavigation route="/(tabs)/feed/gathering">
+            Join a Gathering
+          </TitleWithNavigation>
           <GatheringList />
         </View>
       </ScrollView>
@@ -97,10 +100,6 @@ const styles = StyleSheet.create({
   communityContainer: {
     margin: 16,
   },
-  communityTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   titleText: {
     fontSize: 18,
   },
@@ -111,15 +110,7 @@ const styles = StyleSheet.create({
   eventContainer: {
     marginHorizontal: 16,
   },
-  eventTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   gatheringContainer: {
     margin: 16,
-  },
-  gatheringTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
   },
 });

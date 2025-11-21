@@ -15,6 +15,7 @@ function GatheringList() {
       horizontal
       onEndReachedThreshold={0.5}
       showsHorizontalScrollIndicator={false}
+      contentContainerStyle={{ gap: 16 }} // 다른 list들과의 x축 위치 맞추기
     />
   );
 }

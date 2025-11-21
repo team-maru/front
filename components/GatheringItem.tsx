@@ -24,8 +24,7 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
           <ImageBackground
             source={require("@/assets/images/sample.jpg")}
             style={styles.backgroundImage}
-            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}
-          >
+            imageStyle={{ borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
             <View style={styles.wishButtonContainer}>
               <WishButton />
             </View>
@@ -37,8 +36,7 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
               fontWeight="semibold"
               style={styles.titleText}
               numberOfLines={1}
-              ellipsizeMode="tail"
-            >
+              ellipsizeMode="tail">
               {gathering.title}
             </CustomText>
           </View>
@@ -48,19 +46,24 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
                 name="calendar-month-outline"
                 color={colors.GRAY_600}
                 size={14}
+                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
               />
               <CustomText fontWeight="medium" style={styles.infoText}>
                 {meetDate}
               </CustomText>
             </View>
             <View style={styles.infoOneLineContainer}>
-              <Feather name="map-pin" color={colors.GRAY_600} size={14} />
+              <Feather
+                name="map-pin"
+                color={colors.GRAY_600}
+                size={14}
+                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
+              />
               <CustomText
                 fontWeight="medium"
                 style={styles.infoText}
                 numberOfLines={1}
-                ellipsizeMode="tail"
-              >
+                ellipsizeMode="tail">
                 {gathering.location
                   .split(", ")
                   .filter((part) => !part.includes("-dong"))
@@ -72,6 +75,7 @@ function GatheringItem({ gatheringId }: GatheringItemProps) {
                 name="person-outline"
                 color={colors.GRAY_600}
                 size={14}
+                style={{ marginBottom: 2 }} // 중앙정렬 맞추기
               />
               <CustomText fontWeight="medium" style={styles.infoText}>
                 {gathering.currentMembers}/{gathering.maxMembers}
@@ -97,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     backgroundColor: colors.GRAY_100,
     borderRadius: 20,
-    margin: 8,
+    marginVertical: 8,
   },
   textContainer: {
     paddingHorizontal: 18,

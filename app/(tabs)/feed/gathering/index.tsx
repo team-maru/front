@@ -1,3 +1,5 @@
+import GatheringList from "@/components/GatheringList";
+import TheLatestGatheringList from "@/components/TheLatestGatheringList";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
 import { ScrollView, StyleSheet, View } from "react-native";
@@ -6,28 +8,33 @@ interface GatheringListScreenProps {}
 
 export default function GatheringListScreen({}: GatheringListScreenProps) {
   return (
-    <View style={styles.container}>
-      <CustomText fontWeight="bold" style={styles.titleTextContainer}>
-        Join new experfiences{"\n"}and meet new friends!
-      </CustomText>
-      <ScrollView style={styles.randomGatheringWrapper} horizontal={true}>
-        <View style={styles.gatheringTitleWrapper}></View>
-      </ScrollView>
-    </View>
+    <ScrollView style={styles.container}>
+      <View style={styles.gatheringContainer}>
+        <CustomText fontWeight="bold" style={styles.titleTextContainer}>
+          Join new experfiences{"\n"}and meet new friends!
+        </CustomText>
+        <GatheringList />
+      </View>
+      <View style={styles.gatheringContainer}>
+        <CustomText fontWeight="bold" style={styles.titleTextContainer}>
+          Ongoing Gatherings
+        </CustomText>
+        <TheLatestGatheringList />
+      </View>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.GRAY_100 },
+  container: {
+    flex: 1,
+    backgroundColor: colors.GRAY_100,
+    paddingHorizontal: 16,
+  },
   titleTextContainer: {
-    marginLeft: 16,
-    marginTop: 30,
-    marginBottom: 20,
     fontSize: 18,
   },
-  randomGatheringWrapper: {
-    marginLeft: 16,
-    gap: 16,
-    marginTop: 20,
+  gatheringContainer: {
+    marginTop: 16,
+    backgroundColor: "colors.GRAY_100",
   },
-  gatheringTitleWrapper: {},
 });

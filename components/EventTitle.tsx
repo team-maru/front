@@ -1,12 +1,12 @@
 import { colors } from "@/constants";
-import { Feather } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
 import { Href, router } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
 
 interface EventTitleProps {
   children: React.ReactNode;
-  route?: string;
+  route: "/(tabs)/explore" | "/(tabs)/feed" | "/(tabs)/feed/buddy";
 }
 
 function EventTitle({ children, route }: EventTitleProps) {
@@ -22,7 +22,11 @@ function EventTitle({ children, route }: EventTitleProps) {
         {children}
       </CustomText>
       <Pressable onPress={handlePress}>
-        <Feather name="arrow-right" size={24} color={colors.BLACK} />
+        <MaterialIcons
+          name="keyboard-arrow-right"
+          size={24}
+          color={colors.GRAY_900}
+        />
       </Pressable>
     </View>
   );
@@ -33,8 +37,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginHorizontal: 16,
-    marginVertical: 20,
   },
   titleTextContainer: {
     fontSize: 18,

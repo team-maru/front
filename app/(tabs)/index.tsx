@@ -1,8 +1,8 @@
 import CommunityList from "@/components/CommunityList";
 import EventList from "@/components/EventList";
+import EventTitle from "@/components/EventTitle";
 import GatheringList from "@/components/GatheringList";
 import NotificationButton from "@/components/NotificationButton";
-import RightArrowButton from "@/components/RightArrowButton";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
 
@@ -37,32 +37,20 @@ export default function HomeScreen() {
           </CustomText>
         </View>
         <View style={styles.communityContainer}>
-          <View style={styles.communityTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              New in community
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/feed" />
-          </View>
+          <EventTitle route="/(tabs)/feed">New in community</EventTitle>
+
           <View style={styles.communityList}>
             <CommunityList />
           </View>
         </View>
         <View style={styles.eventContainer}>
-          <View style={styles.eventTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              Find Your KOPLE Moment
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/explore" />
-          </View>
+          <EventTitle route="/(tabs)/explore">
+            Find Your KOPLE Moment
+          </EventTitle>
           <EventList />
         </View>
         <View style={styles.gatheringContainer}>
-          <View style={styles.gatheringTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              Join a Gathering
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/feed/buddy" />
-          </View>
+          <EventTitle route="/(tabs)/feed/buddy">Join a Gathering</EventTitle>
           <GatheringList />
         </View>
       </ScrollView>

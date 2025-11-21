@@ -8,6 +8,7 @@ import { Tabs } from "expo-router";
 export default function TabLayout() {
   return (
     <Tabs
+      initialRouteName="index" // 앱 접속시 홈 페이지로
       screenOptions={{
         tabBarActiveTintColor: colors.ORANGE_600,
         headerShown: false,
@@ -29,6 +30,7 @@ export default function TabLayout() {
         name="feed"
         options={{
           title: "Feed",
+          href: "/feed", //Feed 탭을 누를 때 항상 feed/index로 돌아가도록
           tabBarIcon: ({ color }) => (
             <AntDesign name="form" size={24} color={color} />
           ),

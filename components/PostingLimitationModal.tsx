@@ -22,9 +22,9 @@ const PostingLimitationModal = forwardRef<BottomSheetModal, PostingLimitationMod
       (props: BottomSheetDefaultBackdropProps) => (
         <BottomSheetBackdrop
           {...props}
-          disappearsOnIndex={-1}
-          appearsOnIndex={0}
-          opacity={0.5}
+          disappearsOnIndex={-1} // 모달이 닫힐 때 사라짐
+          appearsOnIndex={0} // 모달이 열릴 때 나타남
+          opacity={0.5} // 배경 투명도 설정
         />
       ),
       []
@@ -44,11 +44,10 @@ const PostingLimitationModal = forwardRef<BottomSheetModal, PostingLimitationMod
           <View style={styles.contentContainer}>
             <WarningIcon width={48} height={48} />
             <CustomText fontWeight="semibold" style={styles.warningTitleStyle}>
-              Posting is limited
+              {warningData?.title}
             </CustomText>
             <CustomText fontWeight="regular" style={styles.warningContentStyle}>
-              Only members who've joined at least{"\n"}
-              one KOPLE event can write a post.
+              {warningData?.content}
             </CustomText>
           </View>
         </BottomSheetView>

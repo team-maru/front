@@ -947,7 +947,7 @@ export const dummyLikes: Like[] = [
   },
 ];
 
-export const warningContentData = [
+export const warningContentData = [ // 게시물 작성 제한 경고 문구 데이터
   {
     id: 1,
     title: "Posting is limited",

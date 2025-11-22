@@ -34,7 +34,7 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider>
+      <BottomSheetModalProvider> // tabs보다 상위에 둬서 모달이 tabs 위에 뜨도록 함
         <ActionSheetProvider>
           <QueryClientProvider client={queryClient}>
             <RootNavigator />

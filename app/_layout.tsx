@@ -1,11 +1,14 @@
 import queryClient from "@/api/queryClient";
 import "@/utils/dayjsConfig";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import "react-native-gesture-handler";
 import "react-native-reanimated";
 
 SplashScreen.preventAutoHideAsync();
@@ -30,12 +33,16 @@ export default function RootLayout() {
   }
 
   return (
-    <ActionSheetProvider>
-      <QueryClientProvider client={queryClient}>
-        <RootNavigator />
-        {/* @ts-ignore: react-native-toast-message is often used without a ref when calling Toast.show() globally. */}
-      </QueryClientProvider>
-    </ActionSheetProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <BottomSheetModalProvider> // tabs보다 상위에 둬서 모달이 tabs 위에 뜨도록 함
+        <ActionSheetProvider>
+          <QueryClientProvider client={queryClient}>
+            <RootNavigator />
+            {/* @ts-ignore: react-native-toast-message is often used without a ref when calling Toast.show() globally. */}
+          </QueryClientProvider>
+        </ActionSheetProvider>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
 
@@ -45,7 +52,6 @@ function RootNavigator() {
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen name="modal" />
       <Stack.Screen name="auth" options={{ headerShown: false }} />
-      <Stack.Screen name="post" options={{ headerShown: false }} />
     </Stack>
   );
 }

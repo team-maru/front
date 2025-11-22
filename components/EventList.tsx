@@ -13,7 +13,7 @@ function EventList() {
   return (
     <>
       {upcomingEvents.map((event) => (
-        <EventItem key={event.id} eventPostId={event.id} />
+        <EventItem key={event.id} isType="event" eventPostId={event.id} />
       ))}
     </>
   );

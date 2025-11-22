@@ -1,12 +1,7 @@
 import { colors } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
-dayjs.extend(relativeTime);
-dayjs.locale("ko");
 
 interface ProfileProps {
   onPress: () => void;

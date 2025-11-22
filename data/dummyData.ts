@@ -946,3 +946,17 @@ export const dummyLikes: Like[] = [
     created_at: "2025-11-18T11:45:00Z",
   },
 ];
+
+export const warningContentData = [ // 게시물 작성 제한 경고 문구 데이터
+  {
+    id: 1,
+    title: "Posting is limited",
+    content:
+      "Only members who've joined at least one KOPLE event can write a post.",
+  },
+  {
+    id: 2,
+    title: "Posting is limited",
+    content: "New posts can be created 5 minutes after your last post",
+  },
+];

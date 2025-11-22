@@ -1,6 +1,6 @@
 import { colors } from "@/constants";
 import { dummyEvents } from "@/data/dummyData";
-import { Feather, FontAwesome6 } from "@expo/vector-icons";
+import { Feather, FontAwesome6, MaterialIcons } from "@expo/vector-icons";
 import dayjs from "dayjs";
 import "dayjs/locale/en";
 import timezone from "dayjs/plugin/timezone";
@@ -15,9 +15,10 @@ dayjs.locale("en");
 
 interface EventItemProps {
   eventPostId: number;
+  isType?: "event" | "gathering";
 }
 
-function EventItem({ eventPostId }: EventItemProps) {
+function EventItem({ eventPostId, isType }: EventItemProps) {
   const event = dummyEvents.find((e) => e.id === eventPostId) || dummyEvents[0];
 
   const formatEventDate = (dateString: string) => {
@@ -45,41 +46,58 @@ function EventItem({ eventPostId }: EventItemProps) {
                 fontWeight="semibold"
                 style={styles.titleText}
                 numberOfLines={2}
-                ellipsizeMode="tail"
-              >
+                ellipsizeMode="tail">
                 {event.title}
               </CustomText>
             </View>
             <View style={styles.infoContainer}>
               <View style={styles.infoOneLineContainer}>
-                <Feather name="map-pin" color={colors.GRAY_600} size={14} />
+                <Feather
+                  name="map-pin"
+                  color={colors.GRAY_600}
+                  size={14}
+                  style={{ marginBottom: 3 }}
+                />
                 <CustomText
                   fontWeight="medium"
                   style={styles.infoText}
                   numberOfLines={1}
-                  ellipsizeMode="tail"
-                >
+                  ellipsizeMode="tail">
                   {event.location}
                 </CustomText>
               </View>
-              <View style={styles.infoOneLineContainer}>
-                <FontAwesome6
-                  name="won-sign"
-                  color={colors.GRAY_600}
-                  size={14}
-                />
-                <CustomText fontWeight="medium" style={styles.infoText}>
-                  {event.price}
-                </CustomText>
-              </View>
+              {/* isType === "event" or "gathering" */}
+              {isType === "event" ? (
+                <View style={styles.infoOneLineContainer}>
+                  <FontAwesome6
+                    name="won-sign"
+                    color={colors.GRAY_600}
+                    size={14}
+                  />
+                  <CustomText fontWeight="medium" style={styles.infoText}>
+                    {event.price}
+                  </CustomText>
+                </View>
+              ) : (
+                <View style={styles.numberOfPepleContainer}>
+                  <MaterialIcons
+                    name="person-outline"
+                    size={20}
+                    color={colors.GRAY_600}
+                    style={{ marginBottom: 3, marginLeft: -2.5 }}
+                  />
+                  <CustomText fontWeight="medium" style={styles.infoText}>
+                    13/20 
+                  </CustomText>
+                </View>
+              )}
             </View>
           </View>
           <View style={styles.imageContainer}>
             <ImageBackground
               source={require("@/assets/images/sample.jpg")}
               style={styles.backgroundImage}
-              imageStyle={{ borderRadius: 5 }}
-            >
+              imageStyle={{ borderRadius: 5 }}>
               <View style={styles.wishButtonContainer}>
                 <WishButton />
               </View>
@@ -148,6 +166,17 @@ const styles = StyleSheet.create({
   infoText: {
     color: colors.GRAY_600,
     fontSize: 14,
+  },
+  numberOfPepleContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  },
+
+  numberOfPepleText: {
+    color: colors.GRAY_600,
+    fontSize: 14,
+    marginLeft: -2.5,
   },
   imageContainer: {
     width: 94,

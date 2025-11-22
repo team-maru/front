@@ -1,4 +1,4 @@
-import BottomModalSheet from "@/components/BottomModalSheet";
+import PostingLimitationModal from "@/components/PostingLimitationModal";
 import FeedHeader from "@/components/FeedHeader";
 import FloatingButton from "@/components/FloatingButton";
 import { colors } from "@/constants";
@@ -6,6 +6,17 @@ import { BottomSheetModal } from "@gorhom/bottom-sheet";
 import { router, Stack, usePathname } from "expo-router";
 import { Fragment, useRef } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+
+// 게시물 타입에 따른 destination 계산 헬퍼 함수
+const getWriteDestination = (writeType: "free" | "connecting" | "gathering") => {
+  const destinations = {
+    free: "/(tabs)/feed/free/write",
+    gathering: "/(tabs)/feed/gathering/write",
+    connecting: "/(tabs)/feed/connecting/write",
+  } as const;
+
+  return destinations[writeType];
+};
 
 export default function FeedLayout() {
   const pathname = usePathname();
@@ -39,11 +50,7 @@ export default function FeedLayout() {
       bottomSheetRef.current?.present();
     } else {
       // 그 외에는 바로 write 페이지로 이동
-      const destination =
-        writeType === "free"
-          ? "/(tabs)/feed/free/write"
-          : "/(tabs)/feed/connecting/write";
-      router.push(destination);
+      router.push(getWriteDestination(writeType));
     }
   };
 
@@ -94,11 +101,7 @@ export default function FeedLayout() {
       {showWriteButton && (
         <FloatingButton onPress={handleFloatingButtonPress} />
       )}
-      <BottomModalSheet
-        ref={bottomSheetRef}
-        writeType={writeType}
-        warningType={1}
-      />
+      <PostingLimitationModal ref={bottomSheetRef} warningType={1} />
     </Container>
   );
 }

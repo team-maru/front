@@ -7,18 +7,16 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { BottomSheetDefaultBackdropProps } from "@gorhom/bottom-sheet/lib/typescript/components/bottomSheetBackdrop/types";
-import { router } from "expo-router";
 import { forwardRef, useCallback } from "react";
 import { StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
 
-interface BottomModalSheetProps {
-  writeType: "free" | "connecting" | "gathering";
+interface PostingLimitationModalProps {
   warningType: number;
 }
 
-const BottomModalSheet = forwardRef<BottomSheetModal, BottomModalSheetProps>(
-  ({ writeType, warningType }, ref) => {
+const PostingLimitationModal = forwardRef<BottomSheetModal, PostingLimitationModalProps>(
+  ({ warningType }, ref) => {
     // Backdrop 렌더 함수
     const renderBackdrop = useCallback(
       (props: BottomSheetDefaultBackdropProps) => (
@@ -32,22 +30,6 @@ const BottomModalSheet = forwardRef<BottomSheetModal, BottomModalSheetProps>(
       []
     );
 
-    const handleNavigate = () => {
-      const destination =
-        writeType === "free"
-          ? "/(tabs)/feed/free/write"
-          : writeType === "gathering"
-          ? "/(tabs)/feed/gathering/write"
-          : "/(tabs)/feed/connecting/write";
-
-      // Bottom Sheet 닫기
-      if (ref && typeof ref !== "function") {
-        ref.current?.dismiss();
-      }
-
-      // 네비게이션
-      router.push(destination);
-    };
     const warningData = warningContentData.find(
       (data) => data.id === warningType
     );
@@ -107,4 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default BottomModalSheet;
+export default PostingLimitationModal;

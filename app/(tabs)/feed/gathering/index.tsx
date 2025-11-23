@@ -35,6 +35,6 @@ const styles = StyleSheet.create({
   },
   gatheringContainer: {
     marginTop: 16,
-    backgroundColor: "colors.GRAY_100",
+    backgroundColor: colors.GRAY_100,
   },
 });

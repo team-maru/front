@@ -1,16 +1,17 @@
 import { colors } from "@/constants";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import { MessagesSquare } from "lucide-react";
+import { Feather, Ionicons, Octicons } from "@expo/vector-icons";
+import { MessagesSquare } from "lucide-react-native";
 import { useState } from "react";
 import {
   Image,
-  Modal,
   Pressable,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native";
+import Popover, { PopoverPlacement } from "react-native-popover-view";
 import CustomText from "./ui/CustomText";
+import { router } from "expo-router";
 
 interface ProfileProps {
   name: string;
@@ -26,36 +27,6 @@ function Profile({
   optiontype = "otherProfile",
 }: ProfileProps) {
   const [visible, setVisible] = useState(false);
-  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
-
-  const handleMenuPress = (action?: () => void) => {
-    setVisible(false);
-    if (action) {
-      setTimeout(() => action(), 100);
-    }
-  };
-
-  const handleIconPress = (event: any) => {
-    event.currentTarget?.measure(
-      (
-        x: number,
-        y: number,
-        width: number,
-        height: number,
-        pageX: number,
-        pageY: number
-      ) => {
-        const iconCenterY = pageY + height / 2;
-        const iconRight = pageX + width / 2;
-
-        setMenuPosition({
-          top: iconCenterY,
-          right: 20,
-        });
-        setVisible(true);
-      }
-    );
-  };
 
   return (
     <View style={styles.container}>
@@ -78,10 +49,14 @@ function Profile({
       </View>
 
       <View style={styles.optionContainer}>
-        {optiontype === "myProfile" && (
-          <>
+        <Popover
+          placement={PopoverPlacement.BOTTOM}
+          arrowSize={{ width: 0, height: 0 }}
+          isVisible={visible}
+          onRequestClose={() => setVisible(false)}
+          from={
             <TouchableOpacity
-              onPress={handleIconPress}
+              onPress={() => setVisible(true)}
               style={styles.iconButton}
               activeOpacity={0.7}>
               <Ionicons
@@ -90,57 +65,52 @@ function Profile({
                 color={colors.GRAY_500}
               />
             </TouchableOpacity>
-
-            <Modal
-              visible={visible}
-              transparent
-              animationType="fade"
-              onRequestClose={() => setVisible(false)}>
+          }
+          popoverStyle={[
+            styles.menuContainer,
+            optiontype === "myProfile"
+              ? styles.menuContainerMyProfile
+              : styles.menuContainerOtherProfile,
+          ]}>
+          {optiontype === "myProfile" ? (
+            <Pressable
+              style={styles.menuItem}
+              onPress={() => router.push("/")}>
+              <Octicons name="pencil" size={18} color={colors.GRAY_900} />
+              <CustomText fontWeight="medium" style={styles.menuText}>
+                Edit
+              </CustomText>
+            </Pressable>
+          ) : (
+            <>
               <Pressable
-                style={styles.modalOverlay}
-                onPress={() => setVisible(false)}>
-                <View
-                  style={[
-                    styles.menuContainer,
-                    {
-                      position: "absolute",
-                      top: menuPosition.top,
-                      right: menuPosition.right,
-                    },
-                  ]}>
-                  <Pressable
-                    style={styles.menuItem}
-                    onPress={() => alert("누름")}>
-                    <MessagesSquare size={24} />
-
-                    <CustomText fontWeight="medium" style={styles.menuText}>
-                      Message
-                    </CustomText>
-                  </Pressable>
-                  <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
-
-                  <Pressable style={styles.menuItem}>
-                    <Feather
-                      name="alert-circle"
-                      size={18}
-                      color={colors.GRAY_900}
-                    />
-                    <CustomText fontWeight="medium" style={styles.menuText}>
-                      Report
-                    </CustomText>
-                  </Pressable>
-                  <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
-
-                  <Pressable style={styles.menuItem}>
-                    <CustomText fontWeight="medium" style={styles.menuText}>
-                      Edit
-                    </CustomText>
-                  </Pressable>
-                </View>
+                style={styles.menuItem}
+                onPress={() => {
+                  setVisible(false);
+                  alert("누름");
+                }}>
+                <MessagesSquare size={18} />
+                <CustomText fontWeight="medium" style={styles.menuText}>
+                  Message
+                </CustomText>
               </Pressable>
-            </Modal>
-          </>
-        )}
+              <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
+
+              <Pressable
+                style={styles.menuItem}
+                onPress={() => setVisible(false)}>
+                <Feather
+                  name="alert-circle"
+                  size={18}
+                  color={colors.GRAY_900}
+                />
+                <CustomText fontWeight="medium" style={styles.menuText}>
+                  Report
+                </CustomText>
+              </Pressable>
+            </>
+          )}
+        </Popover>
       </View>
     </View>
   );
@@ -188,13 +158,8 @@ const styles = StyleSheet.create({
   iconButton: {
     padding: 8,
   },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "transparent",
-  },
   menuContainer: {
     width: 186,
-    height: 97,
     backgroundColor: colors.GRAY_100,
     borderRadius: 12,
     paddingVertical: 4,
@@ -204,10 +169,16 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
     elevation: 5,
   },
+  menuContainerMyProfile: {
+    height: 35,
+  },
+  menuContainerOtherProfile: {
+    height: 71,
+  },
   menuItem: {
     flexDirection: "row",
     paddingHorizontal: 17,
-    height: 31,
+    height: 32,
     alignItems: "center",
     gap: 10,
   },

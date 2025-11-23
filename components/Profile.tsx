@@ -5,8 +5,8 @@ import { MessagesSquare } from "lucide-react-native";
 import { Fragment, ReactNode, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
-import OptionColum from "./OptionColum";
 import CustomText from "./ui/CustomText";
+import OptionColunm from "./OptionColum";
 
 // 상수
 const ICON_SIZE = 18;
@@ -66,7 +66,7 @@ function Profile({
 
   // 내 프로필 메뉴 렌더링
   const renderMyProfileMenu = () => (
-    <OptionColum
+    <OptionColunm
       onPress={() => router.push("/")}
       icon={createIcon(Octicons, "pencil")}
       text="Edit"
@@ -76,13 +76,13 @@ function Profile({
   // 다른 사람 프로필 기본 메뉴 렌더링
   const renderOtherProfileMenu = () => (
     <>
-      <OptionColum
+      <OptionColunm
         onPress={() => router.push("/")}
         icon={createIcon(MessagesSquare)}
         text="Message"
       />
       <Divider />
-      <OptionColum
+      <OptionColunm
         onPress={() => setIsReportMenuVisible(true)}
         icon={createIcon(Feather, "alert-circle")}
         text="Report"
@@ -94,7 +94,7 @@ function Profile({
   // 신고 메뉴 렌더링
   const renderReportMenu = () => (
     <>
-      <OptionColum
+      <OptionColunm
         onPress={() => {
           setIsReportMenuVisible(true);
           setIsPopoverVisible(false);
@@ -107,7 +107,7 @@ function Profile({
 
       {REPORT_REASONS.map((reason, index) => (
         <Fragment key={reason.text}>
-          <OptionColum
+          <OptionColunm
             onPress={() => setIsPopoverVisible(false)}
             text={reason.text}
           />

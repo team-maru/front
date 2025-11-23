@@ -3,14 +3,14 @@ import { ReactNode } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import CustomText from "./ui/CustomText";
 
-interface OptionColumProps {
+interface OptionColunmProps {
   onPress: () => void;
   icon?: ReactNode;
   text: string;
   rightIcon?: ReactNode;
 }
 
-function OptionColum({ onPress, icon, text, rightIcon }: OptionColumProps) {
+function OptionColunm({ onPress, icon, text, rightIcon }: OptionColunmProps) {
   return (
     <Pressable style={styles.menuItem} onPress={onPress}>
       {icon}
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OptionColum;
+export default OptionColunm;

@@ -13,7 +13,7 @@ interface FeedItemProps {
 function FeedItem({ postId, isDetail = false }: FeedItemProps) {
   const handlePressFeed = () => {
     if (!isDetail) {
-      router.push({ pathname: "/post/[id]", params: { id: postId } });
+      router.push({ pathname: "/(tabs)/feed/free/[id]", params: { id: postId } });
     }
   };
   const ContainerComponent = isDetail ? View : Pressable;

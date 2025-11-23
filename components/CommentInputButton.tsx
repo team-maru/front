@@ -5,7 +5,7 @@ import InputField from "./ui/InputField";
 
 interface CommentInputButtonProps {
   content: string;
-  setContent: () => void;
+  setContent: (value: string) => void;
 }
 
 function CommentInputButton({ content, setContent }: CommentInputButtonProps) {
@@ -16,7 +16,7 @@ function CommentInputButton({ content, setContent }: CommentInputButtonProps) {
         onSubmitEditing={() => {}}
         onChangeText={setContent}
         placeholder="Add your comment"
-        isMediumFont={true}
+        fontWeight="medium"
         containerStyle={styles.commentWriteContainer}
       />
       <Pressable

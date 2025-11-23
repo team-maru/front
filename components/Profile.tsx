@@ -1,78 +1,147 @@
 import { colors } from "@/constants";
-import { Ionicons } from "@expo/vector-icons";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import { MessagesSquare } from "lucide-react";
+import { useState } from "react";
+import {
+  Image,
+  Modal,
+  Pressable,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import CustomText from "./ui/CustomText";
-import { useActionSheet } from "@expo/react-native-action-sheet";
 
 interface ProfileProps {
-  onPress: () => void;
   name: string;
   imageUri?: string;
   university: string;
-  option?: boolean;
+  optiontype?: "myProfile" | "otherProfile";
 }
 
 function Profile({
-  onPress,
   imageUri,
   name = "Name",
   university = "university name",
-  option = false,
+  optiontype = "otherProfile",
 }: ProfileProps) {
-  const { showActionSheetWithOptions } = useActionSheet();
+  const [visible, setVisible] = useState(false);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 0 });
 
-  const handlePressOption = () => {
-    const options = ["삭제", "수정", "취소"];
-    const destructiveButtonIndex = 0;
-    const cancelButtonIndex = 2;
+  const handleMenuPress = (action?: () => void) => {
+    setVisible(false);
+    if (action) {
+      setTimeout(() => action(), 100);
+    }
+  };
 
-    showActionSheetWithOptions(
-      { options, destructiveButtonIndex, cancelButtonIndex },
-      (selectedIndex?: number) => {
-        console.log("선택 :", selectedIndex);
-        switch (selectedIndex) {
-          case destructiveButtonIndex: //삭제
-            break;
-          case 1: //수정
-            //router.push(`/경로/${post.id}`); // 이렇게 보내줘서 useLocaleSearchParams로 조회할수 있음
-            break;
-          case cancelButtonIndex:
-            break;
-          default:
-            break;
-        }
+  const handleIconPress = (event: any) => {
+    event.currentTarget?.measure(
+      (
+        x: number,
+        y: number,
+        width: number,
+        height: number,
+        pageX: number,
+        pageY: number
+      ) => {
+        const iconCenterY = pageY + height / 2;
+        const iconRight = pageX + width / 2;
+
+        setMenuPosition({
+          top: iconCenterY,
+          right: 20,
+        });
+        setVisible(true);
       }
     );
   };
 
   return (
     <View style={styles.container}>
-      <Pressable style={styles.profileContainer} onPress={onPress}>
+      <View style={styles.imageContainer}>
         <Image
           source={
             imageUri ? { uri: imageUri } : require("@/assets/images/Earth.png")
           }
           style={styles.avatar}
         />
-        <View>
-          <CustomText style={styles.name} fontWeight="semibold">
-            {name}
-          </CustomText>
-          <CustomText style={styles.university} fontWeight="medium">
-            {university}
-          </CustomText>
-        </View>
-      </Pressable>
-      {option && (
-        <View style={styles.optionContainer}>
-          <Ionicons
-            name="ellipsis-vertical"
-            size={24}
-            color={colors.GRAY_500}
-            onPress={handlePressOption}
-          />
-        </View>
-      )}
+      </View>
+
+      <View style={styles.textContainer}>
+        <CustomText style={styles.name} fontWeight="semibold">
+          {name}
+        </CustomText>
+        <CustomText style={styles.university} fontWeight="medium">
+          {university}
+        </CustomText>
+      </View>
+
+      <View style={styles.optionContainer}>
+        {optiontype === "myProfile" && (
+          <>
+            <TouchableOpacity
+              onPress={handleIconPress}
+              style={styles.iconButton}
+              activeOpacity={0.7}>
+              <Ionicons
+                name="ellipsis-vertical"
+                size={24}
+                color={colors.GRAY_500}
+              />
+            </TouchableOpacity>
+
+            <Modal
+              visible={visible}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setVisible(false)}>
+              <Pressable
+                style={styles.modalOverlay}
+                onPress={() => setVisible(false)}>
+                <View
+                  style={[
+                    styles.menuContainer,
+                    {
+                      position: "absolute",
+                      top: menuPosition.top,
+                      right: menuPosition.right,
+                    },
+                  ]}>
+                  <Pressable
+                    style={styles.menuItem}
+                    onPress={() => alert("누름")}>
+                    <MessagesSquare size={24} />
+
+                    <CustomText fontWeight="medium" style={styles.menuText}>
+                      Message
+                    </CustomText>
+                  </Pressable>
+                  <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
+
+                  <Pressable style={styles.menuItem}>
+                    <Feather
+                      name="alert-circle"
+                      size={18}
+                      color={colors.GRAY_900}
+                    />
+                    <CustomText fontWeight="medium" style={styles.menuText}>
+                      Report
+                    </CustomText>
+                  </Pressable>
+                  <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
+
+                  <Pressable style={styles.menuItem}>
+                    <CustomText fontWeight="medium" style={styles.menuText}>
+                      Edit
+                    </CustomText>
+                  </Pressable>
+                </View>
+              </Pressable>
+            </Modal>
+          </>
+        )}
+      </View>
     </View>
   );
 }
@@ -82,12 +151,21 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
   },
-  profileContainer: {
-    flexDirection: "row",
+  imageContainer: {
+    width: "15%",
     alignItems: "center",
-    gap: 8,
+    justifyContent: "center",
+  },
+  textContainer: {
+    width: "70%",
+    justifyContent: "center",
+    paddingLeft: 6,
+  },
+  optionContainer: {
+    width: "10%",
+    alignItems: "center",
+    justifyContent: "center",
   },
   avatar: {
     width: 52,
@@ -97,18 +175,45 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 16,
     color: colors.BLACK,
-    includeFontPadding: false, // Android 기본 폰트 패딩 제거
-    lineHeight: 16, // 위아래 여백 최소화
+    includeFontPadding: false,
+    lineHeight: 16,
   },
   university: {
     fontSize: 14,
     color: colors.BLACK,
-    includeFontPadding: false, // Android 기본 폰트 패딩 제거
-    lineHeight: 14, // 위아래 여백 최소화
+    includeFontPadding: false,
+    lineHeight: 14,
     marginTop: 4,
   },
-  optionContainer: {
-    marginTop: -16,
+  iconButton: {
+    padding: 8,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "transparent",
+  },
+  menuContainer: {
+    width: 186,
+    height: 97,
+    backgroundColor: colors.GRAY_100,
+    borderRadius: 12,
+    paddingVertical: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  menuItem: {
+    flexDirection: "row",
+    paddingHorizontal: 17,
+    height: 31,
+    alignItems: "center",
+    gap: 10,
+  },
+  menuText: {
+    fontSize: 12,
+    color: colors.GRAY_900,
   },
 });
 

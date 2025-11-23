@@ -2,6 +2,7 @@ import { colors } from "@/constants";
 import { Ionicons } from "@expo/vector-icons";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 import CustomText from "./ui/CustomText";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 interface ProfileProps {
   onPress: () => void;
@@ -18,6 +19,32 @@ function Profile({
   university = "university name",
   option = false,
 }: ProfileProps) {
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const handlePressOption = () => {
+    const options = ["삭제", "수정", "취소"];
+    const destructiveButtonIndex = 0;
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      { options, destructiveButtonIndex, cancelButtonIndex },
+      (selectedIndex?: number) => {
+        console.log("선택 :", selectedIndex);
+        switch (selectedIndex) {
+          case destructiveButtonIndex: //삭제
+            break;
+          case 1: //수정
+            //router.push(`/경로/${post.id}`); // 이렇게 보내줘서 useLocaleSearchParams로 조회할수 있음
+            break;
+          case cancelButtonIndex:
+            break;
+          default:
+            break;
+        }
+      }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Pressable style={styles.profileContainer} onPress={onPress}>
@@ -42,7 +69,7 @@ function Profile({
             name="ellipsis-vertical"
             size={24}
             color={colors.GRAY_500}
-            onPress={() => {}}
+            onPress={handlePressOption}
           />
         </View>
       )}

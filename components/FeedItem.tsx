@@ -27,7 +27,7 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
           <Profile
             name={`Name`}
             university="university name"
-            optiontype={"myProfile"}
+            optiontype={"otherProfile"}
           />
         </View>
         <CustomText fontWeight="semibold" style={styles.titleStyle}>

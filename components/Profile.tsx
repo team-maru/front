@@ -1,17 +1,30 @@
 import { colors } from "@/constants";
 import { Feather, Ionicons, Octicons } from "@expo/vector-icons";
-import { MessagesSquare } from "lucide-react-native";
-import { useState } from "react";
-import {
-  Image,
-  Pressable,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import Popover, { PopoverPlacement } from "react-native-popover-view";
-import CustomText from "./ui/CustomText";
 import { router } from "expo-router";
+import { MessagesSquare } from "lucide-react-native";
+import { Fragment, ReactNode, useState } from "react";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import Popover, { PopoverPlacement } from "react-native-popover-view";
+import OptionColum from "./OptionColum";
+import CustomText from "./ui/CustomText";
+
+// 상수
+const ICON_SIZE = 18;
+
+// 신고 사유 리스트
+const REPORT_REASONS = [
+  { text: "Sexual Content", reportType: 1 },
+  { text: "Fraud", reportType: 2 },
+  { text: "Spam /Trolling", reportType: 3 },
+  { text: "Commercial Ads", reportType: 4 },
+  { text: "Political Activity", reportType: 5 },
+  { text: "Irrelevant Content", reportType: 6 },
+  { text: "Illegal Content", reportType: 7 },
+  { text: "Abusive Language", reportType: 8 },
+];
+
+// 구분선 컴포넌트
+const Divider = () => <View style={styles.divider} />;
 
 interface ProfileProps {
   name: string;
@@ -26,7 +39,82 @@ function Profile({
   university = "university name",
   optiontype = "otherProfile",
 }: ProfileProps) {
-  const [visible, setVisible] = useState(false);
+  const [isPopoverVisible, setIsPopoverVisible] = useState(false);
+  const [isReportMenuVisible, setIsReportMenuVisible] = useState(false);
+
+  // 아이콘 생성 함수
+  const createIcon = (
+    IconComponent: any,
+    iconName?: string
+  ): ReactNode => {
+    if (iconName) {
+      return <IconComponent name={iconName} size={ICON_SIZE} color={colors.GRAY_900} />;
+    }
+    return <IconComponent size={ICON_SIZE} />;
+  };
+
+  // Popover 스타일 계산
+  const getPopoverStyle = () => {
+    if (optiontype === "myProfile") return styles.menuContainerMyProfile;
+    return isReportMenuVisible ? styles.reportReasonContainer : styles.menuContainerOtherProfile;
+  };
+
+  // 내 프로필 메뉴 렌더링
+  const renderMyProfileMenu = () => (
+    <OptionColum
+      onPress={() => router.push("/")}
+      icon={createIcon(Octicons, "pencil")}
+      text="Edit"
+    />
+  );
+
+  // 다른 사람 프로필 기본 메뉴 렌더링
+  const renderOtherProfileMenu = () => (
+    <>
+      <OptionColum
+        onPress={() => router.push("/")}
+        icon={createIcon(MessagesSquare)}
+        text="Message"
+      />
+      <Divider />
+      <OptionColum
+        onPress={() => setIsReportMenuVisible(true)}
+        icon={createIcon(Feather, "alert-circle")}
+        text="Report"
+      />
+    </>
+  );
+
+  // 신고 메뉴 렌더링
+  const renderReportMenu = () => (
+    <>
+      <OptionColum
+        onPress={() => {
+          setIsReportMenuVisible(true);
+          setIsPopoverVisible(false);
+        }}
+        icon={createIcon(Feather, "alert-circle")}
+        text="Report"
+      />
+      <Divider />
+      {REPORT_REASONS.map((reason, index) => (
+        <Fragment key={reason.text}>
+          <OptionColum
+            onPress={() => setIsPopoverVisible(false)}
+            text={reason.text}
+          />
+          {index < REPORT_REASONS.length - 1 && <Divider />}
+        </Fragment>
+      ))}
+    </>
+  );
+
+  // 메뉴 콘텐츠 렌더링
+  const renderMenuContent = () => {
+    if (optiontype === "myProfile") return renderMyProfileMenu();
+    if (isReportMenuVisible) return renderReportMenu();
+    return renderOtherProfileMenu();
+  };
 
   return (
     <View style={styles.container}>
@@ -52,11 +140,11 @@ function Profile({
         <Popover
           placement={PopoverPlacement.BOTTOM}
           arrowSize={{ width: 0, height: 0 }}
-          isVisible={visible}
-          onRequestClose={() => setVisible(false)}
+          isVisible={isPopoverVisible}
+          onRequestClose={() => setIsPopoverVisible(false)}
           from={
             <TouchableOpacity
-              onPress={() => setVisible(true)}
+              onPress={() => setIsPopoverVisible(true)}
               style={styles.iconButton}
               activeOpacity={0.7}>
               <Ionicons
@@ -66,50 +154,8 @@ function Profile({
               />
             </TouchableOpacity>
           }
-          popoverStyle={[
-            styles.menuContainer,
-            optiontype === "myProfile"
-              ? styles.menuContainerMyProfile
-              : styles.menuContainerOtherProfile,
-          ]}>
-          {optiontype === "myProfile" ? (
-            <Pressable
-              style={styles.menuItem}
-              onPress={() => router.push("/")}>
-              <Octicons name="pencil" size={18} color={colors.GRAY_900} />
-              <CustomText fontWeight="medium" style={styles.menuText}>
-                Edit
-              </CustomText>
-            </Pressable>
-          ) : (
-            <>
-              <Pressable
-                style={styles.menuItem}
-                onPress={() => {
-                  setVisible(false);
-                  alert("누름");
-                }}>
-                <MessagesSquare size={18} />
-                <CustomText fontWeight="medium" style={styles.menuText}>
-                  Message
-                </CustomText>
-              </Pressable>
-              <View style={{ height: 1, backgroundColor: "#E0E0E0" }} />
-
-              <Pressable
-                style={styles.menuItem}
-                onPress={() => setVisible(false)}>
-                <Feather
-                  name="alert-circle"
-                  size={18}
-                  color={colors.GRAY_900}
-                />
-                <CustomText fontWeight="medium" style={styles.menuText}>
-                  Report
-                </CustomText>
-              </Pressable>
-            </>
-          )}
+          popoverStyle={[styles.menuContainer, getPopoverStyle()]}>
+          {renderMenuContent()}
         </Popover>
       </View>
     </View>
@@ -175,16 +221,12 @@ const styles = StyleSheet.create({
   menuContainerOtherProfile: {
     height: 71,
   },
-  menuItem: {
-    flexDirection: "row",
-    paddingHorizontal: 17,
-    height: 32,
-    alignItems: "center",
-    gap: 10,
+  reportReasonContainer: {
+    height: 300,
   },
-  menuText: {
-    fontSize: 12,
-    color: colors.GRAY_900,
+  divider: {
+    height: 1,
+    backgroundColor: "#E0E0E0",
   },
 });
 

@@ -7,15 +7,19 @@ interface OptionColumProps {
   onPress: () => void;
   icon?: ReactNode;
   text: string;
+  rightIcon?: ReactNode;
 }
 
-function OptionColum({ onPress, icon, text }: OptionColumProps) {
+function OptionColum({ onPress, icon, text, rightIcon }: OptionColumProps) {
   return (
     <Pressable style={styles.menuItem} onPress={onPress}>
       {icon}
-      <CustomText fontWeight="medium" style={styles.menuText}>
+      <CustomText
+        fontWeight="medium"
+        style={icon ? styles.menuTextWithIcon : styles.menuText}> {/*오른쪽 아이콘 유무에 따른 스타일 적용*/}
         {text}
       </CustomText>
+      {rightIcon}
     </Pressable>
   );
 }
@@ -26,11 +30,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: 17,
     height: 32,
     alignItems: "center",
-    gap: 10,
   },
   menuText: {
     fontSize: 12,
     color: colors.GRAY_900,
+    flex: 1,
+  },
+  menuTextWithIcon: {
+    fontSize: 12,
+    color: colors.GRAY_900,
+    flex: 1,
+    marginLeft: 10,
   },
 });
 

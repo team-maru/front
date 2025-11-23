@@ -1,5 +1,5 @@
 import { colors } from "@/constants";
-import { Feather, Ionicons, Octicons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialIcons, Octicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { MessagesSquare } from "lucide-react-native";
 import { Fragment, ReactNode, useState } from "react";
@@ -43,12 +43,15 @@ function Profile({
   const [isReportMenuVisible, setIsReportMenuVisible] = useState(false);
 
   // 아이콘 생성 함수
-  const createIcon = (
-    IconComponent: any,
-    iconName?: string
-  ): ReactNode => {
+  const createIcon = (IconComponent: any, iconName?: string): ReactNode => {
     if (iconName) {
-      return <IconComponent name={iconName} size={ICON_SIZE} color={colors.GRAY_900} />;
+      return (
+        <IconComponent
+          name={iconName}
+          size={ICON_SIZE}
+          color={colors.GRAY_900}
+        />
+      );
     }
     return <IconComponent size={ICON_SIZE} />;
   };
@@ -56,7 +59,9 @@ function Profile({
   // Popover 스타일 계산
   const getPopoverStyle = () => {
     if (optiontype === "myProfile") return styles.menuContainerMyProfile;
-    return isReportMenuVisible ? styles.reportReasonContainer : styles.menuContainerOtherProfile;
+    return isReportMenuVisible
+      ? styles.reportReasonContainer
+      : styles.menuContainerOtherProfile;
   };
 
   // 내 프로필 메뉴 렌더링
@@ -81,6 +86,7 @@ function Profile({
         onPress={() => setIsReportMenuVisible(true)}
         icon={createIcon(Feather, "alert-circle")}
         text="Report"
+        rightIcon={createIcon(MaterialIcons, "keyboard-arrow-right")}
       />
     </>
   );
@@ -95,8 +101,10 @@ function Profile({
         }}
         icon={createIcon(Feather, "alert-circle")}
         text="Report"
+        rightIcon={createIcon(MaterialIcons, "keyboard-arrow-down")}
       />
       <Divider />
+
       {REPORT_REASONS.map((reason, index) => (
         <Fragment key={reason.text}>
           <OptionColum
@@ -141,7 +149,12 @@ function Profile({
           placement={PopoverPlacement.BOTTOM}
           arrowSize={{ width: 0, height: 0 }}
           isVisible={isPopoverVisible}
-          onRequestClose={() => setIsPopoverVisible(false)}
+          onRequestClose={() => {
+            setIsPopoverVisible(false);
+            setTimeout(() => {
+              setIsReportMenuVisible(false);
+            }, 500); {/*reportReason 모달 닫힐때 갑자기 첫 모달 나오는거 방지 */}
+          }}
           from={
             <TouchableOpacity
               onPress={() => setIsPopoverVisible(true)}

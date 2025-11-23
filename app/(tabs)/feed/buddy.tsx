@@ -5,7 +5,7 @@ import { StyleSheet, View } from "react-native";
 export default function BuddyScreen() {
   return (
     <View style={styles.container}>
-      <View style={styles.gathringContainer}>
+      <View style={styles.gatheringContainer}>
         <TitleWithNavigation route="/(tabs)/feed/gathering">
           Join a Gathering
         </TitleWithNavigation>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.GRAY_100,
     marginHorizontal: 16,
   },
-  gathringContainer: {
+  gatheringContainer: {
     marginTop: 20,
   },
 });

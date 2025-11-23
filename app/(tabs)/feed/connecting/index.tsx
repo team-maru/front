@@ -1,11 +1,10 @@
-import React from 'react';
 import {StyleSheet, View} from 'react-native';
 
-interface ConnetingListProps {
+interface ConnectingListProps {
 
 }
 
-function ConnetingList({}: ConnetingListProps) {
+function ConnectingList({}: ConnectingListProps) {
   return (
     <View></View>
   )
@@ -13,4 +12,4 @@ function ConnetingList({}: ConnetingListProps) {
 
 const styles = StyleSheet.create({});
 
-export default ConnetingList;
+export default ConnectingList;

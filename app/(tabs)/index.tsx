@@ -2,7 +2,7 @@ import CommunityList from "@/components/CommunityList";
 import EventList from "@/components/EventList";
 import GatheringList from "@/components/GatheringList";
 import NotificationButton from "@/components/NotificationButton";
-import RightArrowButton from "@/components/RightArrowButton";
+import TitleWithNavigation from "@/components/TitleWithNavigation";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
 
@@ -37,32 +37,23 @@ export default function HomeScreen() {
           </CustomText>
         </View>
         <View style={styles.communityContainer}>
-          <View style={styles.communityTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              New in community
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/feed" />
-          </View>
+          <TitleWithNavigation route="/(tabs)/feed">
+            New in community
+          </TitleWithNavigation>
           <View style={styles.communityList}>
             <CommunityList />
           </View>
         </View>
         <View style={styles.eventContainer}>
-          <View style={styles.eventTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              Find Your KOPLE Moment
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/explore" />
-          </View>
+          <TitleWithNavigation route="/(tabs)/explore">
+            Find Your KOPLE Moment
+          </TitleWithNavigation>
           <EventList />
         </View>
         <View style={styles.gatheringContainer}>
-          <View style={styles.gatheringTopBar}>
-            <CustomText fontWeight="bold" style={styles.titleText}>
-              Join a Gathering
-            </CustomText>
-            <RightArrowButton destination="/(tabs)/feed/buddy" />
-          </View>
+          <TitleWithNavigation route="/(tabs)/feed/gathering">
+            Join a Gathering
+          </TitleWithNavigation>
           <GatheringList />
         </View>
       </ScrollView>
@@ -109,10 +100,6 @@ const styles = StyleSheet.create({
   communityContainer: {
     margin: 16,
   },
-  communityTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   titleText: {
     fontSize: 18,
   },
@@ -123,15 +110,7 @@ const styles = StyleSheet.create({
   eventContainer: {
     marginHorizontal: 16,
   },
-  eventTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
   gatheringContainer: {
     margin: 16,
-  },
-  gatheringTopBar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
   },
 });

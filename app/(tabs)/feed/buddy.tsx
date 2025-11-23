@@ -1,15 +1,25 @@
-import FeedHeader from "@/components/FeedHeader";
+import TitleWithNavigation from "@/components/TitleWithNavigation";
 import { colors } from "@/constants";
-import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet, View } from "react-native";
 
 export default function BuddyScreen() {
   return (
-    <SafeAreaView style={styles.container}>
-      <FeedHeader feedtype="buddy" />
-    </SafeAreaView>
+    <View style={styles.container}>
+      <View style={styles.gatheringContainer}>
+        <TitleWithNavigation route="/(tabs)/feed/gathering">
+          Join a Gathering
+        </TitleWithNavigation>
+      </View>
+    </View>
   );
 }
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.GRAY_100 },
+  container: {
+    flex: 1,
+    backgroundColor: colors.GRAY_100,
+    marginHorizontal: 16,
+  },
+  gatheringContainer: {
+    marginTop: 20,
+  },
 });

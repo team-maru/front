@@ -5,7 +5,7 @@ import CustomButton from "@/components/ui/CustomButton";
 import { colors } from "@/constants";
 import { Category, ImageUri } from "@/types";
 import { useNavigation } from "expo-router";
-import { useEffect } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   KeyboardAvoidingView,
@@ -49,11 +49,16 @@ function PostWriteScreen() {
     },
   });
 
+  // 폼 필드 값 감시
+  const title = postForm.watch("title");
+  const description = postForm.watch("description");
+  const category = postForm.watch("category");
+
   /**
    * 폼 제출 핸들러 (현재 테스트용)
    * TODO: 실제 API 호출로 변경 필요
    */
-  const onSubmit = (formValues: FormValues) => {
+  const onSubmit = useCallback((formValues: FormValues) => {
     alert(
       `제목은 ${formValues.title} 내용은 ${formValues.description} 카테고리는 ${
         formValues.category
@@ -64,7 +69,23 @@ function PostWriteScreen() {
       }`
     );
     // TODO: 폼 리셋은 API 성공 후 처리
-  };
+  }, []);
+
+  /**
+   * Post 버튼 활성화 조건 검사
+   * - 제목: 10자 초과, 80자 이하
+   * - 내용: 20자 초과, 1000자 이하
+   * - 카테고리: 1개 선택 (빈 문자열이 아님)
+   */
+  const isFormValid = useMemo(
+    () =>
+      title.length > 0 &&
+      title.length <= 80 &&
+      description.length > 0 &&
+      description.length <= 1000 &&
+      category !== "",
+    [title, description, category]
+  );
 
   // 헤더 오른쪽에 "Post" 버튼 추가
   useEffect(() => {
@@ -75,13 +96,15 @@ function PostWriteScreen() {
       headerRight: () => (
         <CustomButton
           label="Post"
-          textStyle={styles.updateButtonContainer}
+          textStyle={
+            isFormValid ? styles.enablePostButton : styles.disablePostButton
+          }
           fontWeight="medium"
           onPress={postForm.handleSubmit(onSubmit)}
         />
       ),
     });
-  }, []);
+  }, [navigation, isFormValid, postForm, onSubmit]);
 
   return (
     <KeyboardAvoidingView
@@ -107,12 +130,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
   },
-  updateButtonContainer: {
+  disablePostButton: {
+    backgroundColor: colors.GRAY_500,
+    paddingHorizontal: 18,
+    borderRadius: 26,
+    fontSize: 15,
+    color: colors.GRAY_100,
+  },
+
+  enablePostButton: {
     backgroundColor: colors.ORANGE_600,
     paddingHorizontal: 18,
     borderRadius: 26,
     fontSize: 15,
-    color: colors.WHITE,
+    color: colors.GRAY_100,
   },
 });
 

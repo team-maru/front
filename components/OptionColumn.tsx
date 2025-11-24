@@ -17,7 +17,6 @@ function OptionColumn({ onPress, icon, text, rightIcon }: OptionColumnProps) {
       <CustomText
         fontWeight="medium"
         style={icon ? styles.menuTextWithIcon : styles.menuText}>
-        {" "}
         {/*오른쪽 아이콘 유무에 따른 스타일 적용*/}
         {text}
       </CustomText>

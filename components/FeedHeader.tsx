@@ -15,38 +15,18 @@ interface FeedHeaderProps {
 
 function FeedHeader({ feedtype }: FeedHeaderProps) {
   const [searchText, setSearchText] = useState("");
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<Category>("All");
 
   /**
-   * 카테고리 버튼 클릭 핸들러 (다중 선택 지원)
-   * - "All" 버튼: 다른 모든 선택 해제, 재클릭 시 선택 해제
-   * - 일반 카테고리: 중복 선택 가능, 선택 시 "All" 자동 해제
+   * 카테고리 버튼 클릭 핸들러 (단일 선택)
+   * - 기본 상태: "All" 선택
+   * - 다른 버튼 클릭 시: 해당 버튼만 선택
+   * - 선택된 버튼 재클릭 시: "All"로 돌아감
    */
   const handleCategoryPress = (label: Category) => {
-    let newSelectedCategories: Category[];
+    const newSelectedCategory = selectedCategory === label ? "All" : label;
 
-    if (label === "All") {
-      // "All"을 클릭하면 다른 모든 선택 해제
-      newSelectedCategories =
-        selectedCategories.length === 1 && selectedCategories[0] === "All"
-          ? [] // "All"만 선택된 상태에서 다시 클릭하면 선택 해제
-          : ["All"]; // 그 외의 경우 "All"만 선택
-    } else {
-      // 다른 카테고리 클릭
-      if (selectedCategories.includes(label)) {
-        // 이미 선택된 경우 제거 (토글)
-        newSelectedCategories = selectedCategories.filter(
-          (cat) => cat !== label
-        );
-      } else {
-        // 선택되지 않은 경우 추가하고 "All" 제거
-        newSelectedCategories = selectedCategories
-          .filter((cat) => cat !== "All")
-          .concat(label);
-      }
-    }
-
-    setSelectedCategories(newSelectedCategories);
+    setSelectedCategory(newSelectedCategory);
     // TODO: 선택된 카테고리로 필터링 로직 추가
   };
 
@@ -58,10 +38,17 @@ function FeedHeader({ feedtype }: FeedHeaderProps) {
       <BoardTabs feedtype={feedtype} />
       {feedtype === "free" && (
         <View style={styles.scrollViewWrapper}>
-          <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+          <ScrollView
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{
+              height: 32,
+              marginTop: 6,
+              marginBottom: 10,
+            }}>
             <CategoryButtons
               categoryLabels={categoryLabels}
-              selectedCategories={selectedCategories}
+              selectedCategory={selectedCategory}
               onPress={handleCategoryPress}
             />
           </ScrollView>

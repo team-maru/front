@@ -1,9 +1,8 @@
 import { colors } from "@/constants";
 import { Controller, useFormContext } from "react-hook-form";
 import { StyleSheet, View } from "react-native";
+import ErrorMessage from "./ui/ErrorMessage";
 import InputField from "./ui/InputField";
-
-interface TitleInputProps {}
 
 /**
  * TitleInput - 게시글 제목 입력 컴포넌트
@@ -13,41 +12,52 @@ interface TitleInputProps {}
  * - autoFocus: 화면 로드 시 자동 포커스
  * - returnKeyType: "next" - 엔터키로 다음 필드(description)로 이동
  */
-function TitleInput({}: TitleInputProps) {
+function TitleInput() {
   const { control, setFocus } = useFormContext();
 
   return (
     <Controller
       name="title"
       control={control}
-      render={({ field: { ref, onChange, value } }) => (
+      rules={{
+        validate: (data: string) => {
+          if (data.length >= 80) {
+            return "Maximum of 80 characters";
+          }
+        },
+      }}
+      render={({ field: { ref, onChange, value }, fieldState: { error } }) => (
         <View style={styles.container}>
           <InputField
             ref={ref}
-            autoFocus // 화면 로드 시 자동 포커스
+            autoFocus
             variant="standard"
             fontSize="large"
             fontWeight="semibold"
             placeholder="Write a Title"
             placeholderTextColor={colors.BLACK}
-            returnKeyType="next" // 엔터키 모양: "다음"
+            returnKeyType="next"
             submitBehavior="submit"
-            onSubmitEditing={() => setFocus("description")} // 엔터 시 description 필드로 포커스 이동
+            onSubmitEditing={() => setFocus("description")}
             value={value}
             onChangeText={(text) => {
-              // 80자 이하일 때만 입력 허용
               if (text.length <= 80) {
                 onChange(text);
               }
             }}
-            maxLength={80} // 추가 안전장치
+            maxLength={80}
           />
+          {error && <ErrorMessage message={error.message} />}
         </View>
       )}
     />
   );
 }
+
 const styles = StyleSheet.create({
-  container: { zIndex: 200 },
+  container: {
+    zIndex: 200,
+  },
 });
+
 export default TitleInput;

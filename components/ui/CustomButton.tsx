@@ -69,12 +69,10 @@ function CustomButton({
         style,
         pressed && styles.pressed,
       ]}
-      {...props}
-    >
+      {...props}>
       <CustomText
         fontWeight={fontWeight}
-        style={[styles[labelStyle], textStyle]}
-      >
+        style={[styles[labelStyle], textStyle]}>
         {label}
       </CustomText>
     </Pressable>
@@ -107,8 +105,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 2,
     borderRadius: 16,
-    backgroundColor: colors.WHITE,
-    borderColor: colors.GRAY_200,
+    backgroundColor: colors.GRAY_100,
+    borderColor: colors.GRAY_500,
     borderWidth: 1.5,
   },
   disabled: {

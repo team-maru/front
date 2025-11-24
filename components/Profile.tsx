@@ -6,7 +6,7 @@ import { Fragment, ReactNode, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
 import CustomText from "./ui/CustomText";
-import OptionColunm from "./OptionColum";
+import OptionColunm from "./OptionColunm";
 
 // 상수
 const ICON_SIZE = 18;

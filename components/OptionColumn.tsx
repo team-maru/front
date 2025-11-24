@@ -3,20 +3,22 @@ import { ReactNode } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import CustomText from "./ui/CustomText";
 
-interface OptionColunmProps {
+interface OptionColumnProps {
   onPress: () => void;
   icon?: ReactNode;
   text: string;
   rightIcon?: ReactNode;
 }
 
-function OptionColunm({ onPress, icon, text, rightIcon }: OptionColunmProps) {
+function OptionColumn({ onPress, icon, text, rightIcon }: OptionColumnProps) {
   return (
     <Pressable style={styles.menuItem} onPress={onPress}>
       {icon}
       <CustomText
         fontWeight="medium"
-        style={icon ? styles.menuTextWithIcon : styles.menuText}> {/*오른쪽 아이콘 유무에 따른 스타일 적용*/}
+        style={icon ? styles.menuTextWithIcon : styles.menuText}>
+        {" "}
+        {/*오른쪽 아이콘 유무에 따른 스타일 적용*/}
         {text}
       </CustomText>
       {rightIcon}
@@ -44,4 +46,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default OptionColunm;
+export default OptionColumn;

@@ -5,8 +5,9 @@ import { MessagesSquare } from "lucide-react-native";
 import { Fragment, ReactNode, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Popover, { PopoverPlacement } from "react-native-popover-view";
+
 import CustomText from "./ui/CustomText";
-import OptionColunm from "./OptionColunm";
+import OptionColumn from "./OptionColumn";
 
 // 상수
 const ICON_SIZE = 18;
@@ -66,7 +67,7 @@ function Profile({
 
   // 내 프로필 메뉴 렌더링
   const renderMyProfileMenu = () => (
-    <OptionColunm
+    <OptionColumn
       onPress={() => router.push("/")}
       icon={createIcon(Octicons, "pencil")}
       text="Edit"
@@ -76,13 +77,13 @@ function Profile({
   // 다른 사람 프로필 기본 메뉴 렌더링
   const renderOtherProfileMenu = () => (
     <>
-      <OptionColunm
+      <OptionColumn
         onPress={() => router.push("/")}
         icon={createIcon(MessagesSquare)}
         text="Message"
       />
       <Divider />
-      <OptionColunm
+      <OptionColumn
         onPress={() => setIsReportMenuVisible(true)}
         icon={createIcon(Feather, "alert-circle")}
         text="Report"
@@ -94,7 +95,7 @@ function Profile({
   // 신고 메뉴 렌더링
   const renderReportMenu = () => (
     <>
-      <OptionColunm
+      <OptionColumn
         onPress={() => {
           setIsReportMenuVisible(true);
           setIsPopoverVisible(false);
@@ -107,7 +108,7 @@ function Profile({
 
       {REPORT_REASONS.map((reason, index) => (
         <Fragment key={reason.text}>
-          <OptionColunm
+          <OptionColumn
             onPress={() => setIsPopoverVisible(false)}
             text={reason.text}
           />
@@ -153,7 +154,10 @@ function Profile({
             setIsPopoverVisible(false);
             setTimeout(() => {
               setIsReportMenuVisible(false);
-            }, 500); {/*reportReason 모달 닫힐때 갑자기 첫 모달 나오는거 방지 */}
+            }, 500);
+            {
+              /*reportReason 모달 닫힐때 갑자기 첫 모달 나오는거 방지 */
+            }
           }}
           from={
             <TouchableOpacity

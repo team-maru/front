@@ -7,8 +7,8 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 
 SplashScreen.preventAutoHideAsync();
@@ -34,7 +34,8 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <BottomSheetModalProvider> // tabs보다 상위에 둬서 모달이 tabs 위에 뜨도록 함
+      <BottomSheetModalProvider>
+        {/*tabs보다 상위에 둬서 모달이 tabs 위에 뜨도록 함*/}
         <ActionSheetProvider>
           <QueryClientProvider client={queryClient}>
             <RootNavigator />

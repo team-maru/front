@@ -14,17 +14,17 @@ import CustomButton from "./ui/CustomButton";
 
 interface CategoryButtonsProps {
   categoryLabels: Category[]; // 표시할 카테고리 목록
-  selectedCategories: Category[]; // 선택된 카테고리들 (단일 선택이면 배열에 1개만)
+  selectedCategory: Category; // 선택된 카테고리들 (단일 선택이면 배열에 1개만)
   onPress: (label: Category) => void; // 버튼 클릭 시 호출되는 콜백
 }
 
 const CategoryButtons = ({
   categoryLabels,
-  selectedCategories,
+  selectedCategory,
   onPress,
 }: CategoryButtonsProps) => {
   const isSelected = (label: Category): boolean => {
-    return selectedCategories.includes(label);
+    return selectedCategory === label;
   };
 
   return (
@@ -50,12 +50,9 @@ const CategoryButtons = ({
 
 const styles = StyleSheet.create({
   categoryContainer: {
-    height: 32,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 6,
-    marginBottom: 10,
     gap: 5,
   },
 });

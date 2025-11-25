@@ -1,24 +1,22 @@
 import PictureIcon from "@/assets/images/picture.svg";
-import { colors } from "@/constants";
 import { categoryLabels } from "@/constants/categoryLabels";
 import { Category, ImageUri } from "@/types";
 import * as ImagePicker from "expo-image-picker";
 import { Controller, useFormContext } from "react-hook-form";
 import { Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import CategoryButtons from "./CategoryButtons";
-
-interface PostWriteOptionsProps {}
+import ErrorMessage from "./ui/ErrorMessage";
+import { colors } from "@/constants";
 
 /**
  * PostWriteOptions - 게시글 작성 옵션 컴포넌트
  *
  * 게시글 작성 시 이미지 첨부와 카테고리 선택 기능 제공
  * - imageUris: setValue로 직접 폼 값 설정
- * - categoris: Controller로 단일 선택 제어 (0개 또는 1개)
+ * - category: Controller로 단일 선택 제어 (0개 또는 1개)
  */
-function PostWriteOptions({}: PostWriteOptionsProps) {
-  const { control, setFocus } = useFormContext();
-  const { setValue, watch } = useFormContext();
+function PostWriteOptions() {
+  const { control, setValue, watch } = useFormContext();
   const imageUris = watch("imageUris") as ImageUri[];
 
   /**
@@ -60,47 +58,54 @@ function PostWriteOptions({}: PostWriteOptionsProps) {
         contentContainerStyle={styles.buttonsContainer}
         horizontal={true}
         showsHorizontalScrollIndicator={false}>
-        <Pressable style={styles.imageContainer} onPress={handleSelectImage}>
+        <Pressable style={styles.imageButton} onPress={handleSelectImage}>
           <PictureIcon
             width={16.5}
             height={16.5}
             style={styles.pictureButton}
           />
         </Pressable>
-        <View style={styles.categoryWrapper}>
-          {/* 카테고리 단일 선택 (0개 또는 1개) */}
-          <Controller
-            name="category"
-            control={control}
-            defaultValue=""
-            rules={{
-              validate: (data: Category | "") => {
-                if (data === "") {
-                  return "카테고리를 선택해주세요.";
-                }
-              },
-            }}
-            render={({ field: { onChange, value }, fieldState: { error } }) => (
+
+        {/* 카테고리 단일 선택 (0개 또는 1개) */}
+        <Controller
+          name="category"
+          control={control}
+          defaultValue=""
+          rules={{
+            validate: (data: Category | "") => {
+              if (data === "") {
+                return "1 category can be selected.";
+              }
+            },
+          }}
+          render={({ field: { onChange, value }, fieldState: { error } }) => (
+            <View style={styles.categoryContainer}>
               <CategoryButtons
-                categoryLabels={categoryLabels.slice(1, 6)} // "All" 제외한 5개 카테고리
-                selectedCategories={value && value !== "" ? [value] : []} // 단일 값을 배열로 변환
+                categoryLabels={categoryLabels.slice(1, 6)}
+                selectedCategory={value}
                 onPress={(label) => {
-                  // 단일 선택: 같은 카테고리 클릭 시 선택 해제, 다른 카테고리 클릭 시 교체
                   onChange(value === label ? "" : label);
                 }}
               />
-            )}
-          />
-        </View>
+              {error && <ErrorMessage message={error?.message} />}
+            </View>
+          )}
+        />
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: { flexDirection: "row" },
-  buttonsContainer: { gap: 5, alignItems: "center" },
-  imageContainer: {
+  container: {
+    flexDirection: "row",
+  },
+  buttonsContainer: {
+    marginTop: 7,
+    gap: 5,
+    alignItems: "flex-start",
+  },
+  imageButton: {
     height: 26,
     paddingHorizontal: 16,
     paddingVertical: 2,
@@ -110,8 +115,10 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     justifyContent: "center",
   },
-  categoryWrapper: {
-    marginTop: 4,
+  categoryContainer: {
+    flex: 1,
+    flexDirection: "column",
+    gap: 3,
   },
   pictureButton: {
     justifyContent: "center",

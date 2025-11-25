@@ -13,7 +13,10 @@ interface FeedItemProps {
 function FeedItem({ postId, isDetail = false }: FeedItemProps) {
   const handlePressFeed = () => {
     if (!isDetail) {
-      router.push({ pathname: "/(tabs)/feed/free/[id]", params: { id: postId } });
+      router.push({
+        pathname: "/(tabs)/feed/free/[id]",
+        params: { id: postId },
+      });
     }
   };
   const ContainerComponent = isDetail ? View : Pressable;
@@ -22,10 +25,9 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
       <View style={[styles.freeItemContainer, isDetail && styles.detailItem]}>
         <View style={styles.profileContainer}>
           <Profile
-            onPress={() => {}}
             name={`Name`}
             university="university name"
-            option={true}
+            optiontype={"otherProfile"}
           />
         </View>
         <CustomText fontWeight="semibold" style={styles.titleStyle}>
@@ -90,8 +92,8 @@ const styles = StyleSheet.create({
     marginTop: 6,
   },
   profileContainer: {
-    marginHorizontal: -28,
-    paddingHorizontal: 20,
+    marginHorizontal: -8,
+    width: "110%",
   },
   titleStyle: {
     alignItems: "center",

@@ -119,7 +119,7 @@ const CalendarBox = ({
         markedDates={getMarkedDates(checkDate)}
         current={currentDate}
         firstDay={1}
-        disableAllTouchEventsForDisabledDays={true} // 해당 달 이외의 날짜 선택 불가능
+        hideExtraDays={true}
         theme={{
           selectedDayBackgroundColor: colors.ORANGE_600,
           todayTextColor: colors.GRAY_600,

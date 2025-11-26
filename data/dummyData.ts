@@ -164,7 +164,7 @@ export const dummyCategories: PostCategory[] = [
   { id: 1, category_name: "All" },
   { id: 2, category_name: "Campus" },
   { id: 3, category_name: "Daily Tips" },
-  { id: 4, category_name: "Eat" },
+  { id: 4, category_name: "Eats" },
   { id: 5, category_name: "Activity" },
   { id: 6, category_name: "Q&A" },
 ];

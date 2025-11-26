@@ -4,7 +4,7 @@ const categoryLabels: Category[] = [
   "All",
   "Campus",
   "Daily Tips",
-  "Eat",
+  "Eats",
   "Activity",
   "Q&A",
 ];

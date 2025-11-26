@@ -1,8 +1,10 @@
-// erd에 정의된 타입들을 TypeScript 인터페이스로 변환한 파일입니다.
-
-interface ImageUri {
-  id?: number;
+export interface Uri {
   uri: string;
+}
+
+export interface ImageUri {
+  id: number;
+  url: string | "";
 }
 
 // Enums
@@ -15,7 +17,7 @@ export type Category =
   | "All"
   | "Campus"
   | "Daily Tips"
-  | "Eat"
+  | "Eats"
   | "Activity"
   | "Q&A";
 
@@ -197,5 +199,3 @@ export interface Gathering {
   };
   createdAt: string;
 }
-
-export { ImageUri };

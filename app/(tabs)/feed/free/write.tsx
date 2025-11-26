@@ -1,4 +1,5 @@
 import DescriptionInput from "@/components/DescriptionInput";
+import ImageList from "@/components/ImageList";
 import PostWriteOptions from "@/components/PostWriteOptions";
 import TitleInput from "@/components/TitleInput";
 import CustomButton from "@/components/ui/CustomButton";
@@ -12,6 +13,7 @@ import {
   Platform,
   ScrollView,
   StyleSheet,
+  View,
 } from "react-native";
 
 /**
@@ -53,6 +55,7 @@ function PostWriteScreen() {
   const title = postForm.watch("title");
   const description = postForm.watch("description");
   const category = postForm.watch("category");
+  const imageUris = postForm.watch("imageUris");
 
   /**
    * 폼 제출 핸들러 (현재 테스트용)
@@ -115,7 +118,10 @@ function PostWriteScreen() {
           <TitleInput />
           <DescriptionInput />
           <PostWriteOptions />
-        </FormProvider>
+        </FormProvider>{" "}
+        <View style={styles.imageListContainer}>
+          <ImageList imageList={imageUris} />
+        </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -124,11 +130,15 @@ function PostWriteScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: colors.GRAY_100,
+    paddingHorizontal: 16,
   },
   scrollContent: {
     paddingTop: 0,
-    paddingHorizontal: 16,
-    paddingBottom: 16,
+    gap:5
+  },
+  imageListContainer: {
+    marginTop: 9,
   },
   disablePostButton: {
     backgroundColor: colors.GRAY_500,

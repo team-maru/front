@@ -1,6 +1,7 @@
 import { colors } from "@/constants";
 import { router } from "expo-router";
-import { Image, Pressable, ScrollView, StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import ImageList, { ImageListProps } from "./ImageList";
 import PostActions from "./PostActions";
 import Profile from "./Profile";
 import CustomText from "./ui/CustomText";
@@ -11,6 +12,14 @@ interface FeedItemProps {
 }
 
 function FeedItem({ postId, isDetail = false }: FeedItemProps) {
+  const dummyImages: ImageListProps = {
+    imageList: [
+      { id: 1, url: "https://picsum.photos/200/300?random=1" },
+      { id: 2, url: "https://picsum.photos/200/300?random=2" },
+      { id: 3, url: "https://picsum.photos/200/300?random=3" },
+      { id: 4, url: "https://picsum.photos/200/300?random=4" },
+    ],
+  };
   const handlePressFeed = () => {
     if (!isDetail) {
       router.push({
@@ -21,7 +30,9 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
   };
   const ContainerComponent = isDetail ? View : Pressable;
   return (
-    <ContainerComponent style={styles.container} onPress={handlePressFeed}>
+    <ContainerComponent
+      style={styles.container}
+      {...(!isDetail && { onPress: handlePressFeed })}> 
       <View style={[styles.freeItemContainer, isDetail && styles.detailItem]}>
         <View style={styles.profileContainer}>
           <Profile
@@ -33,19 +44,7 @@ function FeedItem({ postId, isDetail = false }: FeedItemProps) {
         <CustomText fontWeight="semibold" style={styles.titleStyle}>
           Title
         </CustomText>
-        <ScrollView
-          contentContainerStyle={styles.imagesContainer}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}>
-          {[1, 2, 3, 4].map((_, idx) => (
-            <Pressable key={idx} onPress={(e) => e.stopPropagation()}>
-              <Image
-                source={require("@/assets/images/Earth.png")}
-                style={styles.imageStyle}
-              />
-            </Pressable>
-          ))}
-        </ScrollView>
+        <ImageList {...dummyImages} />
         {isDetail && (
           <CustomText fontWeight="medium" style={styles.contentContainer}>
             Content Text...
@@ -96,20 +95,9 @@ const styles = StyleSheet.create({
     width: "110%",
   },
   titleStyle: {
-    alignItems: "center",
-    justifyContent: "flex-start",
     fontSize: 20,
     color: colors.GRAY_900,
   },
-  imagesContainer: {
-    gap: 16,
-  },
-  imageStyle: {
-    width: 90,
-    height: 90,
-    borderRadius: 10,
-  },
-
   headerContentContainer: {
     paddingBottom: 16,
   },

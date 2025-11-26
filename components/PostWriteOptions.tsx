@@ -1,4 +1,5 @@
 import PictureIcon from "@/assets/images/picture.svg";
+import { colors } from "@/constants";
 import { categoryLabels } from "@/constants/categoryLabels";
 import { Category, ImageUri } from "@/types";
 import * as ImagePicker from "expo-image-picker";
@@ -6,7 +7,6 @@ import { Controller, useFormContext } from "react-hook-form";
 import { Alert, Pressable, ScrollView, StyleSheet, View } from "react-native";
 import CategoryButtons from "./CategoryButtons";
 import ErrorMessage from "./ui/ErrorMessage";
-import { colors } from "@/constants";
 
 /**
  * PostWriteOptions - 게시글 작성 옵션 컴포넌트
@@ -45,9 +45,13 @@ function PostWriteOptions() {
     });
 
     if (!result.canceled && result.assets) {
-      const newImages: ImageUri[] = result.assets.map((asset) => ({
-        uri: asset.uri,
+      // 기존 이미지 개수를 기준으로 새 이미지 id 생성
+      const startId = imageUris.length;
+      const newImages: ImageUri[] = result.assets.map((asset, index) => ({
+        id: startId + index,
+        url: asset.uri,
       }));
+
       setValue("imageUris", [...imageUris, ...newImages]);
     }
   };

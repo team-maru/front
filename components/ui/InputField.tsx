@@ -81,7 +81,13 @@ function InputField(
           {...props}
         />
       </View>
-      {error ? <CustomText style={styles.errorText}>{error}</CustomText> : null}
+      {error ? (
+        <>
+          <CustomText style={styles.errorText}>
+            {error}
+          </CustomText>
+        </>
+      ) : null}
       {success ? (
         <CustomText style={styles.successText}>{success}</CustomText>
       ) : null}

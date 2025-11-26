@@ -7,7 +7,8 @@ function NotificationButton() {
   return (
     <Pressable
       onPress={() => router.push("/")}
-      style={styles.notificationButton}>
+      style={styles.notificationButton}
+    >
       <Fontisto name="bell" size={24} color={colors.BLACK} />
     </Pressable>
   );
@@ -15,7 +16,7 @@ function NotificationButton() {
 
 const styles = StyleSheet.create({
   notificationButton: {
-    margin: 18,
+    margin: 0,
     justifyContent: "center",
     alignItems: "flex-end",
     backgroundColor: colors.GRAY_100,

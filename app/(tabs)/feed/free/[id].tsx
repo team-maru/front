@@ -63,7 +63,7 @@ export default function PostDetailScreen() {
           </View>
         </ScrollView>
         <View style={styles.inputFieldContainer}>
-          <CommentInputButton content={content} setContent={() => setContent} />
+          <CommentInputButton content={content} setContent={setContent} />
         </View>
       </KeyboardAppendView>
     </SafeAreaView>
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.GRAY_100,
-    paddingBottom: 60,
+    paddingBottom: "18%",
   },
   awareScrollViewContainer: {
     flex: 1,

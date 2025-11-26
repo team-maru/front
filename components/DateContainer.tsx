@@ -63,6 +63,7 @@ function DateContainer({
               value={selectedDate}
               onChange={(payload) => {
                 setSelectedDate(payload);
+                setShowMonthPicker(false);
               }}
             />
           </View>

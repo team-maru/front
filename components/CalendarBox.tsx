@@ -51,9 +51,11 @@ interface CalendarModalProps {
   month: number;
 }
 
+// api 연동 후 상태에 따라 스타일 지정할 예정
+
 const getMarkedDates = (checkDate: string) => {
-  // 실제로 마킹이 필요한 날짜만 customStyles로 지정
   const marked: any = {
+    // 예약이 완료된 경우
     "2025-11-03": {
       customStyles: {
         container: {
@@ -66,6 +68,8 @@ const getMarkedDates = (checkDate: string) => {
         },
       },
     },
+
+    // 이벤트는 있으나 예약하지 않은 경우
     "2025-11-15": {
       customStyles: {
         text: {
@@ -81,6 +85,8 @@ const getMarkedDates = (checkDate: string) => {
       },
     },
   };
+
+  // 사용자가 선택한 날짜
   if (checkDate) {
     marked[checkDate] = {
       selected: true,
@@ -112,6 +118,8 @@ const CalendarBox = ({
         markingType={"custom"}
         markedDates={getMarkedDates(checkDate)}
         current={currentDate}
+        firstDay={1}
+        disableAllTouchEventsForDisabledDays={true} // 해당 달 이외의 날짜 선택 불가능
         theme={{
           selectedDayBackgroundColor: colors.ORANGE_600,
           todayTextColor: colors.GRAY_600,

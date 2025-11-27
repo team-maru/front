@@ -57,32 +57,29 @@ const calendarDayStyles = {
     borderWidth: 1,
     backgroundColor: "transparent",
   },
-  reservedText: {
-    color: colors.ORANGE_600,
-  },
+
   eventText: {
     color: colors.ORANGE_600,
   },
 };
-
-// api 연동 후 상태에 따라 스타일 지정할 예정
 
 const getMarkedDates = (checkDate: string) => {
   const marked: any = {};
   const reservedDates = ["2025-11-03"];
   const eventDates = ["2025-11-15", "2025-11-26"];
 
+  // 예약된 날짜
   reservedDates.forEach((date) => {
     marked[date] = {
       customStyles: {
         container: calendarDayStyles.reserved,
-        text: calendarDayStyles.reservedText,
+        text: calendarDayStyles.eventText,
       },
     };
   });
 
+  // 이벤트 날짜 (예약은 안 한 경우)
   eventDates.forEach((date) => {
-    // 예약된 날짜는 이미 처리됨
     if (!reservedDates.includes(date)) {
       marked[date] = {
         customStyles: {

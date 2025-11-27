@@ -1,16 +1,15 @@
 import MonthPicker from "@/components/MonthPicker";
 import CustomText from "@/components/ui/CustomText";
 import { colors } from "@/constants";
+import { YearMonth } from "@/types";
 import { Entypo } from "@expo/vector-icons";
 import { Pressable, StyleSheet, View } from "react-native";
 
 interface DateContainerProps {
   showMonthPicker: boolean;
   setShowMonthPicker: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedDate: { year: number; month: number };
-  setSelectedDate: React.Dispatch<
-    React.SetStateAction<{ year: number; month: number }>
-  >;
+  selectedDate: YearMonth;
+  setSelectedDate: React.Dispatch<React.SetStateAction<YearMonth>>;
 }
 
 function DateContainer({

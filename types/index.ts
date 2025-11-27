@@ -199,3 +199,11 @@ export interface Gathering {
 }
 
 export { ImageUri };
+
+export type Year = number;
+export type Month = number;
+
+export interface YearMonth {
+  year: Year;
+  month: Month;
+}

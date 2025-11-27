@@ -77,7 +77,7 @@ export default function MonthPicker({
           return (
             <Pressable
               key={label}
-              style={[styles.monthItem]}
+              style={styles.monthItem}
               onPress={() => handleSelect(idx)}
             >
               <CustomText

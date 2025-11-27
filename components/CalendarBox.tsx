@@ -51,40 +51,46 @@ interface CalendarModalProps {
   month: number;
 }
 
+const calendarDayStyles = {
+  reserved: {
+    borderColor: colors.ORANGE_600,
+    borderWidth: 1,
+    backgroundColor: "transparent",
+  },
+  reservedText: {
+    color: colors.ORANGE_600,
+  },
+  eventText: {
+    color: colors.ORANGE_600,
+  },
+};
+
 // api 연동 후 상태에 따라 스타일 지정할 예정
 
 const getMarkedDates = (checkDate: string) => {
-  const marked: any = {
-    // 예약이 완료된 경우
-    "2025-11-03": {
-      customStyles: {
-        container: {
-          borderColor: colors.ORANGE_600,
-          borderWidth: 1,
-          backgroundColor: "transparent",
-        },
-        text: {
-          color: colors.ORANGE_600,
-        },
-      },
-    },
+  const marked: any = {};
+  const reservedDates = ["2025-11-03"];
+  const eventDates = ["2025-11-15", "2025-11-26"];
 
-    // 이벤트는 있으나 예약하지 않은 경우
-    "2025-11-15": {
+  reservedDates.forEach((date) => {
+    marked[date] = {
       customStyles: {
-        text: {
-          color: colors.ORANGE_600,
-        },
+        container: calendarDayStyles.reserved,
+        text: calendarDayStyles.reservedText,
       },
-    },
-    "2025-11-26": {
-      customStyles: {
-        text: {
-          color: colors.ORANGE_600,
+    };
+  });
+
+  eventDates.forEach((date) => {
+    // 예약된 날짜는 이미 처리됨
+    if (!reservedDates.includes(date)) {
+      marked[date] = {
+        customStyles: {
+          text: calendarDayStyles.eventText,
         },
-      },
-    },
-  };
+      };
+    }
+  });
 
   // 사용자가 선택한 날짜
   if (checkDate) {
